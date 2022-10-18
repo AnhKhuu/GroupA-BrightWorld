@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Invoice;
+use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +15,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_details', function (Blueprint $table) {
-            $table->integer('Qty');
+        Schema::create('invoce_details', function (Blueprint $table) {
+            $table->foreignIdFor(Product::class);
+            $table->foreignIdFor(Invoice::class);
+            $table->integer('quantity');
             $table->timestamps();
+
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_details');
+        Schema::dropIfExists('invoce_details');
     }
 };

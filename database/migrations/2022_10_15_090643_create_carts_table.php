@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Customer;
+use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,9 +16,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('carts', function (Blueprint $table) {
-            $table->bigIncrements('ID');
+            $table->bigIncrements('id');
+            $table->string('quantity');
             $table->timestamps();
+            $table->foreignIdFor(Product::class);
+            $table->foreignIdFor(Customer::class);
+
         });
+
     }
 
     /**

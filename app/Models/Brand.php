@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
     use HasFactory;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'ShortName',
-        'FullName',
-        'Address',
-        'Desc',
-    ];
+    
+    protected $table = 'brands';
+
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['name', 'full_name', 'address', 'description'];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

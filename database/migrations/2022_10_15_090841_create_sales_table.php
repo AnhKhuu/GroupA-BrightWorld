@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('sales', function (Blueprint $table) {
-            $table->bigIncrements('ID');
-            $table->float('Percent');
+            $table->bigIncrements('id');
+            $table->float('percent');
             $table->timestamps();
+
         });
     }
 

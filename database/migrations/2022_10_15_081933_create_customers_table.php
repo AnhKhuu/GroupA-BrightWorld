@@ -14,16 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->bigIncrements('ID');
-            $table->string('FirstName', '100');
-            $table->string('LastName', '100');
-            $table->string('PhoneNumber', '20');
-            $table->string('Address', '500');
-            $table->string('Zip', '10');
-            $table->string('Email', '250')->unique();
-            $table->string('Username', '20')->unique();
-            $table->string('Password', '20');
+            $table->bigIncrements('id');
+            $table->string('first_name', '100');
+            $table->string('last_name', '100');
+            $table->string('phone_number', '20');
+            $table->string('address', '500');
+            $table->string('zip', '10');
+            $table->string('email')->unique();
+            $table->string('user_name')->unique();
+            $table->string('password', '20');
             $table->timestamps();
+
         });
     }
 

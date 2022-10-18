@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('watts', function (Blueprint $table) {
-            $table->bigIncrements('ID');
-            $table->integer('Measure');
+            $table->bigIncrements('id');
+            $table->integer('measure');
             $table->timestamps();
         });
     }

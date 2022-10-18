@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Customer;
+use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,11 +15,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('feedback', function (Blueprint $table) {
-            $table->bigIncrements('ID');
-            $table->string('Content');
-            $table->integer('Rating');
-            $table->timestamps();
+        Schema::create('feedbacks', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('rating');
+            $table->string('content');
+            $table->foreignIdFor(Product::class);
+            $table->foreignIdFor(Customer::class);
+
         });
     }
 
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feedback');
+        Schema::dropIfExists('feedbacks');
     }
 };

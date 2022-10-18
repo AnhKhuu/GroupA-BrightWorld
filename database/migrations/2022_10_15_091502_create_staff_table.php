@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('staff', function (Blueprint $table) {
-            $table->bigIncrements('ID');
-            $table->string('Username', '20');
-            $table->string('Password', '20');
+        Schema::create('staffs', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('username', '20');
+            $table->string('password', '20');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('staff');
+        Schema::dropIfExists('staffs');
     }
 };
