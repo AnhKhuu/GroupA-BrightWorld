@@ -16,8 +16,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('shape_details', function (Blueprint $table) {
-            $table->foreignIdFor(Product::class);
-            $table->foreignIdFor(Shape::class);
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->unsignedBigInteger('shape_id')->nullable();
+            $table->foreign('shape_id')->references('id')->on('shapes')->onDelete('cascade');
             $table->timestamps();
         });
     }

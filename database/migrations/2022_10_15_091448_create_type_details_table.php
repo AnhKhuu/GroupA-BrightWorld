@@ -16,8 +16,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('type_details', function (Blueprint $table) {
-            $table->foreignIdFor(Product::class);
-            $table->foreignIdFor(Type::class);
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->unsignedBigInteger('type_id')->nullable();
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
             $table->timestamps();
         });
     }

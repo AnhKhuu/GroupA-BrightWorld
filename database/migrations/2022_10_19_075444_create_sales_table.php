@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->float('percent');
             $table->timestamps();
-
+            
         });
     }
 

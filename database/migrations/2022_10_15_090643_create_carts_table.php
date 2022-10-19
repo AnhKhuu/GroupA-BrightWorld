@@ -19,9 +19,11 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('quantity');
             $table->timestamps();
-            $table->foreignIdFor(Product::class);
-            $table->foreignIdFor(Customer::class);
-
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            
         });
 
     }

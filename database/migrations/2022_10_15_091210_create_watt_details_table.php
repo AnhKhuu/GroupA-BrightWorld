@@ -16,8 +16,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('watt_details', function (Blueprint $table) {
-            $table->foreignIdFor(Product::class);
-            $table->foreignIdFor(Watt::class);
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->unsignedBigInteger('watt_id')->nullable();
+            $table->foreign('watt_id')->references('id')->on('watts')->onDelete('cascade');
             $table->timestamps();
         });
     }
