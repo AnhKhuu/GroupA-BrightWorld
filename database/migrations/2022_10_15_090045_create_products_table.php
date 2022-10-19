@@ -22,12 +22,9 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->integer('sold');
             $table->integer('in_stock');
-            $table->unsignedBigInteger('country_id')->nullable();
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
-            $table->unsignedBigInteger('sale_id')->nullable();
-            $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
+           
            
             $table->timestamps();
         });
