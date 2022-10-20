@@ -14,9 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_likes', function (Blueprint $table) {
-          
-            $table->unsignedBigInteger('product_id')->nullable();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();

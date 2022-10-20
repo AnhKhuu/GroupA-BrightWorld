@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('shapes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('shape_desc', '20');
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });
     }

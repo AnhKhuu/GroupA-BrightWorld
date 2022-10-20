@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('watts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('measure');
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });
     }

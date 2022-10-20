@@ -24,8 +24,6 @@ return new class extends Migration
             $table->integer('in_stock');
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
-           
-           
             $table->timestamps();
         });
     }
