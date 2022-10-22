@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('full_name', '250');
             $table->string('address', '500');
             $table->string('description')->nullable();
-            $table->unsignedBigInteger('country_id')->nullable();
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->timestamps();
 
         });

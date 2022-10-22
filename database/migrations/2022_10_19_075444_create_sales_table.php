@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->float('percent');
-            $table->unsignedBigInteger('product_id')->nullable();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
             
         });
