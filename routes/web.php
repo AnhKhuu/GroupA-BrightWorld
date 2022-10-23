@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +32,4 @@ Route::get('/admin/product', [ProductController::class, 'show']) -> name('show')
 Route::get('/admin/catelogue', [CatelogueController::class, 'show']) -> name('show');
 Route::get('/admin/customer', [CustomerController::class, 'show']) -> name('show');
 Route::get('/admin/feedback', [FeedbackController::class, 'show']) -> name('show');
+Route::get('/', [CartController::class, 'index']);

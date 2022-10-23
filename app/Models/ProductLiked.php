@@ -13,15 +13,15 @@ class ProductLiked extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['date'];
+    protected $fillable = ['date', 'customer_id'];
+
+    public function productLikeDetail()
+    {
+        return $this->belongsTo(ProductLikeDetail::class);
+    }
 
     public function customer()
     {
         return $this->hasMany(Customer::class);
-    }
-
-    public function product()
-    {
-        return $this->hasMany(Product::class);
     }
 }

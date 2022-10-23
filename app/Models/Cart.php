@@ -13,15 +13,16 @@ class Cart extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['product_id', 'customer_id', 'quantity'];
+    protected $fillable = ['customer_id', 'quantity'];
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'product_id', 'id');
+        return $this->hasMany(Customer::class);
     }
 
-    public function product()
+    public function cartDetail()
     {
-        return $this->belongsTo(Product::class, 'customer_id', 'id');
+        return $this->belongsTo(CartDetail::class);
     }
+
 }

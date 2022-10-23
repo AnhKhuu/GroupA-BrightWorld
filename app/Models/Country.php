@@ -13,10 +13,11 @@ class Country extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['name', 'full_name', 'description'];
+    protected $fillable = ['short_name', 'full_name', 'description'];
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(Product::class);
     }
+
 }
