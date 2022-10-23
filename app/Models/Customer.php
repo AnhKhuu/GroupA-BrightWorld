@@ -18,23 +18,23 @@ class Customer extends Model
 
     protected $hidden = ['password'];
 
-    public function cart()
+    public function productLike()
     {
-        return $this->hasMany(Cart::class);
+        return $this->belongsTo(ProductLiked::class);
     }
-    
+
     public function feedback()
     {
         return $this->belongsTo(Feedback::class);
     }
 
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
+
     public function invoice()
     {
         return $this->belongsTo(Invoice::class);
-    }
-
-    public function productLiked()
-    {
-        return $this->belongsTo(ProductLiked::class);
     }
 }
