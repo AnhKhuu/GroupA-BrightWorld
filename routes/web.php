@@ -27,9 +27,14 @@ Route::get('/admin/login', function () {
     return view('admin.auth.login');
 });
 
+Route::get('/homepage', function() {
+    return view('index');
+});
+
 Route::get('/admin/dashboard', [ProfileController::class, 'dashboard']) -> name('dashboard');
 Route::get('/admin/product', [ProductController::class, 'show']) -> name('show');
 Route::get('/admin/catelogue', [CatelogueController::class, 'show']) -> name('show');
 Route::get('/admin/customer', [CustomerController::class, 'show']) -> name('show');
 Route::get('/admin/feedback', [FeedbackController::class, 'show']) -> name('show');
 Route::get('/', [CartController::class, 'index']);
+
