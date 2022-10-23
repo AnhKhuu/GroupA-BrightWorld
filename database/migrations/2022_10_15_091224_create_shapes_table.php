@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('shapes', function (Blueprint $table) {
-            $table->bigIncrements('ID');
-            $table->string('ShapeDesc', '20');
+            $table->bigIncrements('id');
+            $table->string('shape_desc', '20');
             $table->timestamps();
         });
     }

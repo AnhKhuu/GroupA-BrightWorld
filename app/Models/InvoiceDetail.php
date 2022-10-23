@@ -8,7 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class InvoiceDetail extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'Qty',
-    ];
+
+    protected $table = 'invoice_details';
+
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['product_id', 'invoice_id', 'quantity'];
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }

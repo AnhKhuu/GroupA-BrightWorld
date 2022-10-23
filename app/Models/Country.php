@@ -8,9 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'ShortName',
-        'FullName',
-        'Desc',
-    ];
+
+    protected $table = 'countries';
+
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['short_name', 'full_name', 'description'];
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 }

@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('types', function (Blueprint $table) {
-            $table->bigIncrements('ID');
-            $table->string('TypeDesc', '20');
+            $table->bigIncrements('id');
+            $table->string('description', '20');
             $table->timestamps();
         });
     }

@@ -8,7 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Watt extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'Measure'
-    ];
+
+    protected $table = 'watts';
+
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['measure'];
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

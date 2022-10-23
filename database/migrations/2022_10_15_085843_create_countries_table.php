@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('countries', function (Blueprint $table) {
-            $table->bigIncrements('ID');
-            $table->string('ShortName', '100');
-            $table->string('FullName', '250');
-            $table->string('Desc')->nullable();
+            $table->bigIncrements('id');
+            $table->string('short_name', '100');
+            $table->string('full_name', '250');
+            $table->string('description')->nullable();
             $table->timestamps();
+
         });
     }
 

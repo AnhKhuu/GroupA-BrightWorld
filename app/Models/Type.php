@@ -8,7 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Type extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'TypeDesc'
-    ];
+
+    protected $table = 'types';
+
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['description'];
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

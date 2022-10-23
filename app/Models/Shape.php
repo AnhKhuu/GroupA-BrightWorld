@@ -8,7 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Shape extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'ShapeDesc',
-    ];
+
+    protected $table = 'shapes';
+
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['description'];
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

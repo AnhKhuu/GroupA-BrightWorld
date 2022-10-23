@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_likeds', function (Blueprint $table) {
+        Schema::create('product_likes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();
+       
+
         });
     }
 
@@ -25,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_likeds');
+        Schema::dropIfExists('product_likes');
     }
 };
