@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\CatelogueController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +21,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/admin/login', function () {
+    return view('admin.auth.login');
+});
+
+Route::get('/admin/dashboard', [ProfileController::class, 'dashboard']) -> name('dashboard');
+Route::get('/admin/product', [ProductController::class, 'show']) -> name('show');
+Route::get('/admin/catelogue', [CatelogueController::class, 'show']) -> name('show');
+Route::get('/admin/customer', [CustomerController::class, 'show']) -> name('show');
+Route::get('/admin/feedback', [FeedbackController::class, 'show']) -> name('show');
