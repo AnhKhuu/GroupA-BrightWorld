@@ -31,19 +31,15 @@ Route::get('/homepage', function() {
     return view('index');
 });
 
-Route::get('/admin/dashboard', [ProfileController::class, 'dashboard']) -> name('dashboard');
-Route::get('/admin/product', [ProductController::class, 'create']) -> name('create');
-Route::get('/admin/catelogue', [CatelogueController::class, 'show']) -> name('show');
-Route::get('/admin/customer', [CustomerController::class, 'show']) -> name('show');
-Route::get('/admin/feedback', [FeedbackController::class, 'show']) -> name('show');
-Route::get('/', [CartController::class, 'index']);
-
-Route::prefix('products')->name('products')->group(function () {
-    // Route::get('index', 'ProductController@index')->name('.index');
-    Route::get('create', 'ProductController@create');
-    Route::post('create', 'ProductController@store');
-    // Route::get('edit/{id}', 'ProductController@edit');
-    // Route::post('edit/{id}', 'ProductController@update');
-    // Route::get('delete/{id}', 'ProductController@destroy');
+Route::prefix('admin')->group(function () {
+    Route::get('dashboard', [ProfileController::class, 'dashboard']);
+    Route::get('product', [ProductController::class, 'create']);
+    Route::post('product', [ProductController::class, 'createProcess']);
+    Route::get('country', [ProductController::class, 'createCountry']);
+    Route::post('country', [ProductController::class, 'createCountryProcess']);
+    Route::get('catelogue', [CatelogueController::class, 'show']);
+    Route::get('customer', [CustomerController::class, 'show']);
+    Route::get('feedback', [FeedbackController::class, 'show']);
 });
+Route::get('/', [CartController::class, 'index']);
 
