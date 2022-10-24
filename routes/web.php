@@ -32,9 +32,18 @@ Route::get('/homepage', function() {
 });
 
 Route::get('/admin/dashboard', [ProfileController::class, 'dashboard']) -> name('dashboard');
-Route::get('/admin/product', [ProductController::class, 'show']) -> name('show');
+Route::get('/admin/product', [ProductController::class, 'create']) -> name('create');
 Route::get('/admin/catelogue', [CatelogueController::class, 'show']) -> name('show');
 Route::get('/admin/customer', [CustomerController::class, 'show']) -> name('show');
 Route::get('/admin/feedback', [FeedbackController::class, 'show']) -> name('show');
 Route::get('/', [CartController::class, 'index']);
+
+Route::prefix('products')->name('products')->group(function () {
+    // Route::get('index', 'ProductController@index')->name('.index');
+    Route::get('create', 'ProductController@create');
+    Route::post('create', 'ProductController@store');
+    // Route::get('edit/{id}', 'ProductController@edit');
+    // Route::post('edit/{id}', 'ProductController@update');
+    // Route::get('delete/{id}', 'ProductController@destroy');
+});
 
