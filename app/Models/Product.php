@@ -13,7 +13,7 @@ class Product extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['type_id','country_id','watt_id','brand_id','sale_id','shape_id', 'name', 'unit', 'price', 'imgUrl', 'description', 'sold', 'inStock'];
+    protected $fillable = ['type_id','country_id','watt_id','brand_id','sale_id','shape_id', 'name', 'unit', 'price', 'img_url', 'description', 'sold', 'in_stock'];
 
     public function sale()
     {
