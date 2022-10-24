@@ -7,7 +7,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         type="text/css">
-    <!-- <link rel="icon" href="imgs/logo-title.png" type="image/x-icon"> -->
+    <link rel="icon" href="{{ asset('admin-assets/dist/img/main/logo-title.png') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" />
@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="owl.carousel.min.css">
     <link rel="stylesheet" href="owl.theme.default.min.css">
+    <link rel="stylesheet" href="{{ asset('admin-assets/dist/css/main.css') }}" />
 </head>
 <body>
 <div id="header">
@@ -25,7 +26,7 @@
             <section class="header w-100">
                 <nav class="d-flex justify-content-between align-items-center position-relative container-lg">
                     <a href="#/!">
-                        <!-- <img src="./imgs/Logo.png" alt="Logo" class="header-logo"> -->
+                        <img src="{{ asset('admin-assets/dist/img/main/Logo.png') }}" alt="Logo" class="header-logo">
                     </a>
                     <div class="search-desktop position-relative">
                         <input type="text" placeholder="Search" class="w-100">
@@ -45,21 +46,26 @@
                                 <span class="material-icons-outlined">
                                     shopping_cart
                                 </span>
-                                <div class="cart-badge position-absolute">{{ProductInCart.length}}</div>
+                                <!-- ProductInCart.length -->
+                                <div class="cart-badge position-absolute">5</div>
                             </div>
                             <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuClickableInside">
                                 <div class="dropdown-item p-0 cart-dropdown">
                                   <div class="product-info p-2 p-lg-4 d-flex align-items-center justify-content-between">
                                       <!-- For loop Cart list -->
-                                        <!-- <img ng-src="{{product.imageUrl}}" alt=""> -->
+                                      <!-- img-product.imageUrl -->
                                         <div class="product-detail px-2 px-md-3">
-                                            <p class="mb-1 mb-md-2">{{product.name}}</p>
+                                            <!-- product.name -->
+                                            <p class="mb-1 mb-md-2">Den led</p>
+                                            <!-- product.productQuantity -->
                                             <div class="quantity mb-1 mb-md-2">
-                                                x{{product.productQuantity}}
+                                                x1
                                             </div>
                                             <div class="price">
-                                                <div class="new-price">{{product.newPrice}}</div>
-                                                <div class="old-price">{{product.oldPrice}}</div>
+                                                <div class="new-price">5</div>
+                                                <div class="old-price">10</div>
+                                                <!-- product.newPrice -->
+                                                <!-- product.oldPrice -->
                                             </div>
                                         </div>
                                         <span class="material-icons-outlined close">
@@ -199,6 +205,7 @@
         <section class="footer" id="footer">
             <div class="subscribe d-flex align-items-center justify-content-center position-relative">
                 <!-- <img src="./imgs/subscribe.png" alt="" class="w-100 position-absolute"> -->
+                <img src="{{ asset('admin-assets/dist/img/main/subscribe.png') }}" alt="" class="w-100 position-absolute">
                 <form class="d-flex flex-column align-items-center">
                     <h1>SUBSCRIBE TO NEWSLETTER</h1>
                     <div class="position-relative w-100">
@@ -216,32 +223,38 @@
                     <div class="row py-3">
                       <div class="col-lg-4 mb-4">
                           <!-- Loop Address list -->
-                            <h1>{{address.branchName}}</h1>
+                          <!-- address.branchName -->
+                            <h1>Ha Noi</h1>
                             <div class="d-flex mb-2">
                                 <span class="material-icons-outlined me-3">
                                     location_on
                                 </span>
-                                <span class="text-justify">{{address.address}}</span>
+                                <!-- address.address -->
+                                <span class="text-justify">so 8 Hang Khay</span>
                             </div>
                             <div class="d-flex mb-2">
                                 <span class="material-icons-outlined me-3">
                                     email
                                 </span>
-                                <a href="mailto:{{address.email}}">{{address.email}}</a>
+                                <!-- address.emai -->
+                                <a href="mailto:brightworld@gmail.com">brightworld@gmail.com</a>
                             </div>
                             <div class="d-flex mb-2">
                                 <span class="material-icons-outlined me-3">
                                     phone_in_talk
                                 </span>
-                                <a href="tel:(84.28) 3863 3594">{{address.phone1}} </a>
+                                <!-- address.phone1 -->
+                                <a href="tel:(84.28) 3863 3594">(84.28) 3863 3594 </a>
                                 <span>-</span>
-                                <a href="tel:(84.28) 3863 4270">{{address.phone2}} </a>
+                                <!-- address.phone2 -->
+                                <a href="tel:(84.28) 3863 4270">(84.28) 3863 4270</a>
                             </div>
                             <div class="d-flex mb-2">
                                 <span class="material-icons-outlined me-3">
                                     print
                                 </span>
-                                <span>{{address.fax}} </span>
+                                <!-- address.fax -->
+                                <span>(84.28) 3863 4270 </span>
                             </div>
                         </div>
                     </div>
