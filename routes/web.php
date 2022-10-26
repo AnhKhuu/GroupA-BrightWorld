@@ -28,18 +28,39 @@ Route::get('/admin/login', function () {
 });
 
 Route::get('/homepage', function() {
-    return view('index');
+    return view('user.index');
 });
 
 Route::prefix('admin')->group(function () {
-    Route::get('dashboard', [ProfileController::class, 'dashboard']);
+    // Route::get('dashboard', [ProfileController::class, 'dashboard']);
+    Route::get('dashboard', [ProductController::class, 'show']);
+
+    Route::get('show', [ProductController::class, 'show']);
+
     Route::get('product', [ProductController::class, 'create']);
     Route::post('product', [ProductController::class, 'createProcess']);
+
     Route::get('country', [ProductController::class, 'createCountry']);
     Route::post('country', [ProductController::class, 'createCountryProcess']);
-    Route::get('catelogue', [CatelogueController::class, 'show']);
-    Route::get('customer', [CustomerController::class, 'show']);
-    Route::get('feedback', [FeedbackController::class, 'show']);
+
+    Route::get('brand', [ProductController::class, 'createBrand']);
+    Route::post('brand', [ProductController::class, 'createBrandProcess']);
+
+    Route::get('type', [ProductController::class, 'createType']);
+    Route::post('type', [ProductController::class, 'createTypeProcess']);
+
+    Route::get('sale', [ProductController::class, 'createSale']);
+    Route::post('sale', [ProductController::class, 'createSaleProcess']);
+
+    Route::get('watt', [ProductController::class, 'createWatt']);
+    Route::post('watt', [ProductController::class, 'createWattProcess']);
+
+    Route::get('shape', [ProductController::class, 'createShape']);
+    Route::post('shape', [ProductController::class, 'createShapeProcess']);
+
+    // Route::get('catelogue', [CatelogueController::class, 'show']);
+    // Route::get('customer', [CustomerController::class, 'show']);
+    // Route::get('feedback', [FeedbackController::class, 'show']);
 });
 Route::get('/', [CartController::class, 'index']);
 

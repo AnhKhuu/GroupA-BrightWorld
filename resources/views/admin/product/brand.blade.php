@@ -10,7 +10,7 @@ Create Product
         <div class="card-body">
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="short_name" class="form-control-label">Short</label>
+                    <label for="short_name" class="form-control-label">Acronym</label>
                     <div class="input-group input-group-merge ">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
@@ -24,7 +24,7 @@ Create Product
                     @enderror
               </div>  
                 <div class="form-group col-md-6">
-                    <label for="full_name" class="form-control-label">Short</label>
+                    <label for="full_name" class="form-control-label">Brand</label>
                     <div class="input-group input-group-merge ">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
@@ -38,7 +38,21 @@ Create Product
                     @enderror
               </div>  
                 <div class="form-group col-md-6">
-                    <label for="description" class="form-control-label">Short</label>
+                    <label for="address" class="form-control-label">Address</label>
+                    <div class="input-group input-group-merge ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-info-circle"></i>
+                            </span>
+                        </div>
+                        <input class="form-control" placeholder="Enter Product Name" name="address" id="address" value="{{old('address')}}">
+                    </div>
+                    @error('address')
+                        <p class="text-danger"><strong>{{$message}}</strong></p>
+                    @enderror
+              </div>  
+                <div class="form-group col-md-6">
+                    <label for="description" class="form-control-label">Description</label>
                     <div class="input-group input-group-merge ">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
