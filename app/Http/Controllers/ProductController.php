@@ -7,8 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    public function show() {
-        return view('admin.product.show');
+
+    public function show()
+    {
+        $pro=DB::table('products')->get();
+        return view('admin.product.show')->with(['pro'=>$pro]);
     }
 
     public function create() {
@@ -43,11 +46,11 @@ class ProductController extends Controller
         DB::table('products')->insert(
             $data
         );
-        if($request->all()){
-            return redirect()->route('products.index')->with('success',"Created product successfully!");
-        }
+        // if($request->all()){
+        //     return redirect()->route('products.index')->with('success',"Created product successfully!");
+        // }
     }
-
+    // Country
     public function createCountry() {
         return view('admin.product.country');
     }
@@ -62,7 +65,7 @@ class ProductController extends Controller
             $data
         );
     }
-
+    // Brand
     public function createBrand() {
         return view('admin.product.brand');
     }
@@ -74,6 +77,56 @@ class ProductController extends Controller
         $data['description'] = $request->input('description');
         $data['address'] = $request->input('address');
         DB::table('brands')->insert(
+            $data
+        );
+    }
+    // Watt
+    public function createWatt() {
+        return view('admin.product.watt');
+    }
+
+    public function createWattProcess(Request $request) {
+        $data = array();
+        $data['measure'] = $request->input('measure');
+        DB::table('watts')->insert(
+            $data
+        );
+    }
+    // Type
+    public function createType() {
+        return view('admin.product.type');
+    }
+
+    public function createTypeProcess(Request $request) {
+        $data = array();
+        $data['description'] = $request->input('description');
+        DB::table('types')->insert(
+            $data
+        );
+    }
+
+    // Sale
+    public function createSale() {
+        return view('admin.product.sale');
+    }
+
+    public function createSaleProcess(Request $request) {
+        $data = array();
+        $data['percent'] = $request->input('percent');
+        DB::table('sales')->insert(
+            $data
+        );
+    }
+
+    // Shape
+    public function createShape() {
+        return view('admin.product.shape');
+    }
+
+    public function createShapeProcess(Request $request) {
+        $data = array();
+        $data['shape_desc'] = $request->input('shape_desc');
+        DB::table('shapes')->insert(
             $data
         );
     }
