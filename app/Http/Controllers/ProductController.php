@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Watt;
+use App\Models\Country;
+use App\Models\Brand;
+use App\Models\Shape;
+use App\Models\Sale;
+use App\Models\Type;
 
 class ProductController extends Controller
 {
@@ -11,17 +17,40 @@ class ProductController extends Controller
     public function show()
     {
         $pro=DB::table('products')->get();
-        return view('admin.product.show')->with(['pro'=>$pro]);
+        $watts=DB::table('watts')->get();
+        $shapes=DB::table('shapes')->get();
+        $sales=DB::table('sales')->get();
+        $types=DB::table('types')->get();
+        $countries=DB::table('countries')->get();
+        $brands=DB::table('brands')->get();
+        return view('admin.product.show')
+                ->with(['pro'=>$pro])
+                ->with(['watts'=>$watts])
+                ->with(['shapes'=>$shapes])
+                ->with(['sales'=>$sales])
+                ->with(['types'=>$types])
+                ->with(['countries'=>$countries])
+                ->with(['brands'=>$brands]);
     }
 
     public function create() {
-        return view('admin.product.create');
+        $watts=DB::table('watts')->get();
+        $shapes=DB::table('shapes')->get();
+        $sales=DB::table('sales')->get();
+        $types=DB::table('types')->get();
+        $countries=DB::table('countries')->get();
+        $brands=DB::table('brands')->get();
+        return view('admin.product.create')
+                ->with(['watts'=>$watts])
+                ->with(['shapes'=>$shapes])
+                ->with(['sales'=>$sales])
+                ->with(['types'=>$types])
+                ->with(['countries'=>$countries])
+                ->with(['brands'=>$brands]);
     }
-// type_id','country_id','watt_id','brand_id','sale_id',
-//'shape_id', 'name', 'unit', 'price', 'imgUrl', 'description', 'sold', 'inStock'
+
     public function createProcess(Request $request) {
         $data = array();
-        // $newid = DB::table('products')->orderby('id','DESC')->first()->id+1;
         $data['type_id'] = $request->input('type_id');
         $data['country_id'] = $request->input('country_id');
         $data['watt_id'] = $request->input('watt_id');
@@ -36,10 +65,7 @@ class ProductController extends Controller
         $data['in_stock'] = $request->input('in_stock');
         $get_image = $request->file('img_url');
         if($get_image){
-            // $get_image->getClientOriginalName();
-            $get_name_picture = 'product'.$data['name'].'.jpg';
-            // $name_picture = current(explode('.',$get_name_picture));
-            // $new_picture = $name_picture . rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $get_name_picture = $data['name'].'.jpg';
             $data['img_url'] = $get_name_picture;
             $get_image->move('admin-assets/dist/img/product',$get_name_picture);
         }
@@ -50,6 +76,28 @@ class ProductController extends Controller
         //     return redirect()->route('products.index')->with('success',"Created product successfully!");
         // }
     }
+
+    public function update($id)
+    {
+        $watts=DB::table('watts')->get();
+        $shapes=DB::table('shapes')->get();
+        $sales=DB::table('sales')->get();
+        $types=DB::table('types')->get();
+        $countries=DB::table('countries')->get();
+        $brands=DB::table('brands')->get();
+        $pro = DB::table('products')
+        ->where('id', intval($id))
+        ->first();
+        return view('admin.product.update')
+            ->with(['pro'=>$pro])
+            ->with(['watts'=>$watts])
+            ->with(['shapes'=>$shapes])
+            ->with(['sales'=>$sales])
+            ->with(['types'=>$types])
+            ->with(['countries'=>$countries])
+            ->with(['brands'=>$brands]);
+    }
+
     // Country
     public function createCountry() {
         return view('admin.product.country');
