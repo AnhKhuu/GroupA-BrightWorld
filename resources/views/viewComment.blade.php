@@ -11,7 +11,7 @@
     <body>
         <div class="container">
             <h2>List Of Comments</h2>
-            <span><a href="{{url('/Comment')}}">Create New Comment</a></span>
+            <span><a href="{{url("/Comment")}}">Create New Comment</a></span>
             <table class="table table-hove table-bordered">
                 <tr>
                     <th>id</th>
