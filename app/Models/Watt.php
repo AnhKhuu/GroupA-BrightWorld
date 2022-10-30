@@ -13,10 +13,10 @@ class Watt extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['description'];
+    protected $fillable = ['measure'];
 
-    public function wattDetail()
+    public function product()
     {
-        return $this->belongsTo(WattDetail::class);
+        return $this->hasMany(Product::class);
     }
 }

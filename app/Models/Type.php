@@ -15,8 +15,8 @@ class Type extends Model
 
     protected $fillable = ['description'];
 
-    public function typeDetail()
+    public function product()
     {
-        return $this->belongsTo(TypeDetail::class);
+        return $this->hasMany(Product::class);
     }
 }

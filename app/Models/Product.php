@@ -13,55 +13,52 @@ class Product extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['name', 'unit', 'price', 'imgUrl', 'description', 'sold', 'inStock'];
-
-    public function cart()
-    {
-        return $this->hasMany(Cart::class);
-    }
-
-    public function feedback()
-    {
-        return $this->belongsTo(Feedback::class);
-    }
+    protected $fillable = ['type_id','country_id','watt_id','brand_id','sale_id','shape_id', 'name', 'unit', 'price', 'img_url', 'description', 'sold', 'in_stock'];
 
     public function sale()
     {
-        return $this->hasMany(Sale::class);
+        return $this->belongsTo(Sale::class);
     }
 
     public function country()
     {
-        return $this->hasMany(Country::class);
+        return $this->belongsTo(Country::class);
     }
 
     public function brand()
     {
-        return $this->hasMany(Brand::class);
+        return $this->belongsTo(Brand::class);
     }
 
-    public function shapeDetail()
+    public function type()
     {
-        return $this->belongsTo(ShapeDetail::class);
+        return $this->belongsTo(Brand::class);
     }
 
-    public function typeDetail()
+    public function watt()
     {
-        return $this->belongsTo(TypeDetail::class);
+        return $this->belongsTo(Brand::class);
     }
 
-    public function wattDetail()
+    public function shape()
     {
-        return $this->belongsTo(WattDetail::class);
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function productLikeDetail()
+    {
+        return $this->belongsTo(ProductLikeDetail::class);
+    }
+
+    public function cartDetail()
+    {
+        return $this->belongsTo(CartDetail::class);
     }
 
     public function invoiceDetail()
     {
         return $this->belongsTo(InvoiceDetail::class);
     }
+    
 
-    public function productLiked()
-    {
-        return $this->belongsTo(ProductLiked::class);
-    }
 }

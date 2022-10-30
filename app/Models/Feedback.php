@@ -13,7 +13,7 @@ class Feedback extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['content', 'rating'];
+    protected $fillable = ['product_id','customer_id','content', 'rating'];
 
     public function customer()
     {

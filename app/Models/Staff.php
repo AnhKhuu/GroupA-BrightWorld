@@ -13,7 +13,7 @@ class Staff extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['name', 'image', 'description'];
+    protected $fillable = ['username', 'password', 'description'];
 
     protected $hidden = ['password'];
 

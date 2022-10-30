@@ -13,10 +13,10 @@ class Shape extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['description'];
+    protected $fillable = ['shape_desc'];
 
-    public function shapeDetail()
+    public function product()
     {
-        return $this->belongsTo(ShapeDetail::class);
+        return $this->hasMany(Product::class);
     }
 }
