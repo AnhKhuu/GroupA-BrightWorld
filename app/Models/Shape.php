@@ -13,7 +13,7 @@ class Shape extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['description'];
+    protected $fillable = ['shape_desc'];
 
     public function product()
     {
