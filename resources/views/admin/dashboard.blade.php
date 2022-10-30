@@ -88,8 +88,26 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+               <li class="nav-item">
+                <a href="../../admin/cart/show" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    Cart
+                    <span class="right badge badge-danger">New</span>
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../admin/invoice/show" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    Invoice
+                    <span class="right badge badge-danger">New</span>
+                  </p>
+                </a>
+              </li>
           <li class="nav-item">
-            <a href="./product" class="nav-link">
+            <a href="../../admin/product" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Products
