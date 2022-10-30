@@ -17,7 +17,7 @@ Create Product
                                 <i class="fa fa-info-circle"></i>
                             </span>
                         </div>
-                        <input class="form-control" placeholder="Enter Product Name" name="name" id="name" value="{{old('name')}}">
+                        <input class="form-control" placeholder="Enter Product Name" name="name" id="name" value="{{$pro->name}}">
                     </div>
                     @error('name')
                         <p class="text-danger"><strong>{{$message}}</strong></p>
@@ -32,9 +32,15 @@ Create Product
                             </span>
                         </div>
                         <select class="form-control" name="type_id">
-                            <option selected>Select Product Type</option>
                             @foreach($types as $type)
-                            <option value="{{$type->id}}">{{$type->description}}</option>
+                                @if($type->id == $pro->type_id)
+                                    <option value="{{$type->id}}" selected>{{$type->description}}</option>
+                                @endif
+                            @endforeach
+                            @foreach($types as $type)
+                                @if($type->id != $pro->type_id)
+                                    <option value="{{$type->id}}">{{$type->description}}</option>
+                                @endif
                             @endforeach
                         </select>
                         <!-- <input class="form-control" placeholder="Enter Product Type" name="type_id" id="name" value="{{old('type_id')}}"> -->
@@ -52,9 +58,15 @@ Create Product
                             </span>
                         </div>
                         <select class="form-control" name="country_id">
-                            <option selected>Select Product Country</option>
                             @foreach($countries as $country)
-                            <option value="{{$country->id}}">{{$country->full_name}}</option>
+                                @if($country->id == $pro->country_id)
+                                    <option value="{{$country->id}}" selected>{{$country->full_name}}</option>
+                                @endif
+                            @endforeach
+                            @foreach($countries as $country)
+                                @if($country->id != $pro->country_id)
+                                    <option value="{{$country->id}}">{{$country->full_name}}</option>
+                                @endif
                             @endforeach
                         </select>
                         <!-- <input class="form-control" placeholder="Enter Product Country" name="country_id" id="name" value="{{old('country_id')}}"> -->
@@ -72,9 +84,15 @@ Create Product
                             </span>
                         </div>
                         <select class="form-control" name="watt_id">
-                            <option selected>Select Product Watt</option>
                             @foreach($watts as $watt)
-                            <option value="{{$watt->id}}">{{$watt->measure}}</option>
+                                @if($watt->id == $pro->watt_id)
+                                    <option value="{{$watt->id}}" selected>{{$watt->measure}}</option>
+                                @endif
+                            @endforeach
+                            @foreach($watts as $watt)
+                                @if($watt->id != $pro->watt_id)
+                                    <option value="{{$watt->id}}">{{$watt->measure}}</option>
+                                @endif
                             @endforeach
                         </select>
                         <!-- <input class="form-control" placeholder="Enter Product Watt" name="watt_id" id="name" value="{{old('watt_id')}}"> -->
@@ -92,9 +110,15 @@ Create Product
                             </span>
                         </div>
                         <select class="form-control" name="brand_id">
-                            <option selected>Select Product Brand</option>
+                        @foreach($brands as $brand)
+                                @if($brand->id == $pro->brand_id)
+                                    <option value="{{$brand->id}}" selected>{{$brand->full_name}}</option>
+                                @endif
+                            @endforeach
                             @foreach($brands as $brand)
-                            <option value="{{$brand->id}}">{{$brand->full_name}}</option>
+                                @if($brand->id != $pro->brand_id)
+                                    <option value="{{$brand->id}}">{{$brand->full_name}}</option>
+                                @endif
                             @endforeach
                         </select>
                         <!-- <input class="form-control" placeholder="Enter Product Brand" name="brand_id" id="name" value="{{old('brand_id')}}"> -->
@@ -112,9 +136,15 @@ Create Product
                             </span>
                         </div>
                         <select class="form-control" name="sale_id">
-                            <option selected>Select Product Sale</option>
+                        @foreach($sales as $sale)
+                                @if($sale->id == $pro->sale_id)
+                                    <option value="{{$sale->id}}" selected>{{$sale->percent}}</option>
+                                @endif
+                            @endforeach
                             @foreach($sales as $sale)
-                            <option value="{{$sale->id}}">{{$sale->percent}}</option>
+                                @if($sale->id != $pro->sale_id)
+                                    <option value="{{$sale->id}}">{{$sale->percent}}</option>
+                                @endif
                             @endforeach
                         </select>
                         <!-- <input class="form-control" placeholder="Enter Product Sale" name="sale_id" id="name" value="{{old('sale_id')}}"> -->
@@ -132,9 +162,15 @@ Create Product
                             </span>
                         </div>
                         <select class="form-control" name="shape_id">
-                            <option selected>Select Product Shape</option>
                             @foreach($shapes as $shape)
-                            <option value="{{$shape->id}}">{{$shape->shape_desc}}</option>
+                                @if($shape->id == $pro->shape_id)
+                                    <option value="{{$shape->id}}" selected>{{$shape->shape_desc}}</option>
+                                @endif
+                            @endforeach
+                            @foreach($shapes as $shape)
+                                @if($shape->id != $pro->shape_id)
+                                    <option value="{{$shape->id}}">{{$shape->shape_desc}}</option>
+                                @endif
                             @endforeach
                         </select>
                         <!-- <input class="form-control" placeholder="Enter Product Shape" name="shape_id" id="name" value="{{old('shape_id')}}"> -->
@@ -151,7 +187,7 @@ Create Product
                                 <i class="fa fa-info-circle"></i>
                             </span>
                         </div>
-                        <input class="form-control" placeholder="Enter Unit" name="unit" id="name" value="{{old('unit')}}">
+                        <input class="form-control" placeholder="Enter Unit" name="unit" id="name" value="{{$pro->unit}}">
                     </div>
                     @error('unit')
                         <p class="text-danger"><strong>{{$message}}</strong></p>
@@ -165,7 +201,7 @@ Create Product
                                 <i class="fa fa-info-circle"></i>
                             </span>
                         </div>
-                        <input class="form-control" placeholder="Enter Product Sold" name="sold" id="name" value="{{old('sold')}}">
+                        <input class="form-control" placeholder="Enter Product Sold" name="sold" id="name" value="{{$pro->sold}}">
                     </div>
                     @error('sold')
                         <p class="text-danger"><strong>{{$message}}</strong></p>
@@ -179,7 +215,7 @@ Create Product
                                 <i class="fa fa-info-circle"></i>
                             </span>
                         </div>
-                        <input class="form-control" placeholder="Enter Product Price" name="price" id="name" value="{{old('price')}}">
+                        <input class="form-control" placeholder="Enter Product Price" name="price" id="name" value="{{$pro->price}}">
                     </div>
                     @error('price')
                         <p class="text-danger"><strong>{{$message}}</strong></p>
@@ -193,7 +229,7 @@ Create Product
                                 <i class="fa fa-info-circle"></i>
                             </span>
                         </div>
-                        <input class="form-control" placeholder="Enter Product in stock" name="in_stock" id="name" value="{{old('in_stock')}}">
+                        <input class="form-control" placeholder="Enter Product in stock" name="in_stock" id="name" value="{{$pro->in_stock}}">
                     </div>
                     @error('in_stock')
                         <p class="text-danger"><strong>{{$message}}</strong></p>
@@ -216,7 +252,7 @@ Create Product
                 </div>
                 <div class="form-group col-md-12">
                     <label for="description" class="form-control-label">Description</label>
-                    <textarea class="form-control" placeholder="Enter description" name="description" id="description">{{old('description')}}</textarea>
+                    <textarea class="form-control" placeholder="Enter description" name="description" id="description">{{$pro->description}}</textarea>
                 </div>
                 @error('description')
                     <p class="text-danger"><strong>{{$message}}</strong></p>

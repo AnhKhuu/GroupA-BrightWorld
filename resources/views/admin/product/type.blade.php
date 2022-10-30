@@ -10,7 +10,7 @@ Create Product
         <div class="card-body">
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="description" class="form-control-label">Acronym</label>
+                    <label for="description" class="form-control-label">Description</label>
                     <div class="input-group input-group-merge ">
                         <div class="input-group-prepend">
                             <span class="input-group-text">

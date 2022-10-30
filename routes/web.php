@@ -40,6 +40,9 @@ Route::prefix('admin')->group(function () {
     Route::get('product', [ProductController::class, 'create']);
     Route::post('product', [ProductController::class, 'createProcess']);
 
+    Route::get('edit/{id}', [ProductController::class, 'update']);
+    Route::post('edit/{id}', [ProductController::class, 'updateProcess']);
+
     Route::get('country', [ProductController::class, 'createCountry']);
     Route::post('country', [ProductController::class, 'createCountryProcess']);
 
