@@ -1,0 +1,180 @@
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.homepage .show-more {
+  color: #999999;
+  font-size: 14px;
+}
+
+.homepage h1 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@media (min-width: 992px) {
+  .homepage h1 {
+    font-size: 24px;
+  }
+}
+
+.product-carousel .item {
+  border: 1px solid #D7D7D7;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.product-carousel .item .img-container {
+  overflow: hidden;
+  width: initial;
+  height: auto;
+}
+
+.product-carousel .item:hover img {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.product-carousel .item .sale {
+  color: #FF9F15;
+  font-size: 12px;
+  border-radius: 13px;
+}
+
+.product-carousel .item img {
+  max-width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  border-radius: 5px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.product-carousel .item p {
+  font-size: 14px;
+  margin: 8px 0;
+  padding: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 2;
+  min-height: 42px;
+}
+
+@media (min-width: 992px) {
+  .product-carousel .item p {
+    font-size: 16px;
+  }
+}
+
+.product-carousel .item .old-price {
+  font-size: 12px;
+  color: #999999;
+  text-decoration: line-through;
+}
+
+@media (min-width: 992px) {
+  .product-carousel .item .old-price {
+    font-size: 14px;
+  }
+}
+
+.product-carousel .item .new-price {
+  font-weight: 600;
+}
+
+@media (min-width: 992px) {
+  .product-carousel .item .new-price {
+    font-size: 18px;
+  }
+}
+
+.product-carousel .item .material-icons {
+  font-size: 20px;
+}
+
+@media (min-width: 992px) {
+  .product-carousel .item .material-icons {
+    font-size: 24px;
+  }
+}
+
+.product-carousel .item .heart-outline {
+  color: #F14747;
+  cursor: pointer;
+}
+
+.product-carousel .item .star {
+  color: #FDBC15;
+}
+
+.owl-carousel .owl-prev, .owl-carousel .owl-next {
+  position: absolute;
+  top: 50%;
+}
+
+.owl-carousel .owl-prev {
+  left: 0 !important;
+}
+
+.owl-carousel .owl-next {
+  right: 0 !important;
+}
+
+.owl-carousel.owl-loading {
+  opacity: 1;
+}
+
+.owl-nav button.owl-next,
+.owl-nav button.owl-prev {
+  background: #FF9F15 !important;
+  opacity: 50% !important;
+  position: absolute;
+  border-radius: 50% !important;
+  top: 50%;
+  width: 35px;
+  height: 35px;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.owl-nav button.owl-next:hover,
+.owl-nav button.owl-prev:hover {
+  background: #FF9F15;
+  opacity: 100% !important;
+}
+
+.owl-nav button.owl-next span {
+  font-size: 35px;
+  margin-bottom: 3px;
+  line-height: 0;
+  color: #FFFFF8 !important;
+  margin-left: 4px;
+}
+
+.owl-nav button.owl-prev span {
+  font-size: 35px;
+  margin-bottom: 3px;
+  line-height: 0;
+  color: #FFFFF8 !important;
+}
+
+.owl-nav button.owl-prev {
+  left: 20px;
+}
+
+.owl-nav button.owl-next {
+  right: 20px;
+}
+/*# sourceMappingURL=homepage.css.map */

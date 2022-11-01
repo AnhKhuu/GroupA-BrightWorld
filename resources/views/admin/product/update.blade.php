@@ -203,9 +203,6 @@ Create Product
                         </div>
                         <input class="form-control" placeholder="Enter Product Sold" name="sold" id="name" value="{{$pro->sold}}">
                     </div>
-                    @error('sold')
-                        <p class="text-danger"><strong>{{$message}}</strong></p>
-                    @enderror
                 </div>
                 <div class="form-group col-md-6">
                     <label for="price" class="form-control-label">Product Price</label>
@@ -254,9 +251,6 @@ Create Product
                     <label for="description" class="form-control-label">Description</label>
                     <textarea class="form-control" placeholder="Enter description" name="description" id="description">{{$pro->description}}</textarea>
                 </div>
-                @error('description')
-                    <p class="text-danger"><strong>{{$message}}</strong></p>
-                @enderror
             </div>
         </div>
         <div class="card-footer">
