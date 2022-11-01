@@ -6,23 +6,38 @@ Homepage
 <link rel="stylesheet" href="{{ asset('admin-assets/dist/css/homepage.css') }}" />
 @endsection
 @section('content')
+<div class="owl-carousel owl-theme banner-carousel position-relative">
+        <div class="item">
+            <img src="/admin-assets/dist/img/main/banner/banner.png" alt="">
+        </div>
+        <div class="item">
+            <img src="/admin-assets/dist/img/main/banner/banner2.png" alt="">
+        </div>
+        <div class="item">
+            <img src="/admin-assets/dist/img/main/banner/banner3.png" alt="">
+        </div>
+    </div>
+<div class="container-lg my-3 my-lg-5">
 <div class="d-flex justify-content-between align-items-center">
   <h1 class="mb-3">BEST SELLERS</h1>
-  {{$sale->percent}}
 </div>
 <section class="product-carousel">
   <div class="owl-carousel owl-theme owl-product-carousel mb-4 mb-lg-5">
     @foreach($pro as $product)
       <div class="item">
-          <a href="#!/Homepage/{{$product->id}}" class="d-block img-container">
+          <a href="/homepage/{{$product->id}}" class="d-block img-container">
             <img src="/admin-assets/dist/img/product/{{$product->img_url}}">
           </a>
-          <a href="#!/Homepage/{{$product->id}}">
+          <a href="/homepage/{{$product->id}}">
               <p>{{$product->name}}</p>
           </a>
           <div class="price">
               <span class="old-price">{{$product->price}}</span>
-              <!-- <span class="new-price">{{(1-$product->sale)*$product->price}}</span> -->
+              @foreach($sales as $sale)
+                @if($sale->id == $product->sale_id)
+              <span class="new-price">{{(1-$sale->percent)*$product->price}}</span>
+                @endif
+              @endforeach
           </div>
           <div class="d-flex align-items-center justify-content-between  mt-2">
               <!-- <span class="star-rating">
@@ -40,6 +55,44 @@ Homepage
     @endforeach
   </div>
 </section>
+<div class="d-flex justify-content-between align-items-center">
+  <h1 class="mb-3">NEW ITEMS</h1>
+</div>
+<section class="product-carousel">
+  <div class="owl-carousel owl-theme owl-product-carousel mb-4 mb-lg-5">
+    @foreach($pro as $product)
+      <div class="item">
+          <a href="#!/homepage/{{$product->id}}" class="d-block img-container">
+            <img src="/admin-assets/dist/img/product/{{$product->img_url}}">
+          </a>
+          <a href="#!/homepage/{{$product->id}}">
+              <p>{{$product->name}}</p>
+          </a>
+          <div class="price">
+              <span class="old-price">{{$product->price}}</span>
+              @foreach($sales as $sale)
+                @if($sale->id == $product->sale_id)
+              <span class="new-price">{{(1-$sale->percent)*$product->price}}</span>
+                @endif
+              @endforeach
+          </div>
+          <div class="d-flex align-items-center justify-content-between  mt-2">
+              <!-- <span class="star-rating">
+                  <span ng-repeat="rating in $product->starRating">
+                    <div star-static-rating rating-value="rating.current" max="rating.max"></div>
+                  </span>
+              </span> -->
+              <span class="favorite">
+                  <span class="material-icons heart-outline">
+                      favorite_border
+                  </span>
+              </span>
+          </div>
+      </div>
+    @endforeach
+  </div>
+</section>
+</div>
 @endsection
 @section('script')
 <script>
@@ -64,6 +117,26 @@ Homepage
               }
           }
           )
-      }, 1000);
+      }, 0);
+  
+      setTimeout(function(){
+        $(".banner-carousel").owlCarousel({
+          loop: true,
+          margin: 13,
+          items: 1,
+          autoplay: true,
+          autoplayTimeout: 2000,
+          autoplayHoverPause: true,
+          responsiveClass: true,
+          responsive: {
+            0: {
+              nav: false
+            },
+            768: {
+              nav: true
+            }
+          }
+      });
+      }, 0);
 </script>
 @endsection

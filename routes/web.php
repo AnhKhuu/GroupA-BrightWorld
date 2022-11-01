@@ -28,7 +28,7 @@ Route::get('/admin/login', function () {
 });
 
 Route::get('/homepage', [ProductController::class, 'index']);
-+
+Route::get('/homepage/{id}', [ProductController::class, 'productDetail']);
 Route::get('/admin/cart/show', [CartController::class, 'show'])->name('admin.cart.show');
 Route::get('/admin/cart/create', [CartController::class, 'create']);
 Route::post('/admin/cart/store', [CartController::class, 'store'])->name('admin.cart.store');
