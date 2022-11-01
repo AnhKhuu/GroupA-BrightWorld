@@ -27,9 +27,8 @@ Route::get('/admin/login', function () {
     return view('admin.auth.login');
 });
 
-Route::get('/homepage', function() {
-    return view('user.index');
-});
+Route::get('/homepage', [ProductController::class, 'index']);
++
 Route::get('/admin/cart/show', [CartController::class, 'show'])->name('admin.cart.show');
 Route::get('/admin/cart/create', [CartController::class, 'create']);
 Route::post('/admin/cart/store', [CartController::class, 'store'])->name('admin.cart.store');
@@ -43,7 +42,6 @@ Route::post('/admin/invoice/store', [InvoiceController::class, 'store'])->name('
 // Route::get('/admin/customer', [CustomerController::class, 'show']);
 // Route::get('/admin/feedback', [FeedbackController::class, 'show']);
 Route::prefix('admin')->group(function () {
-    // Route::get('dashboard', [ProfileController::class, 'dashboard']);
     Route::get('dashboard', [ProductController::class, 'show']);
 
     Route::get('show', [ProductController::class, 'show']);
@@ -71,10 +69,6 @@ Route::prefix('admin')->group(function () {
 
     Route::get('shape', [ProductController::class, 'createShape']);
     Route::post('shape', [ProductController::class, 'createShapeProcess']);
-
-    // Route::get('catelogue', [CatelogueController::class, 'show']);
-    // Route::get('customer', [CustomerController::class, 'show']);
-    // Route::get('feedback', [FeedbackController::class, 'show']);
 });
 Route::get('/', [CartController::class, 'index']);
 
