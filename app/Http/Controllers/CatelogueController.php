@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class CatelogueController extends Controller
 {
     public function show() {
-        return view('admin.catelogue');
+        return view('admin.catelogue.catelogue');
     }
 }

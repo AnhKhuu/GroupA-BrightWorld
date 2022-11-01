@@ -13,7 +13,7 @@ class Invoice extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['cuatomer_id', 'date', 'invoice_number'];
+    protected $fillable = ['customer_id', 'invoice_number'];
 
     public function customer()
     {
