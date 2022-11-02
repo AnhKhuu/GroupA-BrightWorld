@@ -2,17 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Watt;
-use App\Models\Country;
-use App\Models\Brand;
-use App\Models\Shape;
-use App\Models\Sale;
-use App\Models\Type;
 
 class ProductController extends Controller
 {
+    public function index()
+    {
+        $pro=DB::table('products')->get();
+        $watts=DB::table('watts')->get();
+        $shapes=DB::table('shapes')->get();
+        $sales=DB::table('sales')->get();
+        $types=DB::table('types')->get();
+        $countries=DB::table('countries')->get();
+        $brands=DB::table('brands')->get();
+        return view('user.index')
+                ->with(['pro'=>$pro])
+                ->with(['watts'=>$watts])
+                ->with(['shapes'=>$shapes])
+                ->with(['sales'=>$sales])
+                ->with(['types'=>$types])
+                ->with(['countries'=>$countries])
+                ->with(['brands'=>$brands]);
+    }
+
+    public function productDetail($id)
+    {
+        $watts=DB::table('watts')->get();
+        $shapes=DB::table('shapes')->get();
+        $sales=DB::table('sales')->get();
+        $types=DB::table('types')->get();
+        $countries=DB::table('countries')->get();
+        $brands=DB::table('brands')->get();
+        $pro = DB::table('products')
+        ->where('id', intval($id))
+        ->first();
+        return view('user.productDetail')
+                ->with(['pro'=>$pro])
+                ->with(['watts'=>$watts])
+                ->with(['shapes'=>$shapes])
+                ->with(['sales'=>$sales])
+                ->with(['types'=>$types])
+                ->with(['countries'=>$countries])
+                ->with(['brands'=>$brands]);
+    }
 
     public function show()
     {
@@ -96,6 +130,35 @@ class ProductController extends Controller
             ->with(['types'=>$types])
             ->with(['countries'=>$countries])
             ->with(['brands'=>$brands]);
+    }
+
+    public function updateProcess(ProductsRequest $request, $id)
+    {
+        $data = array();
+        $data['type_id'] = $request->input('type_id');
+        $data['country_id'] = $request->input('country_id');
+        $data['watt_id'] = $request->input('watt_id');
+        $data['brand_id'] = $request->input('brand_id');
+        $data['sale_id'] = $request->input('sale_id');
+        $data['shape_id'] = $request->input('shape_id');
+        $data['name'] = $request->input('name');
+        $data['unit'] = $request->input('unit');
+        $data['price'] = $request->input('price');
+        $data['description'] = $request->input('description');
+        $data['sold'] = $request->input('sold');
+        $data['in_stock'] = $request->input('in_stock');
+        $get_image = $request->file('img_url');
+        if($get_image){
+            $get_name_picture = $data['name'].'.jpg';
+            $data['img_url'] = $get_name_picture;
+            $get_image->move('admin-assets/dist/img/product',$get_name_picture);
+        }
+        DB::table('products')->where('id', intval($id))->update(
+            $data
+        );
+        // if($request->all()){
+        //     return redirect()->route('products.index')->with('success',"Update product successfully!");
+        // }
     }
 
     // Country

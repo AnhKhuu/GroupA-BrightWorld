@@ -4,29 +4,56 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CartRequest;
 use App\Models\Cart;
-use App\Models\Staff;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
     public function show() {
-        $carts = Cart::all();
-        return view('admin.cart.show', compact('carts'));
+
+        $carts=DB::table('carts')->get();
+        return view('admin.cart.show')
+                ->with(['carts'=>$carts]);
+               
     }
 
-    public function create()
+    public function create() {
+        $carts=DB::table('carts')->get();
+      
+        return view('admin.cart.create')
+                ->with(['carts'=>$carts]);
+                
+    }
+
+    public function createProcess(Request $request) {
+        $data = array();
+        $data['quantity'] = $request->input('quantity');
+        $data['customer_id'] = $request->input('customer_id');
+       
+        DB::table('carts')->insert(
+            $data
+        );
+    }
+
+    public function update($id)
     {
-        return view('admin.cart.create');
+        $carts=DB::table('carts')->get()
+        ->where('id', intval($id))
+        ->first();
+        return view('admin.cart.update')
+            ->with(['carts'=>$carts]);
+           
     }
 
-    public function store(CartRequest $request)
+    public function updateProcess(CartRequest $request, $id)
     {
-        Cart::create([
-            'quantity' => $request->quantity,
-            'customer_id' =>  $request->customer_id,
-        ]);
+        $data = array();
+        $data['quantity'] = $request->input('quantity');
+        $data['customer_id'] = $request->input('customer_id');
+       
+        DB::table('carts')->where('id', intval($id))->update(
+            $data
+        );
 
-        return to_route('admin.cart.show')->with('success', 'Cart created successfully.');
     }
-
 }
