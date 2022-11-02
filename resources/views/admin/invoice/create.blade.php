@@ -7,7 +7,7 @@ Create Invoices Management
     <div class="card-header">
       <h3 class="card-title">Forms</h3>
     </div>
-    <form method="POST" action="{{ route('admin.invoice.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.invoice.update') }}" enctype="multipart/form-data">
         @csrf
       <div class="card-body">
        
