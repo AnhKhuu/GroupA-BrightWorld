@@ -55,4 +55,45 @@ class CustomerController extends Controller
         return redirect() -> action('CustomerController@customer');
     }
 
+    public function update($CustomerID){
+        $rs = DB::table('customers')
+            -> where('id', $CustomerID)
+            -> first();
+        return view('customer.update', ['rs' => $rs]);
+    }
+
+    public function updateProcess(Request $request, $CustomerID){
+        $FirstName = $request -> input('txtFirstName');
+        $LastName = $request -> input('txtLastName');
+        $PhoneNumber = $request -> input('txtPhoneNumber');
+        $Address = $request -> input('txtAddress');
+        $Zip = $request -> input('txtZip');
+        $Email = $request -> input('txtEmail');
+        $Username = $request -> input('txtUserName');
+        $Password = $request -> input('txtPassword');
+        $CreatedAt = $request -> input('txtCreateAt');
+        $UpdateAt = $request -> input('txtUpdateAt');
+        $rs = DB::table('customer')
+            -> where('id', $CustomerID)
+            -> update([
+                'FirstName' => $FirstName,
+                'LastName' => $LastName,
+                'PhoneNumber' => $PhoneNumber,
+                'Address' => $Address,
+                'Zip' => $Zip,
+                'Email' => $Email,
+                'Username' => $Username,
+                'Password' => $Password,
+                'CreatedAt' => $CreatedAt,
+                'UpdateAt' => $UpdateAt
+            ]);
+        return redirect() -> action('CustomerController@customer');
+    }
+
+    public function delete($CustomerID){
+        $rs = DB::table('customers')
+            -> where('id', $CustomerID)
+            -> delete();
+        return redirect() -> action('CustomerController@customer');
+    }
 }
