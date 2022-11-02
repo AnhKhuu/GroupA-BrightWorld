@@ -81,5 +81,20 @@ Route::prefix('admin')->group(function () {
     Route::get('shape', [ProductController::class, 'createShape']);
     Route::post('shape', [ProductController::class, 'createShapeProcess']);
 });
+//Route::get('/', [CartController::class, 'index']);
 // Route::get('/', [CartController::class, 'index']);
 
+// customer -> listCust
+Route::get('admin/customer/listCust', [CustomerController::class, 'listCust']);
+
+// customer -> create
+Route::get('admin/customer/create', [CustomerController::class, 'create']);
+Route::post('admin/customer/create', [CustomerController::class, 'createProcess']);
+
+// customer -> update
+Route::get('admin/customer/update/{id}', [CustomerController::class, 'update']);
+Route::post('admin/customer/update/{id}', [CustomerController::class, 'updateProcess']);
+
+
+// customer -> delete
+Route::get('admin/customer/delete/{id}', [CustomerController::class, 'delete']);
