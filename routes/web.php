@@ -76,5 +76,13 @@ Route::prefix('admin')->group(function () {
     // Route::get('customer', [CustomerController::class, 'show']);
     // Route::get('feedback', [FeedbackController::class, 'show']);
 });
-Route::get('/', [CartController::class, 'index']);
+//Route::get('/', [CartController::class, 'index']);
+
+// customer -> listCust
+Route::get('admin/customer/listCust', [CustomerController::class, 'listCust']);
+
+// customer -> create
+Route::get('admin/customer/create', [CustomerController::class, 'create']);
+Route::post('admin/customer/create', [CustomerController::class, 'createProcess']);
+
 
