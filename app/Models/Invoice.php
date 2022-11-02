@@ -20,8 +20,13 @@ class Invoice extends Model
         return $this->hasMany(Customer::class);
     }
 
-    public function invoiceDetail()
+    // public function invoiceDetail()
+    // {
+    //     return $this->belongsTo(InvoiceDetail::class);
+    // }
+
+    public function product()
     {
-        return $this->belongsTo(InvoiceDetail::class);
+        return $this->belongsToMany(Product::class, 'invoce_details', 'invoice_id', 'product_id')->withPivot('quantity');
     }
 }

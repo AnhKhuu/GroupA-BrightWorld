@@ -27,21 +27,41 @@ class ProductController extends Controller
                 ->with(['brands'=>$brands]);
     }
 
+    public function productDetail($id)
+    {
+        $watts=DB::table('watts')->get();
+        $shapes=DB::table('shapes')->get();
+        $sales=DB::table('sales')->get();
+        $types=DB::table('types')->get();
+        $countries=DB::table('countries')->get();
+        $brands=DB::table('brands')->get();
+        $pro = DB::table('products')
+        ->where('id', intval($id))
+        ->first();
+        return view('user.productDetail')
+                ->with(['pro'=>$pro])
+                ->with(['watts'=>$watts])
+                ->with(['shapes'=>$shapes])
+                ->with(['sales'=>$sales])
+                ->with(['types'=>$types])
+                ->with(['countries'=>$countries])
+                ->with(['brands'=>$brands]);
+    }
+
     public function show()
     {
         $pro=DB::table('products')->get();
         $watts=DB::table('watts')->get();
         $shapes=DB::table('shapes')->get();
-        // $sales=DB::table('sales')->get();
+        $sales=DB::table('sales')->get();
         $types=DB::table('types')->get();
         $countries=DB::table('countries')->get();
         $brands=DB::table('brands')->get();
-        $sale = DB::table('sales')->where('id', $pro->sale_id)->first();
         return view('admin.product.show')
                 ->with(['pro'=>$pro])
                 ->with(['watts'=>$watts])
                 ->with(['shapes'=>$shapes])
-                ->with(['sale'=>$sale])
+                ->with(['sales'=>$sales])
                 ->with(['types'=>$types])
                 ->with(['countries'=>$countries])
                 ->with(['brands'=>$brands]);

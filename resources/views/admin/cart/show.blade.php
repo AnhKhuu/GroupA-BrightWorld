@@ -19,6 +19,7 @@ Cart Management
           <th>Quantity</th>
           <th>Created At</th>
           <th>Updated At</th>
+          <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -44,6 +45,21 @@ Cart Management
             >
             {{ $cart->updated_at }}
         </td>
+        <td
+        >
+        <div>
+            <a href="{{ route('admin.cart.update', $cart->id) }}"
+                >Edit</a>
+            {{-- <form
+                method="POST"
+                action="{{ route('admin.categories.destroy', $category->id) }}"
+                onsubmit="return confirm('Are you sure?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Delete</button>
+            </form> --}}
+        </div>
+    </td>
             </tr>
         @endforeach
         </tbody>
