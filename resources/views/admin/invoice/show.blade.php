@@ -19,6 +19,8 @@ Invoice Management
           <th>Customer ID</th>
           <th>Created At</th>
           <th>Updated At</th>
+          <th>Actions</th>
+
         </tr>
         </thead>
         <tbody>
@@ -44,6 +46,21 @@ Invoice Management
             >
             {{ $invoice->updated_at }}
         </td>
+        <td
+        >
+        <div>
+            <a href="{{ route('admin.invoice.update', $invoice->id) }}"
+                >Edit</a>
+            {{-- <form
+                method="POST"
+                action="{{ route('admin.categories.destroy', $category->id) }}"
+                onsubmit="return confirm('Are you sure?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Delete</button>
+            </form> --}}
+        </div>
+    </td>
             </tr>
         @endforeach
         </tbody>

@@ -1,0 +1,431 @@
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.checkout .product-info img {
+  width: 90px;
+  height: 90px;
+  border-radius: 5px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+@media (min-width: 992px) {
+  .checkout .product-info img {
+    width: 128px;
+    height: 128px;
+  }
+}
+
+.checkout .product-info p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 3;
+}
+
+.checkout .product-info .material-icons-outlined.close {
+  cursor: pointer;
+}
+
+.checkout .product-info .material-icons-outlined.close:hover {
+  color: #F14747 !important;
+}
+
+.checkout .product-info .quantity input {
+  width: 50px;
+  border: none;
+}
+
+.checkout .product-info .quantity div {
+  border: 1px solid #999999;
+}
+
+.checkout .product-info .quantity button {
+  padding: 2px 5px;
+  line-height: 1;
+  background-color: white;
+}
+
+.checkout .product-info .quantity button:first-of-type {
+  border-right: 1px solid #999999;
+  border-radius: 0;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.checkout .product-info .quantity button:last-of-type {
+  border-left: 1px solid #999999;
+  border-radius: 0;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.checkout .order-summary {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+@media (min-width: 992px) {
+  .checkout .order-summary {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+    border: 1px solid #999999;
+    border-radius: 5px;
+  }
+}
+
+.checkout .order-summary .new-price {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.checkout .order-summary .old-price {
+  text-decoration: line-through;
+  color: #999999;
+}
+
+.checkout .order-summary .title {
+  font-size: 16px;
+}
+
+.checkout .order-summary .result {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.checkout .order-summary .product-calculate {
+  border-bottom: 1px solid #999999;
+}
+
+.checkout h2 {
+  font-weight: 600;
+  text-align: center;
+  font-size: 20px;
+}
+
+@media (min-width: 992px) {
+  .checkout h2 {
+    font-size: 24px;
+    text-align: start;
+  }
+}
+
+.checkout .step {
+  font-size: 12px;
+  color: #999999;
+}
+
+.checkout .error {
+  font-style: italic;
+  color: red;
+}
+
+.checkout .form-group p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.checkout .form-group ::-webkit-input-placeholder {
+  font-size: 14px;
+  color: #999999;
+}
+
+.checkout .form-group :-ms-input-placeholder {
+  font-size: 14px;
+  color: #999999;
+}
+
+.checkout .form-group ::-ms-input-placeholder {
+  font-size: 14px;
+  color: #999999;
+}
+
+.checkout .form-group ::placeholder {
+  font-size: 14px;
+  color: #999999;
+}
+
+.checkout .form-group input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #999999;
+}
+
+.checkout .form-group input:focus {
+  outline: none;
+}
+
+.checkout textarea {
+  border-radius: 5px;
+  border-color: #999999;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100px;
+}
+
+.checkout .step {
+  font-size: 12px;
+  color: #999999;
+}
+
+.checkout .trigger-ship {
+  border-radius: 5px;
+  border: 1px solid #999999;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  /* Customize the label (the container) */
+  /* Hide the browser's default checkbox */
+  /* Create a custom checkbox */
+  /* On mouse-over, add a grey background color */
+  /* When the checkbox is checked, add a blue background */
+  /* Create the checkmark/indicator (hidden when not checked) */
+  /* Show the checkmark when checked */
+  /* Style the checkmark/indicator */
+}
+
+.checkout .trigger-ship .container-filter {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkout .trigger-ship .container-filter input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkout .trigger-ship .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border-radius: 2px;
+  border: 1.5px solid #D1D1D1;
+}
+
+.checkout .trigger-ship .container-filter:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.checkout .trigger-ship .container-filter input:checked ~ .checkmark {
+  background-color: #FF9F15;
+}
+
+.checkout .trigger-ship .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkout .trigger-ship .container-filter input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkout .trigger-ship .container-filter .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.checkout .form-group p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.checkout .payment-method {
+  /* Hide the browser's default radio button */
+  /* Create a custom radio button */
+  /* On mouse-over, add a grey background color */
+  /* When the radio button is checked, add a blue background */
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  /* Show the indicator (dot/circle) when checked */
+  /* Style the indicator (dot/circle) */
+}
+
+.checkout .payment-method .container-filter {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkout .payment-method .container-filter input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkout .payment-method .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.checkout .payment-method .container-filter:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.checkout .payment-method .container-filter input:checked ~ .checkmark {
+  background-color: #FF9F15;
+}
+
+.checkout .payment-method .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkout .payment-method .container-filter input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkout .payment-method .container-filter .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+.checkout input, .checkout select {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #999999;
+}
+
+.checkout input:focus, .checkout select:focus {
+  outline: none;
+}
+
+.checkout .confirmation {
+  /* Customize the label (the container) */
+  /* Hide the browser's default checkbox */
+  /* Create a custom checkbox */
+  /* On mouse-over, add a grey background color */
+  /* When the checkbox is checked, add a blue background */
+  /* Create the checkmark/indicator (hidden when not checked) */
+  /* Show the checkmark when checked */
+  /* Style the checkmark/indicator */
+}
+
+.checkout .confirmation .container-filter {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkout .confirmation .container-filter input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkout .confirmation .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border-radius: 2px;
+  border: 1.5px solid #D1D1D1;
+}
+
+.checkout .confirmation .container-filter:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.checkout .confirmation .container-filter input:checked ~ .checkmark {
+  background-color: #FF9F15;
+}
+
+.checkout .confirmation .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkout .confirmation .container-filter input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkout .confirmation .container-filter .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.checkout .complete-order {
+  color: #FFFFF8;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #FF9F15;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.checkout .complete-order:hover {
+  background-color: #cc7f11;
+}
+
+.checkout .complete-order[disabled=disabled] {
+  cursor: default;
+  background-color: #FF9F15;
+  opacity: 50%;
+}
+/*# sourceMappingURL=checkout.css.map */

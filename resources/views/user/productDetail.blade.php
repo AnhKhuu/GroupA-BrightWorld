@@ -82,7 +82,7 @@ Homepage
           </span>
           <span>Add to cart</span>
         </button>
-        <a href="#!Checkout" class="btn buy-now">
+        <a href="{{ route('user.checkout', $pro->id) }}" class="btn buy-now">
           Buy now
         </a>
       </div>

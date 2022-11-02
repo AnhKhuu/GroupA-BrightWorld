@@ -55,9 +55,14 @@ class Product extends Model
         return $this->belongsTo(CartDetail::class);
     }
 
-    public function invoiceDetail()
+    // public function invoiceDetail()
+    // {
+    //     return $this->belongsTo(InvoiceDetail::class);
+    // }
+
+    public function invoice()
     {
-        return $this->belongsTo(InvoiceDetail::class);
+        return $this->belongsToMany(Invoice::class, 'invoce_details', 'invoice_id', 'product_id')->withPivot('quantity');
     }
     
 
