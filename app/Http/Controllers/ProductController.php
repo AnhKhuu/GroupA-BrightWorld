@@ -10,6 +10,10 @@ class ProductController extends Controller
 {
     public function index()
     {
+         $cart = session('cart', [
+            'total_price'=>0,
+            'items'=> collect()
+        ]);
         $pro=DB::table('products')->get();
         $watts=DB::table('watts')->get();
         $shapes=DB::table('shapes')->get();
@@ -17,7 +21,7 @@ class ProductController extends Controller
         $types=DB::table('types')->get();
         $countries=DB::table('countries')->get();
         $brands=DB::table('brands')->get();
-        return view('user.index')
+        return view('user.index' , compact('cart'))
                 ->with(['pro'=>$pro])
                 ->with(['watts'=>$watts])
                 ->with(['shapes'=>$shapes])
@@ -29,6 +33,10 @@ class ProductController extends Controller
 
     public function productDetail($id)
     {
+        $cart = session('cart', [
+            'total_price'=>0,
+            'items'=> collect()
+        ]);
         $watts=DB::table('watts')->get();
         $shapes=DB::table('shapes')->get();
         $sales=DB::table('sales')->get();
@@ -38,7 +46,7 @@ class ProductController extends Controller
         $pro = DB::table('products')
         ->where('id', intval($id))
         ->first();
-        return view('user.productDetail')
+        return view('user.productDetail', compact('cart'))
                 ->with(['pro'=>$pro])
                 ->with(['watts'=>$watts])
                 ->with(['shapes'=>$shapes])

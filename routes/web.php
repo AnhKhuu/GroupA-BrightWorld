@@ -13,6 +13,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('test', function () {
+    dd(session(('cart')));
+});
+
 //READ -> http://localhost/GroupA-BrightWorld/public/vwComment
 Route::get('/vwComment', 'App\Http\Controllers\feedBack@viewComment');
 //CREATE -> http://localhost/GroupA-BrightWorld/public/Comment
@@ -29,9 +33,11 @@ Route::get('/admin/login', function () {
 
 Route::get('/homepage', [ProductController::class, 'index']);
 Route::get('/homepage/{id}', [ProductController::class, 'productDetail']);
+// Route::get('/homepage', [CartController::class, 'showCart'])->name('user.showCart');
 
 Route::prefix('user')->group(function () {
 Route::get('checkout/{id}', [InvoiceController::class, 'checkout'])->name("user.checkout");
+Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('user.addToCart');
 // Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
 });
 
