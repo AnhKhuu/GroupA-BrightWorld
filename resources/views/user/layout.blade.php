@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@yield('title')</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title')</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
         type="text/css">
     <link rel="icon" href="{{ asset('admin-assets/dist/img/main/logo-title.png') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -21,17 +22,20 @@
     <link rel="stylesheet" href="{{ asset('admin-assets/dist/css/owl.carousel.min.default.css') }}" />
     @yield('link')
 </head>
+
 <body>
-<div id="header">
+    <div id="header">
         <section class="header-container position-fixed">
             <section class="header w-100">
                 <nav class="d-flex justify-content-between align-items-center position-relative container-lg">
                     <a href="#/!">
-                        <img src="{{ asset('admin-assets/dist/img/main/Logo.png') }}" alt="Logo" class="header-logo">
+                        <img src="{{ asset('admin-assets/dist/img/main/Logo.png') }}" alt="Logo"
+                            class="header-logo">
                     </a>
                     <div class="search-desktop position-relative">
                         <input type="text" placeholder="Search" class="w-100">
-                        <a href="#!Product-category" class="btn material-icons-outlined position-absolute p-0 search-icon">
+                        <a href="#!Product-category"
+                            class="btn material-icons-outlined position-absolute p-0 search-icon">
                             search
                         </a>
                     </div>
@@ -52,9 +56,10 @@
                             </div>
                             <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuClickableInside">
                                 <div class="dropdown-item p-0 cart-dropdown">
-                                  <div class="product-info p-2 p-lg-4 d-flex align-items-center justify-content-between">
-                                      <!-- For loop Cart list -->
-                                      <!-- img-product.imageUrl -->
+                                    <div
+                                        class="product-info p-2 p-lg-4 d-flex align-items-center justify-content-between">
+                                        <!-- For loop Cart list -->
+                                        <!-- img-product.imageUrl -->
                                         <div class="product-detail px-2 px-md-3">
                                             <!-- product.name -->
                                             <p class="mb-1 mb-md-2">Den led</p>
@@ -79,11 +84,26 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="./Signin/signin.html" class="ms-2 ms-md-3 ms-xxl-5">
-                            <span class="material-icons-outlined">
-                                person_outline
-                            </span>
-                        </a>
+                        @if (Session::has('user'))
+                            @foreach (Session::get('user') as $username)
+                                <a href="/editProfile/{{ $username }}" class="ms-2 ms-md-3 ms-xxl-5">
+                                    <span class="material-icons-outlined">
+                                        edit
+                                    </span>
+                                </a>
+                                <a href="/logout" class="ms-2 ms-md-3 ms-xxl-5">
+                                    <span class="material-icons-outlined">
+                                        logout
+                                    </span>
+                                </a>
+                            @endforeach
+                        @else
+                            <a href="/signin" class="ms-2 ms-md-3 ms-xxl-5">
+                                <span class="material-icons-outlined">
+                                    person_outline
+                                </span>
+                            </a>
+                        @endif
                         <span class="material-icons-outlined ms-2 trigger-mb-menu" data-bs-toggle="collapse"
                             data-bs-target="#collapseNav" aria-expanded="false" aria-controls="collapseNav">
                             menu
@@ -91,7 +111,7 @@
                     </div>
                     <div class="position-absolute collapse" id="collapseNav">
                         <div>
-                            <a href="#/!" class="active">
+                            <a href="#/!">
                                 HOME
                             </a>
                             <div class="d-flex justify-content-between">
@@ -204,7 +224,8 @@
         <section class="footer" id="footer">
             <div class="subscribe d-flex align-items-center justify-content-center position-relative">
                 <!-- <img src="./imgs/subscribe.png" alt="" class="w-100 position-absolute"> -->
-                <img src="{{ asset('admin-assets/dist/img/main/subscribe.png') }}" alt="" class="w-100 position-absolute">
+                <img src="{{ asset('admin-assets/dist/img/main/subscribe.png') }}" alt=""
+                    class="w-100 position-absolute">
                 <form class="d-flex flex-column align-items-center">
                     <h1>SUBSCRIBE TO NEWSLETTER</h1>
                     <div class="position-relative w-100">
@@ -220,9 +241,9 @@
             <div class="information">
                 <div class="container-lg">
                     <div class="row py-3">
-                      <div class="col-lg-4 mb-4">
-                          <!-- Loop Address list -->
-                          <!-- address.branchName -->
+                        <div class="col-lg-4 mb-4">
+                            <!-- Loop Address list -->
+                            <!-- address.branchName -->
                             <h1>Ha Noi</h1>
                             <div class="d-flex mb-2">
                                 <span class="material-icons-outlined me-3">
@@ -270,12 +291,13 @@
         &copy Copyright by Group1
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="{{ asset('admin-assets/dist/js/owl.carousel.min.js') }}"></script>
     @yield('script')
 </body>
+
 </html>
