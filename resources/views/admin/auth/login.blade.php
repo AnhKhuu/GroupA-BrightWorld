@@ -52,7 +52,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <a href="../../admin/dashboard">
+            <a href="/admin/product">
               <button class="btn btn-primary btn-block">Sign In</button>
             </a>
           </div>
