@@ -256,9 +256,9 @@ Create Product
         <div class="card-footer">
             <div class="row save-buttons">
                 <div class="col-md-12">
-                    <a href="index" class="btn btn-success">Cancel</a>
-                    <button type="reset" class="btn btn-danger">Reset</button>
-                    <button type="submit" class="btn btn-info">Save</button>
+                <a href="/admin/product" class="btn btn-danger">Cancel</a>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>

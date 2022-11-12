@@ -64,7 +64,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="/homepage" class="brand-link">
       <img src="{{ asset('admin-assets/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Bright World</span>
     </a>
@@ -89,11 +89,18 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                <li class="nav-item">
+            <a href="/admin/product" class="nav-link">
+                <i class="nav-icon fas fa-lightbulb"></i>
+              <p>
+                Products
+              </p>
+            </a>
+          </li>
+               <li class="nav-item">
                 <a href="../../admin/cart/show" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Cart
-                    <span class="right badge badge-danger">New</span>
                   </p>
                 </a>
               </li>
@@ -102,25 +109,14 @@
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Invoice
-                    <span class="right badge badge-danger">New</span>
                   </p>
                 </a>
               </li>
-          <li class="nav-item">
-            <a href="../../admin/product" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Products
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
           <li class="nav-item">
             <a href="../../admin/catelogue" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Catelogue
-                <span class="right badge badge-danger">New</span>
               </p>
             </a>
           </li>
@@ -129,7 +125,6 @@
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Customers
-                <span class="right badge badge-danger">New</span>
               </p>
             </a>
           </li>
@@ -138,7 +133,6 @@
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Feedback
-                <span class="right badge badge-danger">New</span>
               </p>
             </a>
           </li>
@@ -155,7 +149,7 @@
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="">
             <h1 class="m-0">@yield('title')</h1>
             <div> @yield('content')</div>
           </div><!-- /.col -->
@@ -219,5 +213,6 @@
 <script src="{{ asset('admin-assets/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('admin-assets/dist/js/pages/dashboard.js')}}"></script>
+@yield('script')
 </body>
 </html>

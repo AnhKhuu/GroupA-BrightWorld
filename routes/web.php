@@ -24,16 +24,42 @@ Route::prefix('admin')->group(function () {
 });
 
 
+Route::get('test', function () {
+    dd(session(('cart')));
+});
+Route::get('/search-product', [ProductController::class, 'search']);
+// Route::get('/test', [ProductController::class, 'test']);
+
+//READ -> http://localhost/GroupA-BrightWorld/public/vwComment
+Route::get('/vwComment', 'App\Http\Controllers\feedBack@viewComment');
+//CREATE -> http://localhost/GroupA-BrightWorld/public/Comment
+Route::get('/Comment','App\Http\Controllers\feedBack@createComment');
+Route::post('/commentProcess','App\Http\Controllers\feedBack@commentProcess');
+//REPLY -> http://localhost/GroupA-BrightWorld/public/reply
+Route::get('/reply/{id}','App\Http\Controllers\feedBack@reply');
+Route::post('/replyProcess/{id}','App\Http\Controllers\feedBack@replyProcess');
+//DELETE -> http://localhost/GroupA-BrightWorld/public/delete
+Route::get('/delete/{id}','App\Http\Controllers\feedBack@delete');
 Route::get('/admin/login', function () {
     return view('admin.auth.login');
 });
 
 Route::get('/homepage', [ProductController::class, 'index']);
 Route::get('/homepage/{id}', [ProductController::class, 'productDetail']);
+// Route::get('/homepage', [CartController::class, 'showCart'])->name('user.showCart');
 
 Route::prefix('user')->group(function () {
 Route::get('checkout/{id}', [InvoiceController::class, 'checkout'])->name("user.checkout");
+Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('user.addToCart');
 // Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
+});
+
+Route::prefix('homepage')->group(function() {
+    Route::get('country/{id}', [ProductController::class, 'showByCountry']);
+    Route::get('brand/{id}', [ProductController::class, 'showByBrand']);
+    Route::get('shape/{id}', [ProductController::class, 'showByShape']);
+    Route::get('type/{id}', [ProductController::class, 'showByType']);
+    Route::get('watt/{id}', [ProductController::class, 'showByWatt']);
 });
 
 Route::prefix('admin')->group(function () {
@@ -53,34 +79,48 @@ Route::prefix('admin')->group(function () {
 // Route::get('/admin/catelogue', [CatelogueController::class, 'show']);
 // Route::get('/admin/customer', [CustomerController::class, 'show']);
 // Route::get('/admin/feedback', [FeedbackController::class, 'show']);
+
 Route::prefix('admin')->group(function () {
-    Route::get('dashboard', [ProductController::class, 'show']);
 
-    Route::get('show', [ProductController::class, 'show']);
+    Route::get('product', [ProductController::class, 'show']);
+    Route::get('product/create', [ProductController::class, 'create']);
+    Route::post('product/create', [ProductController::class, 'createProcess']);
 
-    Route::get('product', [ProductController::class, 'create']);
-    Route::post('product', [ProductController::class, 'createProcess']);
+    Route::get('product/edit/{id}', [ProductController::class, 'update']);
+    Route::post('product/edit/{id}', [ProductController::class, 'updateProcess']);
 
-    Route::get('edit/{id}', [ProductController::class, 'update']);
-    Route::post('edit/{id}', [ProductController::class, 'updateProcess']);
+    Route::get('product/delete/{id}', [ProductController::class, 'deleteProcess']);
 
-    Route::get('country', [ProductController::class, 'createCountry']);
-    Route::post('country', [ProductController::class, 'createCountryProcess']);
+    Route::get('country/create', [ProductController::class, 'createCountry']);
+    Route::post('country/create', [ProductController::class, 'createCountryProcess']);
 
-    Route::get('brand', [ProductController::class, 'createBrand']);
-    Route::post('brand', [ProductController::class, 'createBrandProcess']);
+    Route::get('brand/create', [ProductController::class, 'createBrand']);
+    Route::post('brand/create', [ProductController::class, 'createBrandProcess']);
 
-    Route::get('type', [ProductController::class, 'createType']);
-    Route::post('type', [ProductController::class, 'createTypeProcess']);
+    Route::get('type/create', [ProductController::class, 'createType']);
+    Route::post('type/create', [ProductController::class, 'createTypeProcess']);
 
-    Route::get('sale', [ProductController::class, 'createSale']);
-    Route::post('sale', [ProductController::class, 'createSaleProcess']);
+    Route::get('sale/create', [ProductController::class, 'createSale']);
+    Route::post('sale/create', [ProductController::class, 'createSaleProcess']);
 
-    Route::get('watt', [ProductController::class, 'createWatt']);
-    Route::post('watt', [ProductController::class, 'createWattProcess']);
+    Route::get('watt/create', [ProductController::class, 'createWatt']);
+    Route::post('watt/create', [ProductController::class, 'createWattProcess']);
 
-    Route::get('shape', [ProductController::class, 'createShape']);
-    Route::post('shape', [ProductController::class, 'createShapeProcess']);
+    Route::get('shape/create', [ProductController::class, 'createShape']);
+    Route::post('shape/create', [ProductController::class, 'createShapeProcess']);
+
+    // customer -> listCust
+    Route::get('customer/listCust', [CustomerController::class, 'listCust']);
+
+    // customer -> create
+    Route::get('customer/create', [CustomerController::class, 'create']);
+    Route::post('customer/create', [CustomerController::class, 'createProcess']);
+
+    // customer -> update
+    Route::get('customer/update/{id}', [CustomerController::class, 'update']);
+    Route::post('customer/update/{id}', [CustomerController::class, 'updateProcess']);
+
+
+    // customer -> delete
+    Route::get('customer/delete/{id}', [CustomerController::class, 'delete']);
 });
-// Route::get('/', [CartController::class, 'index']);
-

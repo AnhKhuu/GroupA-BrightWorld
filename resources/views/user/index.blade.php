@@ -19,11 +19,11 @@ Homepage
     </div>
 <div class="container-lg my-3 my-lg-5">
 <div class="d-flex justify-content-between align-items-center">
-  <h1 class="mb-3">BEST SELLERS</h1>
+  <h3 class="mb-3">BEST SELLERS</h3>
 </div>
 <section class="product-carousel">
   <div class="owl-carousel owl-theme owl-product-carousel mb-4 mb-lg-5">
-    @foreach($pro as $product)
+    @foreach($bestSeller as $product)
       <div class="item">
           <a href="/homepage/{{$product->id}}" class="d-block img-container">
             <img src="/admin-assets/dist/img/product/{{$product->img_url}}">
@@ -56,16 +56,16 @@ Homepage
   </div>
 </section>
 <div class="d-flex justify-content-between align-items-center">
-  <h1 class="mb-3">NEW ITEMS</h1>
+  <h3 class="mb-3">NEW ITEMS</h3>
 </div>
 <section class="product-carousel">
   <div class="owl-carousel owl-theme owl-product-carousel mb-4 mb-lg-5">
-    @foreach($pro as $product)
+    @foreach($newItems as $product)
       <div class="item">
-          <a href="#!/homepage/{{$product->id}}" class="d-block img-container">
+          <a href="/homepage/{{$product->id}}" class="d-block img-container">
             <img src="/admin-assets/dist/img/product/{{$product->img_url}}">
           </a>
-          <a href="#!/homepage/{{$product->id}}">
+          <a href="/homepage/{{$product->id}}">
               <p>{{$product->name}}</p>
           </a>
           <div class="price">

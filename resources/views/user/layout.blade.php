@@ -26,14 +26,16 @@
         <section class="header-container position-fixed">
             <section class="header w-100">
                 <nav class="d-flex justify-content-between align-items-center position-relative container-lg">
-                    <a href="#/!">
+                    <a href="/homepage">
                         <img src="{{ asset('admin-assets/dist/img/main/Logo.png') }}" alt="Logo" class="header-logo">
                     </a>
                     <div class="search-desktop position-relative">
-                        <input type="text" placeholder="Search" class="w-100">
-                        <a href="#!Product-category" class="btn material-icons-outlined position-absolute p-0 search-icon">
-                            search
-                        </a>
+                        <form action="/search-product" method="GET" enctype="multipart/form-data">
+                            <input id="searchInput" type="text" placeholder="Search" name="name" class="w-100">
+                            <button type="submit" id="searchBtn" class="btn material-icons-outlined position-absolute p-0 search-icon">
+                                search
+                            </button>
+                        </form>
                     </div>
                     <div class="d-flex">
                         <span class="material-icons-outlined ms-2" id="searchTrigger" data-bs-toggle="collapse"
@@ -48,26 +50,29 @@
                                     shopping_cart
                                 </span>
                                 <!-- ProductInCart.length -->
-                                <div class="cart-badge position-absolute">5</div>
+                                <div class="cart-badge position-absolute">{{ count(session('cart.items')?? [] ) }}</div>
                             </div>
                             <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuClickableInside">
                                 <div class="dropdown-item p-0 cart-dropdown">
                                   <div class="product-info p-2 p-lg-4 d-flex align-items-center justify-content-between">
                                       <!-- For loop Cart list -->
+                                      
                                       <!-- img-product.imageUrl -->
-                                        <div class="product-detail px-2 px-md-3">
-                                            <!-- product.name -->
-                                            <p class="mb-1 mb-md-2">Den led</p>
-                                            <!-- product.productQuantity -->
-                                            <div class="quantity mb-1 mb-md-2">
-                                                x1
+                                      <div class="product-detail px-2 px-md-3">
+                                          @foreach ($cart['items'] as $item)
+                                          <!-- product.name -->
+                                          <p class="mb-1 mb-md-2">{{ $item['object']->name }}</p>
+                                          <!-- product.productQuantity -->
+                                          <div class="quantity mb-1 mb-md-2">
+                                              {{ $item['quantity'] }}
                                             </div>
                                             <div class="price">
-                                                <div class="new-price">5</div>
-                                                <div class="old-price">10</div>
+                                                <div class="new-price">{{ $item['object']->price }}</div>
+                                                <div class="old-price">{{ $item['object']->price }}</div>
                                                 <!-- product.newPrice -->
                                                 <!-- product.oldPrice -->
                                             </div>
+                                            @endforeach
                                         </div>
                                         <span class="material-icons-outlined close">
                                             delete
@@ -153,7 +158,17 @@
                     <a href="#/!"class="active">HOME</a>
                     <span>
                         <div class="d-flex align-items-center">
-                            <a href="#!Product-category" class="me-2">PRODUCT</a>
+                            <!-- <a href="#!Product-category" class="me-2">PRODUCT+</a> -->
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle fw-bold" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    BRAND
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    @foreach($brands as $brand)
+                                        <li><a class="dropdown-item" href="/homepage/brand/{{$brand->id}}">{{$brand->full_name}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
                             <!-- <span class="material-icons-outlined" data-bs-toggle="collapse"
                                 data-bs-target="#collapseSubMenuLev1Desktop" aria-expanded="false"
                                 aria-controls="collapseSubMenuLev1Desktop">expand_more</span> -->
@@ -191,9 +206,53 @@
                             </div>
                         </div>
                     </span>
-                    <a class="#!Sales" href="#!Sales">SALES</a>
-                    <a class="#!Contact" href="#!Contact">CONTACT</a>
-                    <a class="#!About" href="#!About">ABOUT</a>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle fw-bold" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            COUNTRY
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            @foreach($countries as $country)
+                                <li><a class="dropdown-item" href="/homepage/country/{{$country->id}}">{{$country->full_name}}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle fw-bold" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            CATALOGUE
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <div class="btn-group dropend">
+                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    SHAPE
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @foreach($shapes as $shape)
+                                        <li><a class="dropdown-item" href="/homepage/shape/{{$shape->id}}">{{$shape->shape_desc}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="btn-group dropend">
+                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    TYPE
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @foreach($types as $type)
+                                        <li><a class="dropdown-item" href="/homepage/type/{{$type->id}}">{{$type->description}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="btn-group dropend">
+                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    WATT
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @foreach($watts as $watt)
+                                        <li><a class="dropdown-item" href="/homepage/watt/{{$watt->id}}">{{$watt->measure}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </ul>
+                    </div>
                 </div>
             </nav>
         </section>
@@ -276,6 +335,24 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="{{ asset('admin-assets/dist/js/owl.carousel.min.js') }}"></script>
+    <script>
+        const scrollToTopBtn = document.getElementById('myBtn')
+        scrollToTopBtn.addEventListener("click", scrollToTop)
+            function scrollToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+        const searchInput = document.getElementById('searchInput').value;
+        function searchProduct() {
+            console.log({searchInput})
+            if(searchInput) {
+                // window.location.href = `http://127.0.0.1:8000/search/${searchInput}`;
+                console.log("/search")
+            } else {
+                return;
+            }
+        }
+    </script>
     @yield('script')
 </body>
 </html>

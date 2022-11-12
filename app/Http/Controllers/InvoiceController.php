@@ -60,13 +60,13 @@ class InvoiceController extends Controller
 
     public function checkout($id)
     {
-        $pro=Product::find($id);
-
-        $invoices=Invoice::find($id);
-
-        return view('user.checkout')
-                ->with(['pro'=>$pro])
-                ->with(['invoices' => $invoices]);
+        $invoice_details=DB::table('invoce_details')
+        ->join('invoices','invoices.id','=','invoce_details.invoice_id')
+        ->join('products','products.id','=','invoce_details.product_id')
+        ->get();
+        dd($invoice_details);
+        // return view('user.checkout')
+        //         ->with(['invoice_details'=>$invoice_details]);
        
     }
 
