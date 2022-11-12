@@ -1,11 +1,11 @@
 @extends('admin.dashboard')
 @section('title')
-Feedback Management
+Feedback 
 @endsection
 @section('content')
 <body>
 <h1>Reply</h1>
-    <form action="{{ url("feedback/update/{$feedbacks -> id}") }}" method="post">
+    <form action="{{ url("admin/feedback/update/{$feedbacks -> id}") }}" method = "post">
         @csrf
         Id: <input name="txtId" value="{{$feedbacks -> id}}" readonly/><br>
         Rating: <input name="txtRating" value="{{$feedbacks -> rating}}"/><br>

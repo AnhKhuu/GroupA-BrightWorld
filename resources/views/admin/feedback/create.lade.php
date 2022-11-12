@@ -1,11 +1,10 @@
-<!-- @extends('admin.dashboard') -->
-<!-- @section('title')
-Feedback Management
+@extends('admin.dashboard')
+@section('title')
+Feedback 
 @endsection
-@section('content') -->
+@section('content')
 
 <div>
-
     <h1>Create new Comment</h1>
     <form >
         @csrf 
@@ -14,8 +13,7 @@ Feedback Management
         Content: <input name="txtContent"/><br>
         Product Id: <input name="txtProductId"/><br>
         Customer Id: <input name="txtCustomerId"/><br>
-        <input type="submit" value="createComment"/><br>
-   </form>
-
+        <input type="submit" value="create"/><br>
+    </form>
 </div>
-<!-- @endsection -->
+@endsection

@@ -6,7 +6,7 @@ use App\Http\Requests\FeedbackRequest;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\DB;//Access DB class
+use Illuminate\Support\Facades\DB;
 
 class FeedbackController extends Controller
 {
@@ -17,7 +17,6 @@ class FeedbackController extends Controller
 
     public function create() {
         return view('admin.feedback.create');
-                
     }
 
     public function createProcess(Request $feedbacks) {
