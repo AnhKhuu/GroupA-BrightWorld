@@ -11,6 +11,11 @@ class ProductController extends Controller
 {
     public function index()
     {
+         $cart = session('cart', [
+            'total_price'=>0,
+            'items'=> collect()
+        ]);
+        $pro=DB::table('products')->get();
         $bestSeller=DB::table('products')->orderBy('sold', 'desc')->get();
         $newItems=DB::table('products')->orderBy('created_at', 'desc')->get();
         $watts=DB::table('watts')->get();
@@ -19,7 +24,8 @@ class ProductController extends Controller
         $types=DB::table('types')->get();
         $countries=DB::table('countries')->get();
         $brands=DB::table('brands')->get();
-        return view('user.index')
+        return view('user.index' , compact('cart'))
+                ->with(['pro'=>$pro])
                 ->with(['bestSeller'=>$bestSeller])
                 ->with(['newItems'=>$newItems])
                 ->with(['watts'=>$watts])
@@ -89,6 +95,10 @@ class ProductController extends Controller
 
     public function productDetail($id)
     {
+        $cart = session('cart', [
+            'total_price'=>0,
+            'items'=> collect()
+        ]);
         $watts=DB::table('watts')->get();
         $shapes=DB::table('shapes')->get();
         $sales=DB::table('sales')->get();
@@ -99,7 +109,7 @@ class ProductController extends Controller
         ->where('id', intval($id))
         ->first();
         $relatedProduct = DB::table('products')->where('type_id', $pro->type_id)->get();
-        return view('user.productDetail')
+        return view('user.productDetail', compact('cart'))
                 ->with(['pro'=>$pro])
                 ->with(['relatedProduct'=>$relatedProduct])
                 ->with(['watts'=>$watts])

@@ -80,7 +80,7 @@ Homepage
           <span class="material-icons-outlined">
             add_shopping_cart
           </span>
-          <span>Add to cart</span>
+          <a href="{{ route('user.addToCart', $pro->id)  }}">Add to cart</a>
         </button>
         <a href="{{ route('user.checkout', $pro->id) }}" class="btn buy-now">
           Buy now

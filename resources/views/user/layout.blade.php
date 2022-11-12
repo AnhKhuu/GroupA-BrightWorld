@@ -50,26 +50,29 @@
                                     shopping_cart
                                 </span>
                                 <!-- ProductInCart.length -->
-                                <div class="cart-badge position-absolute">5</div>
+                                <div class="cart-badge position-absolute">{{ count(session('cart.items')?? [] ) }}</div>
                             </div>
                             <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuClickableInside">
                                 <div class="dropdown-item p-0 cart-dropdown">
                                   <div class="product-info p-2 p-lg-4 d-flex align-items-center justify-content-between">
                                       <!-- For loop Cart list -->
+                                      
                                       <!-- img-product.imageUrl -->
-                                        <div class="product-detail px-2 px-md-3">
-                                            <!-- product.name -->
-                                            <p class="mb-1 mb-md-2">Den led</p>
-                                            <!-- product.productQuantity -->
-                                            <div class="quantity mb-1 mb-md-2">
-                                                x1
+                                      <div class="product-detail px-2 px-md-3">
+                                          @foreach ($cart['items'] as $item)
+                                          <!-- product.name -->
+                                          <p class="mb-1 mb-md-2">{{ $item['object']->name }}</p>
+                                          <!-- product.productQuantity -->
+                                          <div class="quantity mb-1 mb-md-2">
+                                              {{ $item['quantity'] }}
                                             </div>
                                             <div class="price">
-                                                <div class="new-price">5</div>
-                                                <div class="old-price">10</div>
+                                                <div class="new-price">{{ $item['object']->price }}</div>
+                                                <div class="old-price">{{ $item['object']->price }}</div>
                                                 <!-- product.newPrice -->
                                                 <!-- product.oldPrice -->
                                             </div>
+                                            @endforeach
                                         </div>
                                         <span class="material-icons-outlined close">
                                             delete
