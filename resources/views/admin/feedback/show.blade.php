@@ -4,7 +4,7 @@ Feedback
 @endsection
 @section('content')
 <div class="d-flex justify-content-end m-2 p-2">
-    <a href="{{url("create")}}">
+    <a href="{{url('admin/feedback/create') }}">
         <button type="button" class="btn btn-block btn-outline-primary">New Feedback</button>
     </a>
 </div>
@@ -28,7 +28,7 @@ Feedback
                     <td>{{$item -> product_id }}</td>
                     <td>{{$item -> customer_id }}</td>
                     <td>
-                        <a href="{{url("admin/feedback/update/{$item -> id}") }}">Reply</a>
+                        <a href="{{url('admin/feedback/update/{$item -> id}') }}">Reply</a>
                     </td>
                 </tr>
             @endforeach

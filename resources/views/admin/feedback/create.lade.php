@@ -6,7 +6,7 @@ Feedback
 
 <div>
     <h1>Create new Comment</h1>
-    <form >
+    <form action="{{ url('admin/feedback/createProcess') }}" method="post">
         @csrf 
         Id: <input name="txtId"/><br>
         Rating: <input name="txtRating"/><br>
