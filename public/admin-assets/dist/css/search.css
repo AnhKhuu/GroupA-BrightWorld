@@ -1,0 +1,848 @@
+/*#region breakpoints */
+/*#endregion */
+/*#region mixins */
+/*#endregion */
+.product-category {
+  /* Hide the browser's default radio button */
+}
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+.product-category .orderBy:hover {
+  cursor: pointer;
+  color: #FF9F15;
+}
+
+.product-category table {
+  border: 1px solid #999999;
+  border-collapse: collapse;
+}
+
+.product-category table td {
+  border: 1px solid #999999;
+  text-align: center;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.product-category table td li {
+  font-size: 14px;
+}
+
+.product-category table tr:last-of-type td {
+  vertical-align: top;
+}
+
+.product-category table img {
+  width: 200px;
+}
+
+.product-category .detail-compare-modal {
+  border-radius: 10px;
+  background-color: white;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 100%;
+  z-index: 51;
+  min-height: 100vh;
+  display: none;
+  -webkit-animation: animatezoom 0.6s;
+          animation: animatezoom 0.6s;
+}
+
+.product-category .detail-compare-modal .table-container {
+  overflow-y: scroll;
+  max-height: 100vh;
+}
+
+.product-category .detail-compare-modal .material-icons {
+  cursor: pointer;
+}
+
+.product-category .compare-modal {
+  bottom: 10px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-color: whitesmoke;
+  z-index: 20;
+  width: 90%;
+  display: none;
+  border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+  .product-category .compare-modal {
+    width: 60%;
+  }
+}
+
+.product-category .compare-modal button {
+  color: #FFFFF8;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #FF9F15;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.product-category .compare-modal button:hover {
+  background-color: #cc7f11;
+}
+
+.product-category .compare-modal button[disabled=disabled] {
+  background-color: #FF9F15;
+  cursor: default;
+  opacity: 50%;
+}
+
+.product-category .compare-modal .compare-products {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 10px;
+  -ms-grid-rows: 1fr;
+      grid-template-rows: 1fr;
+}
+
+@media (min-width: 768px) {
+  .product-category .compare-modal .compare-products {
+    grid-column-gap: 20px;
+  }
+}
+
+.product-category .compare-modal .compare-products .item {
+  min-height: -webkit-fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  background-color: #FFECD0;
+}
+
+.product-category .tooltip-compare {
+  background-color: #FFECD0;
+  color: #FF9F15;
+  border-radius: 10px;
+  font-size: 10px;
+  top: 10px;
+  right: 35px;
+  z-index: 11;
+  display: none;
+}
+
+.product-category .add-to-compare:hover + .tooltip-compare {
+  display: block;
+}
+
+.product-category .col-md-3 {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .product-category .col-md-3 {
+    display: block;
+  }
+}
+
+.product-category .col-md-3 h1 {
+  font-size: 24px;
+}
+
+.product-category .col-md-3 h2 {
+  font-size: 18px;
+}
+
+.product-category .col-md-3 label {
+  font-size: 16px;
+  display: block;
+}
+
+.product-category .col-md-3 span {
+  font-size: 16px;
+}
+
+.product-category .col-md-3 .filter-brand .quantity {
+  font-size: 12px;
+  color: #FF9F15;
+  font-weight: 600;
+  width: 38px;
+  height: 18px;
+  border-radius: 12px;
+  background-color: #FFECD0;
+  text-align: center;
+}
+
+.product-category .col-md-3 .filter-rating,
+.product-category .col-md-3 .filter-brand {
+  /* Customize the label (the container) */
+  /* Hide the browser's default checkbox */
+  /* Create a custom checkbox */
+  /* On mouse-over, add a grey background color */
+  /* When the checkbox is checked, add a blue background */
+  /* Create the checkmark/indicator (hidden when not checked) */
+  /* Show the checkmark when checked */
+  /* Style the checkmark/indicator */
+}
+
+.product-category .col-md-3 .filter-rating .container-filter,
+.product-category .col-md-3 .filter-brand .container-filter {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.product-category .col-md-3 .filter-rating .container-filter input,
+.product-category .col-md-3 .filter-brand .container-filter input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.product-category .col-md-3 .filter-rating .checkmark,
+.product-category .col-md-3 .filter-brand .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border-radius: 2px;
+  border: 1.5px solid #D1D1D1;
+}
+
+.product-category .col-md-3 .filter-rating .container-filter:hover input ~ .checkmark,
+.product-category .col-md-3 .filter-brand .container-filter:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.product-category .col-md-3 .filter-rating .container-filter input:checked ~ .checkmark,
+.product-category .col-md-3 .filter-brand .container-filter input:checked ~ .checkmark {
+  background-color: #FF9F15;
+}
+
+.product-category .col-md-3 .filter-rating .checkmark:after,
+.product-category .col-md-3 .filter-brand .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.product-category .col-md-3 .filter-rating .container-filter input:checked ~ .checkmark:after,
+.product-category .col-md-3 .filter-brand .container-filter input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.product-category .col-md-3 .filter-rating .container-filter .checkmark:after,
+.product-category .col-md-3 .filter-brand .container-filter .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.product-category .col-md-3 .filter-rating .material-icons.star {
+  color: #FDBC15;
+}
+
+.product-category .col-md-3 .filter-rating .material-icons.star-outline {
+  color: #D1D1D1;
+}
+
+.product-category .col-md-3 .filter-price {
+  /* Customize the label (the container) */
+  /* Hide the browser's default checkbox */
+  /* Create a custom checkbox */
+  /* On mouse-over, add a grey background color */
+  /* When the checkbox is checked, add a blue background */
+  /* Create the checkmark/indicator (hidden when not checked) */
+  /* Show the checkmark when checked */
+  /* Style the checkmark/indicator */
+}
+
+.product-category .col-md-3 .filter-price .container-filter {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.product-category .col-md-3 .filter-price .container-filter input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.product-category .col-md-3 .filter-price .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border-radius: 2px;
+  border: 1.5px solid #D1D1D1;
+}
+
+.product-category .col-md-3 .filter-price .container-filter:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.product-category .col-md-3 .filter-price .container-filter input:checked ~ .checkmark {
+  background-color: #FF9F15;
+}
+
+.product-category .col-md-3 .filter-price .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.product-category .col-md-3 .filter-price .container-filter input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.product-category .col-md-3 .filter-price .container-filter .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.product-category .col-md-3 .btn-apply {
+  color: #FFFFF8;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #FF9F15;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.product-category .col-md-3 .btn-apply:hover {
+  background-color: #cc7f11;
+}
+
+.product-category .col-md-3 .btn-reset {
+  color: #FF9F15;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid #FF9F15;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.product-category #collapseFilter {
+  width: 80%;
+  height: 600px;
+  overflow: scroll;
+  padding: 16px;
+}
+
+.product-category #collapseFilter label {
+  font-size: 16px;
+  display: block;
+}
+
+.product-category #collapseFilter span {
+  font-size: 16px;
+}
+
+.product-category #collapseFilter .quantity {
+  font-size: 12px;
+  color: #FF9F15;
+  font-weight: 600;
+  width: 38px;
+  height: 18px;
+  border-radius: 12px;
+  background-color: #FFECD0;
+  text-align: center;
+}
+
+.product-category #collapseFilter .filter-rating,
+.product-category #collapseFilter .filter-brand,
+.product-category #collapseFilter .filter-type {
+  /* Customize the label (the container) */
+  /* Hide the browser's default checkbox */
+  /* Create a custom checkbox */
+  /* On mouse-over, add a grey background color */
+  /* When the checkbox is checked, add a blue background */
+  /* Create the checkmark/indicator (hidden when not checked) */
+  /* Show the checkmark when checked */
+  /* Style the checkmark/indicator */
+}
+
+.product-category #collapseFilter .filter-rating .container-filter,
+.product-category #collapseFilter .filter-brand .container-filter,
+.product-category #collapseFilter .filter-type .container-filter {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.product-category #collapseFilter .filter-rating .container-filter input,
+.product-category #collapseFilter .filter-brand .container-filter input,
+.product-category #collapseFilter .filter-type .container-filter input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.product-category #collapseFilter .filter-rating .checkmark,
+.product-category #collapseFilter .filter-brand .checkmark,
+.product-category #collapseFilter .filter-type .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border-radius: 2px;
+  border: 1.5px solid #D1D1D1;
+}
+
+.product-category #collapseFilter .filter-rating .container-filter:hover input ~ .checkmark,
+.product-category #collapseFilter .filter-brand .container-filter:hover input ~ .checkmark,
+.product-category #collapseFilter .filter-type .container-filter:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.product-category #collapseFilter .filter-rating .container-filter input:checked ~ .checkmark,
+.product-category #collapseFilter .filter-brand .container-filter input:checked ~ .checkmark,
+.product-category #collapseFilter .filter-type .container-filter input:checked ~ .checkmark {
+  background-color: #FF9F15;
+}
+
+.product-category #collapseFilter .filter-rating .checkmark:after,
+.product-category #collapseFilter .filter-brand .checkmark:after,
+.product-category #collapseFilter .filter-type .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.product-category #collapseFilter .filter-rating .container-filter input:checked ~ .checkmark:after,
+.product-category #collapseFilter .filter-brand .container-filter input:checked ~ .checkmark:after,
+.product-category #collapseFilter .filter-type .container-filter input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.product-category #collapseFilter .filter-rating .container-filter .checkmark:after,
+.product-category #collapseFilter .filter-brand .container-filter .checkmark:after,
+.product-category #collapseFilter .filter-type .container-filter .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.product-category #collapseFilter .filter-rating .material-icons.star {
+  color: #FDBC15;
+}
+
+.product-category #collapseFilter .filter-rating .material-icons.star-outline {
+  color: #D1D1D1;
+}
+
+.product-category #collapseFilter .filter-price {
+  /* Hide the browser's default radio button */
+  /* Create a custom radio button */
+  /* On mouse-over, add a grey background color */
+  /* When the radio button is checked, add a blue background */
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  /* Show the indicator (dot/circle) when checked */
+  /* Style the indicator (dot/circle) */
+}
+
+.product-category #collapseFilter .filter-price .container-filter {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.product-category #collapseFilter .filter-price .container-filter input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.product-category #collapseFilter .filter-price .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.product-category #collapseFilter .filter-price .container-filter:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.product-category #collapseFilter .filter-price .container-filter input:checked ~ .checkmark {
+  background-color: #FF9F15;
+}
+
+.product-category #collapseFilter .filter-price .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.product-category #collapseFilter .filter-price .container-filter input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.product-category #collapseFilter .filter-price .container-filter .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+.product-category #collapseFilter .btn-apply {
+  color: #FFFFF8;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #FF9F15;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.product-category #collapseFilter .btn-apply:hover {
+  background-color: #cc7f11;
+}
+
+.product-category #collapseFilter .btn-reset {
+  color: #FF9F15;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid #FF9F15;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.product-category .filter-category {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+@media (min-width: 768px) {
+  .product-category .filter-category {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+.product-category .collapse {
+  top: 39px;
+  right: 0;
+  background-color: #FFFFF8;
+  padding: 16px;
+}
+
+.product-category .vl {
+  height: 16px;
+  border-left: 1px solid grey;
+}
+
+@media (min-width: 768px) {
+  .product-category .vl.last {
+    border-left: 1px solid white;
+  }
+}
+
+.product-category .vl.first {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .product-category .vl.first {
+    display: block;
+    border-left: 1px solid white;
+  }
+}
+
+.product-category .container-filter {
+  font-size: 14px;
+  color: #999999;
+}
+
+.product-category .material-icons-outlined {
+  color: #999999;
+}
+
+@media (min-width: 768px) {
+  .product-category .material-icons-outlined {
+    display: none;
+  }
+}
+
+.product-category .container-filter input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.product-category .product-list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  -ms-grid-rows: (1fr)[12];
+      grid-template-rows: repeat(12, 1fr);
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .product-category .product-list {
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+    -ms-grid-rows: (1fr)[8];
+        grid-template-rows: repeat(8, 1fr);
+    grid-column-gap: 8px;
+    grid-row-gap: 8px;
+  }
+}
+
+@media (min-width: 992px) {
+  .product-category .product-list {
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+  }
+}
+
+.product-category .item {
+  border: 1px solid #D7D7D7;
+  border-radius: 5px;
+  padding: 8px;
+  min-height: 295.6px;
+}
+
+.product-category .item .add-to-compare {
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.product-category .item .add-to-compare span {
+  color: #FF9F15;
+}
+
+@media (min-width: 768px) {
+  .product-category .item {
+    min-height: 283.06px;
+  }
+}
+
+@media (min-width: 992px) {
+  .product-category .item {
+    min-height: 395.73px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .product-category .item {
+    min-height: 440.73px;
+  }
+}
+
+.product-category .item .img-container {
+  overflow: hidden;
+  width: initial;
+  height: auto;
+}
+
+.product-category .item:hover img {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.product-category .item img {
+  max-width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  border-radius: 5px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.product-category .item p {
+  font-size: 14px;
+  margin: 8px 0;
+  height: 42px;
+  padding: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 2;
+}
+
+@media (min-width: 768px) {
+  .product-category .item p {
+    height: 42px;
+  }
+}
+
+@media (min-width: 992px) {
+  .product-category .item p {
+    font-size: 16px;
+    height: 48px;
+  }
+}
+
+.product-category .item .old-price {
+  font-size: 12px;
+  color: #999999;
+  text-decoration: line-through;
+}
+
+@media (min-width: 992px) {
+  .product-category .item .old-price {
+    font-size: 14px;
+  }
+}
+
+.product-category .item .new-price {
+  font-weight: 600;
+}
+
+@media (min-width: 992px) {
+  .product-category .item .new-price {
+    font-size: 18px;
+  }
+}
+
+.product-category .item .material-icons {
+  font-size: 20px;
+}
+
+@media (min-width: 992px) {
+  .product-category .item .material-icons {
+    font-size: 24px;
+  }
+}
+
+.product-category .item .heart-outline {
+  color: #F14747;
+  cursor: pointer;
+}
+
+.product-category .item .star {
+  color: #FDBC15;
+}
+
+.product-category .product-list {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+/*# sourceMappingURL=product-category.css.map */

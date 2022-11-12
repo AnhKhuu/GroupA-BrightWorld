@@ -16,11 +16,11 @@ Homepage
         </div>
       </div>
     </div>
-    <div class="col-lg-1">
+    <!-- <div class="col-lg-1">
       <div class="w-100 mb-5">
         <img src="/admin-assets/dist/img/product/{{$pro->img_url}}" alt="" class="w-100 img-gallery">
       </div>
-    </div>
+    </div> -->
     <div class="product-information col-lg-5 ps-lg-5">
       <p class="product-name pt-3 pb-2 my-0">{{$pro->name}}</p>
       <div class="d-flex product-sub-information align-items-center justify-content-between">
@@ -140,6 +140,47 @@ Homepage
       </button>
     </div>
     </form>
+  </div>
+  <div class="related-product">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="mb-3">RELATED PRODUCT</h1>
+    </div>
+    <section class="product-carousel">
+      <div class="owl-carousel owl-theme owl-product-carousel mb-4 mb-lg-5">
+      @foreach($relatedProduct as $product)
+      @if($product->id != $pro->id)
+      <div class="item">
+          <a href="/homepage/{{$product->id}}" class="d-block img-container">
+            <img src="/admin-assets/dist/img/product/{{$product->img_url}}">
+          </a>
+          <a href="/homepage/{{$product->id}}">
+              <p>{{$product->name}}</p>
+          </a>
+          <div class="price">
+              <span class="old-price">{{$product->price}}</span>
+              @foreach($sales as $sale)
+                @if($sale->id == $product->sale_id)
+              <span class="new-price">{{(1-$sale->percent)*$product->price}}</span>
+                @endif
+              @endforeach
+          </div>
+          <div class="d-flex align-items-center justify-content-between  mt-2">
+              <!-- <span class="star-rating">
+                  <span ng-repeat="rating in $product->starRating">
+                    <div star-static-rating rating-value="rating.current" max="rating.max"></div>
+                  </span>
+              </span> -->
+              <span class="favorite">
+                  <span class="material-icons heart-outline">
+                      favorite_border
+                  </span>
+              </span>
+          </div>
+      </div>
+    @endif
+    @endforeach
+      </div>
+    </section>
   </div>
 </section>
 @endsection
