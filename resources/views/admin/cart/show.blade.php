@@ -11,17 +11,16 @@ Cart Management
 </div>
 <div class="card">
     <div class="card-body">
-      <table id="example2" class="table table-bordered table-hover">
-        <thead>
-        <tr>
-          <th>ID Cart</th>
-          <th>ID Customer</th>
-          <th>Quantity</th>
-          <th>Created At</th>
-          <th>Updated At</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
+        <table id="example2" class="table table-bordered table-hover">
+            <tr>
+             <th>ID Cart</th>
+            <th>ID Customer</th>
+            <th>Quantity</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Actions</th>
+            </tr>
+       
         <tbody>
             @foreach ($carts as $cart)
             <tr >
@@ -45,8 +44,7 @@ Cart Management
             >
             {{ $cart->updated_at }}
         </td>
-        <td
-        >
+        <td>
         <div>
             <a href="{{ route('admin.cart.update', $cart->id) }}"
                 >Edit</a>

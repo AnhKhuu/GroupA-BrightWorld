@@ -134,7 +134,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../admin/feedback" class="nav-link">
+            <a href="../../admin/feedback/show" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Feedback

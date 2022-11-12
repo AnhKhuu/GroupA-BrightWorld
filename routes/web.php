@@ -13,16 +13,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//READ -> http://localhost/GroupA-BrightWorld/public/vwComment
-Route::get('/vwComment', 'App\Http\Controllers\feedBack@viewComment');
-//CREATE -> http://localhost/GroupA-BrightWorld/public/Comment
-Route::get('/Comment','App\Http\Controllers\feedBack@createComment');
-Route::post('/commentProcess','App\Http\Controllers\feedBack@commentProcess');
-//REPLY -> http://localhost/GroupA-BrightWorld/public/reply
-Route::get('/reply/{id}','App\Http\Controllers\feedBack@reply');
-Route::post('/replyProcess/{id}','App\Http\Controllers\feedBack@replyProcess');
-//DELETE -> http://localhost/GroupA-BrightWorld/public/delete
-Route::get('/delete/{id}','App\Http\Controllers\feedBack@delete');
+//FEEDBACK
+
+Route::prefix('admin')->group(function () {
+    Route::get('admin/feedback/show', [FeedbackController::class, 'show']);
+     Route::get('admin/feedback/create', [FeedbackController::class, 'create']);
+     Route::post('admin/feedback/create', [FeedbackController::class, 'createProcess'])-> name('admin.feedback.create');
+     Route::get('admin/feedback/update/{id}', [FeedbackController::class, 'update'])-> name('admin.feedback.update');
+     Route::post('admin/feedback/update/{id}', [FeedbackController::class, 'updateProcess']);
+});
+
+
 Route::get('/admin/login', function () {
     return view('admin.auth.login');
 });
