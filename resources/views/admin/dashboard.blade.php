@@ -129,7 +129,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="../../admin/feedback/show" class="nav-link">
+            <a href="{{url("admin/feedback/show")}}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Feedback
@@ -142,6 +142,7 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+  <!-- href="../../feedback/show" class="nav-link" -->
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

@@ -9,17 +9,29 @@ use App\Models\Feedback;
 use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 
+
 class FeedbackController extends Controller
 {
     public function show() {
         $items=DB::table('feedbacks')
         ->whereNull('reply')
+        ->orderBy('rating', 'asc')
         ->get();
         return view('admin.feedback.show')->with(['items'=>$items]);
     }
 
     public function showAll() {
-        $itemss=DB::table('feedbacks')->get();
+        $itemss=DB::table('feedbacks')
+        ->orderBy('rating', 'asc')
+        ->get();
+        return view('admin.feedback.showAll')->with(['itemss'=>$itemss]);
+    }
+
+    public function showReply() {
+        $itemss=DB::table('feedbacks')
+        ->whereNotNull('reply')
+        ->orderBy('rating', 'asc')
+        ->get();
         return view('admin.feedback.showAll')->with(['itemss'=>$itemss]);
     }
 
@@ -50,7 +62,6 @@ class FeedbackController extends Controller
         ->where('id', $id)
         ->first();
         return view('admin.feedback.update', ['rs'=>$rs]);
-        // return view('admin.feedback.update');
     }
     public function updateProcess(Request $rqst)
     {
@@ -70,12 +81,33 @@ class FeedbackController extends Controller
             'reply' => $reply,
         ]);
         return redirect() -> action([FeedbackController::class, 'show']);
-
-        // $rqst = DB::table('feedbacks') 
-        //     ->where('id', $id)
-        //     ->update();
-        // return redirect() -> action([FeedbackController::class, 'show']);
     }
 
+    // public function validateFeedback()
+    // {
+    //     if (len(input('txtReply')) <= 2){
+    //         alert("Do not null");
+    //         return false;
+    //     }else{
+    //         return true;
+    //     }
+    // }
+
+    // public function createDetail(Request $id) {
+    //     $rating = $rqst -> input('txtRating');
+    //     $content = $rqst -> textarea('review');
+    //     $productId = $id;
+    //     $customerId = $rqst -> input('txtCustomerId');
+       
+    //     DB::table('feedbacks')->insert([
+    //         'id' => $id,
+    //         'rating' => $rating,
+    //         'content' => $content,
+    //         'product_id' => $productId,
+    //         'customer_Id' => $customerId
+    //     ]);
+    //     $items=DB::table('feedbacks')->get();
+    //     return view('admin.feedback.show')->with(['items'=>$items]);
+    // }
 
 }

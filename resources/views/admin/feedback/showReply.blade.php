@@ -8,9 +8,9 @@ Feedback Management
 <br>
 <form>
     <div class="container">
-    <div>Feedback Show Reply not yes.    
+    <div>Feedback Show Answered.    
         <span>
-            <a href="{{url("admin/feedback/showReply")}}"> Show Answered</a> | 
+            <a href="{{url("admin/feedback/show")}}"> Show Reply not yes</a> | 
             <a href="{{url("admin/feedback/showAll")}}"> Show All</a>
         </span>
     </div>

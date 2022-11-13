@@ -6,10 +6,14 @@ Feedback Management
 
 <div>
 <br>
-    <div>Feedback Show All
-    <form>
+<form>
     <div class="container">
-        
+    <div>Feedback Show All.
+        <span>
+            <a href="{{url("admin/feedback/show")}}"> Show Reply not yes</a> | 
+            <a href="{{url("admin/feedback/showReply")}}"> Show Answered</a>
+        </span>
+    </div>
         <table class="table table-hove table-bordered">
             <tr>
                 <th>id</th>
@@ -29,12 +33,12 @@ Feedback Management
                 <td>{{$ite -> customer_id }}</td>
                 <td>{{$ite -> reply }}</td>
                 <td>
-                    <a href="{{url("admin/feedback/update/{$ite ->id}")}}">Reply</a>
+                    <a href="{{url("admin/feedback/update/{$ite ->id}")}}"> Reply</a>
                 </td>
             </tr>
             @endforeach
         </table>
     </div>
-    </form>
+</form>
 </div>
 @endsection

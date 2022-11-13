@@ -10,10 +10,10 @@ Feedback Management
         @csrf
         <!-- Id: <input name="txtId"/><br> -->
         Rating: <input name="txtRating"/><br>
-        Content: <input name="txtContent"/><br>
+        Content: <textarea> name="txtContent" required</textarea><br>
         Product Id: <input name="txtProductId"/><br>
         Customer Id: <input name="txtCustomerId"/><br>
-        Reply: <input name="txtReply"/><br>
+        Reply: <textarea> name="txtReply" </textarea><br>
         <input type="submit" value="create"/><br>
     </form>
 </div>

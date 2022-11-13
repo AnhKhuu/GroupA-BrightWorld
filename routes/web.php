@@ -49,6 +49,8 @@ Route::prefix('admin')->group(function () {
     Route::get('feedback/update/{id}', [FeedbackController::class, 'update']);
     Route::post('feedback/updateProcess/{id}', [FeedbackController::class, 'updateProcess']);
     Route::get('feedback/showAll', [FeedbackController::class, 'showAll']);
+    Route::get('feedback/showReply', [FeedbackController::class, 'showReply']);
+    // Route::post('feedback/createDetail/{id, cusId}', [FeedbackController::class, 'createDetail']);
 
 });
 
