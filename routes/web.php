@@ -16,19 +16,10 @@ Route::get('/', function () {
 Route::get('test', function () {
     dd(session(('cart')));
 });
+
 Route::get('/search-product', [ProductController::class, 'search']);
 // Route::get('/test', [ProductController::class, 'test']);
 
-//READ -> http://localhost/GroupA-BrightWorld/public/vwComment
-Route::get('/vwComment', 'App\Http\Controllers\feedBack@viewComment');
-//CREATE -> http://localhost/GroupA-BrightWorld/public/Comment
-Route::get('/Comment','App\Http\Controllers\feedBack@createComment');
-Route::post('/commentProcess','App\Http\Controllers\feedBack@commentProcess');
-//REPLY -> http://localhost/GroupA-BrightWorld/public/reply
-Route::get('/reply/{id}','App\Http\Controllers\feedBack@reply');
-Route::post('/replyProcess/{id}','App\Http\Controllers\feedBack@replyProcess');
-//DELETE -> http://localhost/GroupA-BrightWorld/public/delete
-Route::get('/delete/{id}','App\Http\Controllers\feedBack@delete');
 Route::get('/admin/login', function () {
     return view('admin.auth.login');
 });
@@ -38,9 +29,9 @@ Route::get('/homepage/{id}', [ProductController::class, 'productDetail']);
 // Route::get('/homepage', [CartController::class, 'showCart'])->name('user.showCart');
 
 Route::prefix('user')->group(function () {
-Route::get('checkout/{id}', [InvoiceController::class, 'checkout'])->name("user.checkout");
-Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('user.addToCart');
-// Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
+    Route::get('checkout/{id}', [InvoiceController::class, 'checkout'])->name("user.checkout");
+    Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('user.addToCart');
+    // Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
 });
 
 Route::prefix('homepage')->group(function() {
@@ -52,6 +43,17 @@ Route::prefix('homepage')->group(function() {
 });
 
 Route::prefix('admin')->group(function () {
+    Route::get('feedback/show', [FeedbackController::class, 'show']);
+    Route::get('feedback/create', [FeedbackController::class, 'create']);
+    Route::post('feedback/createProcess', [FeedbackController::class, 'createProcess']);
+    Route::get('feedback/update/{id}', [FeedbackController::class, 'update']);
+    Route::post('feedback/updateProcess/{id}', [FeedbackController::class, 'updateProcess']);
+    Route::get('feedback/showAll', [FeedbackController::class, 'showAll']);
+
+});
+
+Route::prefix('admin')->group(function () {
+
     Route::get('cart/show', [CartController::class, 'show']);
     Route::get('cart/create', [CartController::class, 'create']);
     Route::post('cart/create', [CartController::class, 'createProcess'])-> name('admin.cart.create');
