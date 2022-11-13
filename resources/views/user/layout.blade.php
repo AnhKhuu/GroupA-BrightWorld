@@ -113,11 +113,26 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="./Signin/signin.html" class="ms-2 ms-md-3 ms-xxl-5">
-                            <span class="material-icons-outlined">
-                                person_outline
-                            </span>
-                        </a>
+                        @if (Session::has('user'))
+                            @foreach (Session::get('user') as $username)
+                                <a href="/editProfile/{{ $username }}" class="ms-2 ms-md-3 ms-xxl-5">
+                                    <span class="material-icons-outlined">
+                                        edit
+                                    </span>
+                                </a>
+                                <a href="/logout" class="ms-2 ms-md-3 ms-xxl-5">
+                                    <span class="material-icons-outlined">
+                                        logout
+                                    </span>
+                                </a>
+                            @endforeach
+                        @else
+                            <a href="/signin" class="ms-2 ms-md-3 ms-xxl-5">
+                                <span class="material-icons-outlined">
+                                    person_outline
+                                </span>
+                            </a>
+                        @endif
                         <span class="material-icons-outlined ms-2 trigger-mb-menu" data-bs-toggle="collapse"
                             data-bs-target="#collapseNav" aria-expanded="false" aria-controls="collapseNav">
                             menu
@@ -125,7 +140,7 @@
                     </div>
                     <div class="position-absolute collapse" id="collapseNav">
                         <div>
-                            <a href="#/!" class="active">
+                            <a href="#/!">
                                 HOME
                             </a>
                             <div class="d-flex justify-content-between">
