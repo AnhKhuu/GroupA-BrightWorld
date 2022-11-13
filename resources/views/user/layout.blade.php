@@ -29,12 +29,14 @@
             <section class="header w-100">
                 <nav class="d-flex justify-content-between align-items-center position-relative container-lg">
                     <a href="/homepage">
-                        <img src="{{ asset('admin-assets/dist/img/main/Logo.png') }}" alt="Logo" class="header-logo">
+                        <img src="{{ asset('admin-assets/dist/img/main/Logo.png') }}" alt="Logo"
+                            class="header-logo">
                     </a>
                     <div class="search-desktop position-relative">
                         <form action="/search-product" method="GET" enctype="multipart/form-data">
                             <input id="searchInput" type="text" placeholder="Search" name="name" class="w-100">
-                            <button type="submit" id="searchBtn" class="btn material-icons-outlined position-absolute p-0 search-icon">
+                            <button type="submit" id="searchBtn"
+                                class="btn material-icons-outlined position-absolute p-0 search-icon">
                                 search
                             </button>
                         </form>
@@ -52,34 +54,59 @@
                                     shopping_cart
                                 </span>
                                 <!-- ProductInCart.length -->
-                                <div class="cart-badge position-absolute">{{ count(session('cart.items')?? [] ) }}</div>
+                                @if (Session::has('Cart') != null)
+                                    <div class="cart-badge position-absolute">{{ Session::get('Cart')->totalQuanty }}
+                                    </div>
+                                @else
+                                    <div class="cart-badge position-absolute">0</div>
+                                @endif
                             </div>
                             <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuClickableInside">
-                                <div class="dropdown-item p-0 cart-dropdown">
-                                  <div class="product-info p-2 p-lg-4 d-flex align-items-center justify-content-between">
-                                      <!-- For loop Cart list -->
-                                      
-                                      <!-- img-product.imageUrl -->
-                                      <div class="product-detail px-2 px-md-3">
-                                          @foreach ($cart['items'] as $item)
-                                          <!-- product.name -->
-                                          <p class="mb-1 mb-md-2">{{ $item['object']->name }}</p>
-                                          <!-- product.productQuantity -->
-                                          <div class="quantity mb-1 mb-md-2">
-                                              {{ $item['quantity'] }}
+                                <div class="dropdown-item p-0 cart-dropdown" id="change-item-cart">
+                                    @if (Session::has('Cart') != null)
+                                        @foreach (Session::get('Cart')->products as $item)
+                                            <div
+                                                class="product-info p-2 p-lg-4 d-flex align-items-center justify-content-between">
+                                                <img src="/admin-assets/dist/img/product/{{ $item['productInfo']->img_url }}"
+                                                    alt="">
+                                                <div class="product-detail px-2 px-md-3">
+                                                    <p class="mb-1 mb-md-2">{{ $item['productInfo']->name }}</p>
+                                                    <div class="quantity mb-1 mb-md-2">
+                                                        <p>x <b>{{ $item['quanty'] }}</b></p>
+                                                    </div>
+                                                    <div class="price">
+                                                        <div class="new-price">
+                                                            @isset($sales)
+                                                                @foreach ($sales as $sale)
+                                                                    @if ($sale->id == $item['productInfo']->sale_id)
+                                                                        <span
+                                                                            class="new-price">{{ (1 - $sale->percent) * number_format($item['productInfo']->price) }}đ</span>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endisset
+
+                                                            <div class="old-price">
+                                                                {{ number_format($item['productInfo']->price) }}đ</div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <span class="material-icons-outlined close"
+                                                    data-id="{{ $item['productInfo']->id }}">
+                                                    delete
+                                                </span>
                                             </div>
-                                            <div class="price">
-                                                <div class="new-price">{{ $item['object']->price }}</div>
-                                                <div class="old-price">{{ $item['object']->price }}</div>
-                                                <!-- product.newPrice -->
-                                                <!-- product.oldPrice -->
-                                            </div>
-                                            @endforeach
+                                        @endforeach
+                                        <div class="select-total px-2">
+                                            <span>total:</span>
+                                            <h5>{{number_format(Session::get('Cart')->totalPrice)}}₫</h5>
                                         </div>
-                                        <span class="material-icons-outlined close">
-                                            delete
-                                        </span>
-                                    </div>
+                                        <div class="btn-bar-cart w-100 d-flex justify-content-between my-0">
+                                            <a href="{{url('/List-Carts')}}" class='btn buy-now w-100'>View Card</a>
+                                        </div>
+                                    @endif
+
+
                                     <div class="btn-bar-cart w-100 d-flex justify-content-between my-0">
                                         <!-- buy-now -->
                                     </div>
@@ -177,13 +204,19 @@
                         <div class="d-flex align-items-center">
                             <!-- <a href="#!Product-category" class="me-2">PRODUCT+</a> -->
                             <div class="dropdown">
-                                <button class="btn dropdown-toggle fw-bold" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn dropdown-toggle fw-bold" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     BRAND
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    @foreach($brands as $brand)
-                                        <li><a class="dropdown-item" href="/homepage/brand/{{$brand->id}}">{{$brand->full_name}}</a></li>
-                                    @endforeach
+                                    @isset($brands)
+                                        @foreach ($brands as $brand)
+                                            <li><a class="dropdown-item"
+                                                    href="/homepage/brand/{{ $brand->id }}">{{ $brand->full_name }}</a>
+                                            </li>
+                                        @endforeach
+                                    @endisset
+
                                 </ul>
                             </div>
                             <!-- <span class="material-icons-outlined" data-bs-toggle="collapse"
@@ -224,48 +257,77 @@
                         </div>
                     </span>
                     <div class="dropdown">
-                        <button class="btn dropdown-toggle fw-bold" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle fw-bold" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             COUNTRY
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            @foreach($countries as $country)
-                                <li><a class="dropdown-item" href="/homepage/country/{{$country->id}}">{{$country->full_name}}</a></li>
-                            @endforeach
+                            @isset($countries)
+
+
+                                @foreach ($countries as $country)
+                                    <li><a class="dropdown-item"
+                                            href="/homepage/country/{{ $country->id }}">{{ $country->full_name }}</a>
+                                    </li>
+                                @endforeach
+                            @endisset
+
                         </ul>
                     </div>
                     <div class="dropdown">
-                        <button class="btn dropdown-toggle fw-bold" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        <button class="btn dropdown-toggle fw-bold" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                             CATALOGUE
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <div class="btn-group dropend">
-                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     SHAPE
                                 </button>
                                 <ul class="dropdown-menu">
-                                    @foreach($shapes as $shape)
-                                        <li><a class="dropdown-item" href="/homepage/shape/{{$shape->id}}">{{$shape->shape_desc}}</a></li>
-                                    @endforeach
+                                    @isset($shapes)
+
+                                        @foreach ($shapes as $shape)
+                                            <li><a class="dropdown-item"
+                                                    href="/homepage/shape/{{ $shape->id }}">{{ $shape->shape_desc }}</a>
+                                            </li>
+                                        @endforeach
+                                    @endisset
+
                                 </ul>
                             </div>
                             <div class="btn-group dropend">
-                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     TYPE
                                 </button>
                                 <ul class="dropdown-menu">
-                                    @foreach($types as $type)
-                                        <li><a class="dropdown-item" href="/homepage/type/{{$type->id}}">{{$type->description}}</a></li>
-                                    @endforeach
+                                    @isset($types)
+
+                                        @foreach ($types as $type)
+                                            <li><a class="dropdown-item"
+                                                    href="/homepage/type/{{ $type->id }}">{{ $type->description }}</a>
+                                            </li>
+                                        @endforeach
+                                    @endisset
+
                                 </ul>
                             </div>
                             <div class="btn-group dropend">
-                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     WATT
                                 </button>
                                 <ul class="dropdown-menu">
-                                    @foreach($watts as $watt)
-                                        <li><a class="dropdown-item" href="/homepage/watt/{{$watt->id}}">{{$watt->measure}}</a></li>
-                                    @endforeach
+                                    @isset($watts)
+
+                                        @foreach ($watts as $watt)
+                                            <li><a class="dropdown-item"
+                                                    href="/homepage/watt/{{ $watt->id }}">{{ $watt->measure }}</a>
+                                            </li>
+                                        @endforeach
+                                    @endisset
                                 </ul>
                             </div>
                         </ul>
@@ -353,22 +415,59 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="{{ asset('admin-assets/dist/js/owl.carousel.min.js') }}"></script>
+
+
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css" />
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
     <script>
         const scrollToTopBtn = document.getElementById('myBtn')
         scrollToTopBtn.addEventListener("click", scrollToTop)
-            function scrollToTop() {
+
+        function scrollToTop() {
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
         }
         const searchInput = document.getElementById('searchInput').value;
+
         function searchProduct() {
-            console.log({searchInput})
-            if(searchInput) {
+            console.log({
+                searchInput
+            })
+            if (searchInput) {
                 // window.location.href = `http://127.0.0.1:8000/search/${searchInput}`;
                 console.log("/search")
             } else {
                 return;
             }
+        }
+    </script>
+    <script>
+        $("#change-item-cart").on("click", ".material-icons-outlined", function() {
+            $.ajax({
+                url: 'Delete-Item-Cart/' + $(this).data("id"),
+                type: 'GET',
+            }).done(function(response) {
+                RenderCart(response);
+                alertify.success('Đã xóa sản phẩm');
+                setTimeout(function() {
+                    location.reload();
+                }, 600);
+            });
+        });
+
+        function RenderCart(response) {
+            $("#change-item-cart").empty();
+            $("#change-item-cart").html(response);
         }
     </script>
     @yield('script')

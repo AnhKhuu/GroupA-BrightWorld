@@ -32,6 +32,9 @@ Route::get('/reply/{id}', 'App\Http\Controllers\feedBack@reply');
 Route::post('/replyProcess/{id}', 'App\Http\Controllers\feedBack@replyProcess');
 //DELETE -> http://localhost/GroupA-BrightWorld/public/delete
 Route::get('/delete/{id}', 'App\Http\Controllers\feedBack@delete');
+Route::get('/admin/login', function () {
+    return view('admin.auth.login');
+});
 // Route::get('/admin/login', function () {
 //     return view('admin.auth.login');
 // });
@@ -42,6 +45,10 @@ Route::get('/homepage/{id}', [ProductController::class, 'productDetail']);
 
 Route::prefix('user')->group(function () {
     Route::get('checkout/{id}', [InvoiceController::class, 'checkout'])->name("user.checkout");
+    Route::post('checkout/create', [InvoiceController::class, 'checkoutProcess'])->name('user.checkout.create');
+
+
+    // Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
     // Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
 });
 
@@ -56,7 +63,13 @@ Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('user
 // Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
 });
 
-Route::prefix('homepage')->group(function() {
+Route::get('homepage/Add-Cart/{id}/{saleId}', [CartController::class, 'AddCart']);
+Route::get('homepage/Delete-Item-Cart/{id}', [CartController::class, 'DeleteItemCart']);
+Route::get('List-Carts', [CartController::class, 'ViewListCart']);
+Route::get('Delete-Item-List-Cart/{id}', [CartController::class, 'DeleteListItemCart']);
+Route::get('Save-Item-List-Cart/{id}/{quanty}/{saleId}', [CartController::class, 'SaveListItemCart']);
+
+Route::prefix('homepage')->group(function () {
     Route::get('country/{id}', [ProductController::class, 'showByCountry']);
     Route::get('brand/{id}', [ProductController::class, 'showByBrand']);
     Route::get('shape/{id}', [ProductController::class, 'showByShape']);
