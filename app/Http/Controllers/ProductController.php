@@ -46,14 +46,6 @@ class ProductController extends Controller
     //     return view('user.search');
     // }
 
-    public function heart() {
-        return view('heart');
-    }
-
-    public function test() {
-        return view('user.test');
-    }
-
     public function search(Request $request) {
         $search = $request->input('name');
         $pro = DB::table('products')->where('name', 'like', '%'.$search.'%')->get();
@@ -63,15 +55,52 @@ class ProductController extends Controller
         $types=DB::table('types')->get();
         $countries=DB::table('countries')->get();
         $brands=DB::table('brands')->get();
-        if($pro) {
-            return view('user.search')->with(['pro'=>$pro])->with(['watts'=>$watts])
-            ->with(['shapes'=>$shapes])
-            ->with(['sales'=>$sales])
-            ->with(['types'=>$types])
-            ->with(['countries'=>$countries])
-            ->with(['brands'=>$brands]);
+        $type = $pro->type_id;
+        $brand = $pro->brand_id;
+        $country = $pro->country_id;
+        $shape = $pro->shape_id;
+        $watt = $pro->watt_id;
+        if($request->input('brand') || $request->input('type') || $request->input('watt') || $request->input('shape') || $request->input('sale')) {
+            if($request->input('brand')) {
+                $brand = $request->input('brand');
+            }
+            if($request->input('country')) {
+                $country = $request->input('country');
+            }
+            if($request->input('watt')) {
+                $watt = $request->input('watt');
+            }
+            if($request->input('sale')) {
+                $sale = $request->input('sale');
+            }
+            if($request->input('shape')) {
+                $shape = $request->input('shape');
+            }
+            $pro = DB::table('products')
+            ->where('name', 'like', '%'.$search.'%')
+            ->where('type_id', $type)
+            ->where('brand_id', $brand)
+            ->where('country_id', $country)
+            ->where('watt_id', $watt)
+            ->where('shape_id', $shape)
+            ->get();
+        }
+        // $product
+        if($search) {
+            if($pro) {
+                return view('user.search')->with(['pro'=>$pro])->with(['watts'=>$watts])
+                ->with(['shapes'=>$shapes])
+                ->with(['sales'=>$sales])
+                ->with(['types'=>$types])
+                ->with(['countries'=>$countries])
+                ->with(['brands'=>$brands])
+                ->with('search', $search)
+                ->with('searchType', $searchType);
+            } else {
+                return view('user.search');
+            }
         } else {
-            return view('user.search')->with('cantFind', 'The product that you found does not exit!');
+            return redirect('/homepage');
         }
     }
     // public function search(Request $request) {

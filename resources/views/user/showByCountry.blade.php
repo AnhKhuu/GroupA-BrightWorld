@@ -12,7 +12,7 @@ Homepage
             <span>Number of results: {{count($pro)}}</span>
             <div class="row">
                     @foreach($pro as $product)
-                    <div class="item position-relative col-3 mr-4">
+                    <div class="item position-relative col-3 mr-4 mb-4">
                         <a class="img-container d-block" href="/homepage/{{$product->id}}">
                             <img src="/admin-assets/dist/img/product/{{$product->img_url}}">
                         </a>
