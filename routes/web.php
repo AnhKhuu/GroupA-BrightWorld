@@ -12,9 +12,11 @@ use App\Http\Controllers\InvoiceController;
 
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+    
+    // return view('admin/dashboard');
+});
 
 Route::get('test', function () {
     dd(session(('cart')));
@@ -23,16 +25,7 @@ Route::get('test', function () {
 Route::get('/search-product', [ProductController::class, 'search']);
 // Route::get('/test', [ProductController::class, 'test']);
 
-//READ -> http://localhost/GroupA-BrightWorld/public/vwComment
-Route::get('/vwComment', 'App\Http\Controllers\feedBack@viewComment');
-//CREATE -> http://localhost/GroupA-BrightWorld/public/Comment
-Route::get('/Comment', 'App\Http\Controllers\feedBack@createComment');
-Route::post('/commentProcess', 'App\Http\Controllers\feedBack@commentProcess');
-//REPLY -> http://localhost/GroupA-BrightWorld/public/reply
-Route::get('/reply/{id}', 'App\Http\Controllers\feedBack@reply');
-Route::post('/replyProcess/{id}', 'App\Http\Controllers\feedBack@replyProcess');
-//DELETE -> http://localhost/GroupA-BrightWorld/public/delete
-Route::get('/delete/{id}', 'App\Http\Controllers\feedBack@delete');
+
 Route::get('/admin/login', function () {
     return view('admin.auth.login');
 });

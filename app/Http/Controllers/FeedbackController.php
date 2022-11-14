@@ -32,7 +32,7 @@ class FeedbackController extends Controller
         ->whereNotNull('reply')
         ->orderBy('rating', 'asc')
         ->get();
-        return view('admin.feedback.showAll')->with(['itemss'=>$itemss]);
+        return view('admin.feedback.showReply')->with(['itemss'=>$itemss]);
     }
 
 
