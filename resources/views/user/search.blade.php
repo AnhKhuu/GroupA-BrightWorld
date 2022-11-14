@@ -13,26 +13,40 @@ Homepage
             <div class="mb-3 mb-lg-5 filter-brand">
                 <h2>Type</h2>
                 <div>
-                    @foreach($types as $type)
-                    <label class="container-filter d-flex align-items-center justify-content-between">
-                        <span class="brand-name">{{$type->description}}</span>
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                        <span class="quantity">6</span>
-                    </label>
-                    @endforeach
+                        <form action="/search-product" method="GET" enctype="multipart/form-data">
+                        @foreach($types as $type)
+                        <label class="container-filter d-flex align-items-center justify-content-between">
+                            <span class="brand-name">{{$type->description}}</span>
+                            <input type="radio" name="type" value="{{$type->id}}">
+                            <span class="checkmark"></span>
+                            <span class="quantity">6</span>
+                        </label>
+                        @endforeach
+                        <input type="text" placeholder="Search" name="name" value="{{$search}}" style="width: 0; height: 0; opacity: 0">
+                        <button type="submit" class="btn-apply">
+                            Apply
+                        </button>
+                    </form>
                 </div>
             </div>
             <div class="mb-3 mb-lg-5 filter-brand">
                 <h2>Brand</h2>
                 <div>
+                <form action="/search-product" method="GET" enctype="multipart/form-data">
+
                 @foreach($brands as $brand)
-                    <label class="container-filter d-flex align-items-center" ng-repeat="brand in getBrandCategories()">
-                        <span class="brand-name">{{$brand->full_name}}</span>
-                        <input type="checkbox" ng-model="filterBrand[brand]">
-                        <span class="checkmark"></span>
-                    </label>
+                <label class="container-filter d-flex align-items-center justify-content-between">
+                            <span class="brand-name">{{$brand->full_name}}</span>
+                            <input type="radio" name="type" value="{{$brand->id}}">
+                            <span class="checkmark"></span>
+                            <span class="quantity">6</span>
+                        </label>
                 @endforeach
+                <input type="text" placeholder="Search" name="name" value="{{$search}}" style="width: 0; height: 0; opacity: 0">
+                        <button type="submit" class="btn-apply">
+                            Apply
+                        </button>
+                    </form>
                 </div>
             </div>
             <div class="mb-3 mb-lg-5 filter-brand">

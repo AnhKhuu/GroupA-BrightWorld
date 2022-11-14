@@ -375,6 +375,11 @@
   font-size: 16px;
   font-weight: 600;
   background-color: #FF9F15;
+  padding: 20px;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -732,6 +737,10 @@
 
 .product-category .item .add-to-compare span {
   color: #FF9F15;
+}
+
+.item {
+  max-width: 300px;
 }
 
 @media (min-width: 768px) {
