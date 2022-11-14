@@ -9,33 +9,35 @@ use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class CartController extends Controller
 {
-    public function show() {
+    public function show()
+    {
 
-        $carts=DB::table('carts')->get();
+        $carts = DB::table('carts')->get();
         return view('admin.cart.show')
-                ->with(['carts'=>$carts]);
-               
+            ->with(['carts' => $carts]);
     }
 
-    public function create() {
-        $carts=DB::table('carts')->get();
-      
+    public function create()
+    {
+        $carts = DB::table('carts')->get();
+
         return view('admin.cart.create')
-                ->with(['carts'=>$carts]);
-                
+            ->with(['carts' => $carts]);
     }
 
-    public function createProcess(Request $request) {
-        $current_date_time = Carbon::now()->toDateTimeString(); 
+    public function createProcess(Request $request)
+    {
+        $current_date_time = Carbon::now()->toDateTimeString();
         $data = array();
         $data['quantity'] = $request->input('quantity');
         $data['customer_id'] = $request->input('customer_id');
-        $data['created_at'] =$current_date_time;
+        $data['created_at'] = $current_date_time;
         $data['updated_at'] = $current_date_time;
-       
+
         DB::table('carts')->insert(
             $data
         );
@@ -43,12 +45,11 @@ class CartController extends Controller
 
     public function update($id)
     {
-        $carts=DB::table('carts')->get()
-        ->where('id', intval($id))
-        ->first();
+        $carts = DB::table('carts')->get()
+            ->where('id', intval($id))
+            ->first();
         return view('admin.cart.update')
-            ->with(['carts'=>$carts]);
-           
+            ->with(['carts' => $carts]);
     }
 
     public function updateProcess(CartRequest $request, $id)
@@ -56,28 +57,80 @@ class CartController extends Controller
         $data = array();
         $data['quantity'] = $request->input('quantity');
         $data['customer_id'] = $request->input('customer_id');
-       
+
         DB::table('carts')->where('id', intval($id))->update(
             $data
         );
-
     }
 
-    public function addToCart($id)
+    public function AddCart(Request $req, $id, $saleId)
     {
-       $product = Product::find($id);
-       $cart = new CartOps();
-       $cart -> addToCart($product);
-       return back();
+        $product = DB::table('products')->where('id', $id)->first();
+        $sale = DB::table('sales')->where('id', '=', $saleId)->first();
+        $sales = DB::table('sales')->get();
+
+        if ($product != null) {
+            $oldCart = Session('Cart') ? Session('Cart') : null;
+            $newCart = new CartOps($oldCart);
+            $newCart->AddCart($product, $id, $sale);
+            $req->Session()->put('Cart', $newCart);
+        }
+        return view('user.layout')->with(['sales' => $sales]);
     }
 
-    // public function showCart()
-    // {
-    //     $cart = session('cart', [
-    //         'total_price'=>0,
-    //         'items'=> collect()
-    //     ]);
-    //     return view('user.layout', compact('cart'));
-    // }
-}
+    public function DeleteItemCart(Request $req, $id)
+    {
+        $oldCart = Session('Cart') ? Session('Cart') : null;
+        $newCart = new CartOps($oldCart);
+        $newCart->DeleteItemCart($id);
 
+        if (is_countable($newCart) || Count($newCart->products) > 0) {
+            $req->Session()->put('Cart', $newCart);
+        } else {
+            $req->Session()->forget('Cart');
+        }
+        return view('user.layout');
+    }
+
+    public function ViewListCart()
+    {
+        $pro = DB::table('products')->get();
+        $sales = DB::table('sales')->get();
+
+        //hard code customer
+        $customer = DB::table('customers')->where('id', '=', 1)->first();
+
+        return view('user.list')
+            ->with(['pro' => $pro])
+            ->with(['customer' => $customer])
+            ->with(['sales' => $sales]);
+    }
+
+    public function DeleteListItemCart(Request $req, $id)
+    {
+        $oldCart = Session('Cart') ? Session('Cart') : null;
+        $newCart = new CartOps($oldCart);
+        $newCart->DeleteItemCart($id);
+
+        if (Count($newCart->products) > 0) {
+            $req->Session()->put('Cart', $newCart);
+        } else {
+            $req->Session()->forget('Cart');
+        }
+        return view('user.list');
+    }
+
+
+    public function SaveListItemCart(Request $req, $id, $quanty, $saleId)
+    {
+        $sale = DB::table('sales')->where('id', '=', $saleId)->first();
+
+        $oldCart = Session('Cart') ? Session('Cart') : null;
+        $newCart = new CartOps($oldCart);
+        $newCart->UpdateItemCart($id, $quanty, $sale);
+
+        $req->Session()->put('Cart', $newCart);
+
+        return view('user.list');
+    }
+}

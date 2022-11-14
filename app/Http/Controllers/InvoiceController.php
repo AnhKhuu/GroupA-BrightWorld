@@ -60,14 +60,29 @@ class InvoiceController extends Controller
 
     public function checkout($id)
     {
-        $invoice_details=DB::table('invoce_details')
-        ->join('invoices','invoices.id','=','invoce_details.invoice_id')
-        ->join('products','products.id','=','invoce_details.product_id')
-        ->get();
-        dd($invoice_details);
-        // return view('user.checkout')
-        //         ->with(['invoice_details'=>$invoice_details]);
+        $sales = DB::table('sales')->get();
+        $customer = DB::table('customers')->where('id', '=', $id)->first();
+        // $invoice_details=DB::table('invoce_details')
+        // ->join('invoices','invoices.id','=','invoce_details.invoice_id')
+        // ->join('products','products.id','=','invoce_details.product_id')
+        // ->get();
+        return view('user.checkout')
+            ->with(['sales' => $sales])
+            ->with(['customer' => $customer]);
+            // ->with(['invoice_details'=>$invoice_details]);
        
+    }
+
+    public function checkoutProcess(InvoiceRequest $request)
+    {
+        $data = array();
+        $data['invoice_number'] = $request->input('invoice_number');
+        $data['customer_id'] = $request->input('customer_id');
+       
+        DB::table('invoices')->insert(
+            $data
+        );
+        return redirect('/homepage');
     }
 
 }

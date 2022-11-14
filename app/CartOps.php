@@ -1,39 +1,51 @@
-<?php
+<?php 
 namespace App;
+class CartOps{
+    public $products = null;
+    public $totalPrice = 0;
+    public $finalPrice = 0;
+    public $totalQuanty = 0;
 
-class CartOps {
-    public $cart;
-    public function __construct()
-    {
-        $this->cart = session('cart', [
-            'total_price'=>0,
-            'items'=> collect()
-        ]);
-    }
-
-    public function addToCart($product) {
-        $items = $this->cart['items'];
-        $total_price = $this->cart['total_price'];
-        if(count($items) > 0 && $items->contains('object.id', $product->id)) {
-            $items = $items->map(function($item) use($product)
-            {
-                if($item['object'] -> id == $product -> id) {
-                    $item['quantity'] += 1;
-                }
-                return $item;
-            });
-        } else {
-            $newItem = collect([
-                'quantity' => 1,
-                'object' => $product
-            ]);
-            $items = $items -> push($newItem);
+    public function __construct($cart){
+        if($cart){
+            $this->products = $cart->products;
+            $this->totalPrice = $cart->totalPrice;
+            $this->finalPrice = $cart->finalPrice;
+            $this->totalQuanty = $cart->totalQuanty;
         }
-        $total_price += $product -> price;
-        $cart = ['cart' => [
-            'total_price' => $total_price,
-            'items'=> $items
-        ]];
-        session() -> put($cart);
     }
+
+    public function AddCart($product, $id, $sale){
+        $newProduct = ['quanty' => 0, 'price'=> $product->price, 'productInfo' => $product];
+        if($this->products){
+            if(array_key_exists($id, $this->products)){
+                $newProduct = $this->products[$id];
+            }
+        }
+        $newProduct['quanty']++;
+        $newProduct['price'] = $newProduct['quanty'] * (1 - $sale->percent) * $product->price;
+        $this->products[$id] =  $newProduct;
+        $this->totalPrice += (1 - $sale->percent) * $product->price;
+        $this->finalPrice = ($this->totalPrice * 110 / 100) + 30000;
+        $this->totalQuanty++;
+    }
+
+    public function DeleteItemCart($id){
+        $this->totalQuanty -= $this->products[$id]['quanty'] ?? true;
+        $this->totalPrice -= $this->products[$id]['price'] ?? true;
+        unset($this->products[$id]);
+    }
+
+    public function UpdateItemCart($id, $quanty, $sale){
+        $this->totalQuanty -= $this->products[$id]['quanty'];
+        $this->totalPrice -= $this->products[$id]['price'];
+
+        $this->products[$id]['quanty'] = $quanty;
+        $this->products[$id]['price'] = $quanty * ((1 - $sale->percent) * $this->products[$id]['productInfo']->price);
+
+        $this->totalQuanty += $this->products[$id]['quanty'];
+        $this->totalPrice += $this->products[$id]['price'];
+    }
+
 }
+?>
