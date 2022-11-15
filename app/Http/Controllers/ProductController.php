@@ -375,7 +375,9 @@ class ProductController extends Controller
 
     public function createCountryProcess(Request $request) {
         $data = array();
-        // $newid = DB::table('products')->orderby('id','DESC')->first()->id+1;
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $data['created_at'] = $current_date_time;
+        $data['updated_at'] = $current_date_time;
         $data['short_name'] = $request->input('short_name');
         $data['full_name'] = $request->input('full_name');
         $data['description'] = $request->input('description');
@@ -390,6 +392,9 @@ class ProductController extends Controller
 
     public function createBrandProcess(Request $request) {
         $data = array();
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $data['created_at'] = $current_date_time;
+        $data['updated_at'] = $current_date_time;
         $data['short_name'] = $request->input('short_name');
         $data['full_name'] = $request->input('full_name');
         $data['description'] = $request->input('description');
@@ -405,6 +410,9 @@ class ProductController extends Controller
 
     public function createWattProcess(Request $request) {
         $data = array();
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $data['created_at'] = $current_date_time;
+        $data['updated_at'] = $current_date_time;
         $data['measure'] = $request->input('measure');
         DB::table('watts')->insert(
             $data
@@ -417,6 +425,9 @@ class ProductController extends Controller
 
     public function createTypeProcess(Request $request) {
         $data = array();
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $data['created_at'] = $current_date_time;
+        $data['updated_at'] = $current_date_time;
         $data['description'] = $request->input('description');
         DB::table('types')->insert(
             $data
@@ -430,6 +441,9 @@ class ProductController extends Controller
 
     public function createSaleProcess(Request $request) {
         $data = array();
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $data['created_at'] = $current_date_time;
+        $data['updated_at'] = $current_date_time;
         $data['percent'] = $request->input('percent');
         DB::table('sales')->insert(
             $data
@@ -443,6 +457,9 @@ class ProductController extends Controller
 
     public function createShapeProcess(Request $request) {
         $data = array();
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $data['created_at'] = $current_date_time;
+        $data['updated_at'] = $current_date_time;
         $data['shape_desc'] = $request->input('shape_desc');
         DB::table('shapes')->insert(
             $data
