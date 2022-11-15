@@ -28,7 +28,7 @@
         <section class="header-container position-fixed">
             <section class="header w-100">
                 <nav class="d-flex justify-content-between align-items-center position-relative container-lg">
-                    <a href="/homepage">
+                    <a href="/admin">
                         <img src="{{ asset('admin-assets/dist/img/main/Logo.png') }}" alt="Logo"
                             class="header-logo">
                     </a>
@@ -120,14 +120,14 @@
                                         edit
                                     </span>
                                 </a>
-                                <a href="/logout" class="ms-2 ms-md-3 ms-xxl-5">
+                                <a href="admin/logout" class="ms-2 ms-md-3 ms-xxl-5">
                                     <span class="material-icons-outlined">
                                         logout
                                     </span>
                                 </a>
                             @endforeach
                         @else
-                            <a href="/signin" class="ms-2 ms-md-3 ms-xxl-5">
+                            <a href="admin/signin" class="ms-2 ms-md-3 ms-xxl-5">
                                 <span class="material-icons-outlined">
                                     person_outline
                                 </span>
