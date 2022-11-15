@@ -13,6 +13,7 @@ List of products
     <span>{{ $message }}</span>
 </div>
 @endif
+<a href="/admin/product/create" class="btn btn-primary">CREATE PRODUCT</a>
 <table id="example" class="table">
             <thead>
                 <tr>

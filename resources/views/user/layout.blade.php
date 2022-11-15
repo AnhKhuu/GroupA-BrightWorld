@@ -28,7 +28,7 @@
         <section class="header-container position-fixed">
             <section class="header w-100">
                 <nav class="d-flex justify-content-between align-items-center position-relative container-lg">
-                    <a href="/homepage">
+                    <a href="/">
                         <img src="{{ asset('admin-assets/dist/img/main/Logo.png') }}" alt="Logo"
                             class="header-logo">
                     </a>
