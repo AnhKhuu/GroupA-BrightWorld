@@ -41,6 +41,8 @@ class CartController extends Controller
         DB::table('carts')->insert(
             $data
         );
+        return redirect('admin/cart/show');
+
     }
 
     public function update($id)
@@ -61,6 +63,14 @@ class CartController extends Controller
         DB::table('carts')->where('id', intval($id))->update(
             $data
         );
+        return redirect('admin/cart/show');
+
+    }
+
+    public function deleteProcess($id)
+    {
+        DB::table('carts')->where('id', '=', $id)->delete();
+        return redirect('admin/cart/show');
     }
 
     public function AddCart(Request $req, $id, $saleId)
@@ -98,8 +108,8 @@ class CartController extends Controller
         $sales = DB::table('sales')->get();
 
         //hard code customer
-        $customer = DB::table('customers')->where('id', '=', 1)->first();
-
+        $userId = session('userId');
+        $customer = DB::table('customers')->where('id', '=', $userId)->first();
         return view('user.list')
             ->with(['pro' => $pro])
             ->with(['customer' => $customer])
@@ -121,16 +131,27 @@ class CartController extends Controller
     }
 
 
-    public function SaveListItemCart(Request $req, $id, $quanty, $saleId)
+    public function SaveListItemCart(Request $req, $id, $quanty, $saleId, $customerId)
     {
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $dataCart = array();
         $sale = DB::table('sales')->where('id', '=', $saleId)->first();
 
         $oldCart = Session('Cart') ? Session('Cart') : null;
         $newCart = new CartOps($oldCart);
         $newCart->UpdateItemCart($id, $quanty, $sale);
 
+        $dataCart['quantity'] = $quanty;
+        $dataCart['customer_id'] = $customerId;
+        $dataCart['created_at'] = $current_date_time;
+        $dataCart['updated_at'] = $current_date_time;
+
         $req->Session()->put('Cart', $newCart);
 
-        return view('user.list');
+        DB::table('carts')->insert(
+            $dataCart
+        );
+
+        return redirect('/List-Carts');
     }
 }

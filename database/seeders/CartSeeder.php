@@ -18,8 +18,8 @@ class CartSeeder extends Seeder
     public function run()
     {
         DB::table('carts')->insert([
-            'quantity' => 3,
-            'customer_id' => 1,
+            'quantity' => 1,
+            'customer_id' => 10,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);

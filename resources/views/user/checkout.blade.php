@@ -42,13 +42,13 @@
                                                 @foreach ($sales as $sale)
                                                     @if ($sale->id == $item['productInfo']->sale_id)
                                                         <span
-                                                            class="new-price">{{ (1 - $sale->percent) * number_format($item['productInfo']->price) }}đ</span>
+                                                            class="new-price">{{ number_format((1 - $sale->percent) * $item['productInfo']->price, 3, '.', ' ') }}đ</span>
                                                     @endif
                                                 @endforeach
                                             @endisset
 
                                             <div class="old-price">
-                                                {{ number_format($item['productInfo']->price) }}đ</div>
+                                                {{ number_format($item['productInfo']->price, 3, '.', ' ') }}đ</div>
 
                                         </div>
                                     </div>
@@ -59,11 +59,14 @@
                     <div class="product-calculate mb-3">
                         <div class="d-flex justify-content-between">
                             <p class="title">Subtotal</p>
-                            <p class="result">{{ number_format(Session::get('Cart')->totalPrice) }}₫</p>
+                            <p class="result">
+                                {{ number_format(Session::get('Cart')->totalPrice, 3, '.', ' ') }}₫</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="tax">Tax</p>
-                            <p class="result">10% x <b>{{ number_format(Session::get('Cart')->totalPrice) }}₫</b></p>
+                            <p class="result">10% x
+                                <b>{{ number_format(Session::get('Cart')->totalPrice, 3, '.', ' ') }}₫</b>
+                            </p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <p class="title">Shipping</p>
@@ -73,14 +76,14 @@
                     <div class="product-total">
                         <div class="d-flex justify-content-between">
                             <p class="title">Total</p>
-                            <p class="result"><b>{{ number_format(Session::get('Cart')->finalPrice) }}₫</b></p>
+                            <p class="result"><b>{{ number_format(Session::get('Cart')->finalPrice, 3, '.', ' ') }}₫</b></p>
                         </div>
                     </div>
                 </div>
             @endif
 
             <div class="col-lg-8">
-                <form method="POST" action="{{ route('user.checkout.create') }}" enctype="multipart/form-data">
+                <form method="GET" action="{{ url('user/success') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="billing-info mb-lg-5 mb-3">
                         <div class="d-flex align-items-center justify-content-between mb-4">
@@ -91,23 +94,23 @@
                             <div class="col-lg-6 pe-lg-5">
                                 <div class="form-group mb-4">
                                     <p>First name <span class="required">*</span></p>
-                                    <input type="text" class="form-control" id="first_name" name="first_name"
-                                        value="{{ $customer->first_name }}">
+                                    <input type="text" class="form-control" id="first_name" name="first_name" required>
                                 </div>
 
 
                                 <div class="form-group mb-4">
                                     <p>Email <span class="required">*</span></p>
                                     <input type="email" class="form-control" id="email" name="email"
-                                        value="{{ $customer->email }}">
+                                        title="The domain portion of the email address is invalid (the portion after the @)."
+                                        pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$"
+                                        required>
 
                                 </div>
 
 
                                 <div class="form-group mb-4">
                                     <p>Address <span class="required">*</span></p>
-                                    <input type="text" class="form-control" id="address" name="address"
-                                        value="{{ $customer->address }}">
+                                    <input type="text" class="form-control" id="address" name="address" required>
                                 </div>
 
 
@@ -124,21 +127,20 @@
                             <div class="col-lg-6 pe-lg-5">
                                 <div class="form-group mb-4">
                                     <p>Last name <span class="required">*</span></p>
-                                    <input type="text" class="form-control" id="last_name" name="last_name"
-                                        value="{{ $customer->last_name }}">
-                                    <input type="number" class="form-control" id="invoice_number" name="invoice_number">
-                                    <input type="hidden" class="form-control" id="customer_id" name="customer_id" value="{{ $customer->id }}">
+                                    <input type="text" class="form-control" id="last_name" name="last_name" required>
+                                    {{-- <input type="number" class="form-control" id="invoice_number" name="invoice_number"/>
+                                    <input type="hidden" class="form-control" id="customer_id" name="customer_id"/> --}}
                                 </div>
 
                                 <div class="form-group mb-4">
                                     <p>Phone <span class="required">*</span></p>
                                     <input type="text" class="form-control" id="phone_number" name="phone_number"
-                                        value="{{ $customer->phone_number }}">
+                                        required>
                                 </div>
                                 <div class="form-group mb-4">
                                     <p>Zip/Postal</p>
                                     <input type="number" class="form-control" id="zip" name="zip"
-                                        value="{{ $customer->zip }}">
+                                        pattern="[-+]?[0-9]" maxlength="12" required>
                                 </div>
                             </div>
                         </div>
