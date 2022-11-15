@@ -124,8 +124,34 @@ class InvoiceController extends Controller
         return redirect('user/success');
     }
 
-    public function Success()
+    public function Success(Request $request)
     {
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $userId = session('userId');
+        $cart = DB::table('carts')->where('customer_id', '=', $userId)->orderBy('created_at', 'desc')->first();
+        $invoice = DB::table('invoices')->where('customer_id', '=', $userId)->orderBy('created_at', 'desc')->first();
+        $productId = $request->input('product_id');
+        $dataCart = [];
+        $dataInvoice = [];
+        $dataCart['product_id'] = $productId;
+        $dataCart['cart_id'] = $cart->id;
+        $dataCart['created_at'] = $current_date_time;
+        $dataCart['updated_at'] = $current_date_time;
+
+        $dataInvoice['product_id'] = $productId;
+        $dataInvoice['invoice_id'] = $invoice->id;
+        $dataInvoice['quantity'] = $cart->quantity;
+        $dataInvoice['created_at'] = $current_date_time;
+        $dataInvoice['updated_at'] = $current_date_time;
+        DB::table('cart_details')->insert(
+            $dataCart
+        );
+
+        DB::table('invoce_details')->insert(
+            $dataInvoice
+        );
+        $request->session()->forget('Cart');
+
         return view('user.success');
     }
 }
