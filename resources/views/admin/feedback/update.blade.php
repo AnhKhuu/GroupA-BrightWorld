@@ -36,8 +36,8 @@ Feedback Management
             </tr>
             <tr>
                 <td>Reply:</td>
-                <td><textarea type="Text" name="txtReply" value="{{$rs -> reply}}" required 
-                pattern="[A-Za-z0-9]{3,1000}" title="Three letter reply" autofocus></textarea></td>
+                <td><textarea name="txtReply" autofocus required 
+                pattern="[A-Za-z0-9]{3,1000}" placeholder="{{$rs -> reply}}"></textarea></td>
             </tr>
         </table>
         <br>
@@ -53,4 +53,5 @@ Feedback Management
         Product Id: <input name="txtProductId" value="{{$rs -> product_id}}" readonly/><br>
         Customer Id: <input name="txtCustomerId" value="{{$rs -> customer_id}}" readonly/><br>
         Reply: <textarea>  type="Text" name="txtReply" value="{{$rs -> reply}}" </textarea><br> -->
-        <!-- placeholder="In put reply here"  -->
+        <!-- placeholder="In put reply here"  type="Text" required-->
+        <!-- required title="Three letter reply" pattern="[A-Za-z0-9]{3,1000}"  -->

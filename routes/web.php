@@ -12,10 +12,23 @@ use App\Http\Controllers\InvoiceController;
 
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+    
+    // return view('admin/dashboard');
+});
 
+Route::get('test', function () {
+    dd(session(('cart')));
+});
+
+Route::get('/search-product', [ProductController::class, 'search']);
+// Route::get('/test', [ProductController::class, 'test']);
+
+
+Route::get('/admin/login', function () {
+    return view('admin.auth.login');
+});
 //READ -> http://localhost/GroupA-BrightWorld/public/vwComment
 Route::get('/vwComment', 'App\Http\Controllers\feedBack@viewComment');
 //CREATE -> http://localhost/GroupA-BrightWorld/public/Comment

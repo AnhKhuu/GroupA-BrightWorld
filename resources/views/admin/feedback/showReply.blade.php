@@ -24,7 +24,7 @@ Feedback Management
                 <th>reply</th>
                 <th>Funtion</th>
             </tr>
-            @foreach($items as $item)
+            @foreach($itemss as $item)
             <tr>
                 <td>{{$item -> id}}</td>
                 <td>{{$item -> rating }}</td>
