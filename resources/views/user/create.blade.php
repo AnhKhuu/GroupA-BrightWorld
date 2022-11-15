@@ -3,7 +3,7 @@
     Register
 @endsection
 @section('content')
-    <form action="{{ url('/customer/createProcess') }}" method="post">
+    <form action="{{ url('admin/customer/createProcess') }}" method="post">
         @csrf
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <h1 style="text-align: center;">REGISTER INFORMATION</h1>

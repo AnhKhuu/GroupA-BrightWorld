@@ -59,7 +59,7 @@ class CustomerController extends Controller
                 'created_at' => $CreatedAt,
                 'updated_at' => $UpdateAt
             ]);
-            return redirect('/signin');
+            return redirect('admin/signin');
         }
         return view('user.create')->with('errors', 'Register failed');
     }
@@ -114,6 +114,7 @@ class CustomerController extends Controller
         $user = DB::table('customers')->where('user_name', $request->input('username'))->first();
         if ($user != null && $user->password == $request->input('password')) {
             $request->session()->push('user', $user->user_name);
+            $request->session()->push('userId', $user->id);
             return redirect('/');
         }
         return back();
@@ -126,6 +127,7 @@ class CustomerController extends Controller
     public function logout(Request $request)
     {
         $request->session()->forget('user');
+        $request->session()->forget('userId');
         return redirect('/');
     }
 }
