@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('test', function () {
     dd(session(('cart')));
 });
-
 Route::get('/search-product', [ProductController::class, 'search']);
 // Route::get('/test', [ProductController::class, 'test']);
 
@@ -45,10 +44,9 @@ Route::get('/homepage/{id}', [ProductController::class, 'productDetail']);
 // Route::get('/homepage', [CartController::class, 'showCart'])->name('user.showCart');
 
 Route::prefix('user')->group(function () {
-    Route::get('checkout/{id}', [InvoiceController::class, 'checkout'])->name("user.checkout");
-    Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('user.addToCart');
-    // Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
-    Route::post('checkout/create', [InvoiceController::class, 'checkoutProcess'])->name('user.checkout.create');
+    Route::match(['get', 'post'], 'checkout', [InvoiceController::class, 'checkout'])->name("user.checkout");
+    Route::post('checkout/create', [InvoiceController::class, 'checkoutProcess'])->name("user.checkout.create");
+    Route::get('success', [InvoiceController::class, 'Success']);
 
 
     // Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
@@ -61,16 +59,15 @@ Route::prefix('admin')->group(function () {
     Route::post('/', [AdminController::class, 'checkLogin']);
     Route::get('logout', [AdminController::class, 'logout']);
     Route::get('home', [AdminCustomerController::class, 'index'])->name('home')->middleware('checkAdminLogin');
-Route::get('checkout/{id}', [InvoiceController::class, 'checkout'])->name("user.checkout");
-Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('user.addToCart');
-// Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
 });
 
 Route::get('homepage/Add-Cart/{id}/{saleId}', [CartController::class, 'AddCart']);
 Route::get('homepage/Delete-Item-Cart/{id}', [CartController::class, 'DeleteItemCart']);
 Route::get('List-Carts', [CartController::class, 'ViewListCart']);
 Route::get('Delete-Item-List-Cart/{id}', [CartController::class, 'DeleteListItemCart']);
-Route::get('Save-Item-List-Cart/{id}/{quanty}/{saleId}', [CartController::class, 'SaveListItemCart']);
+Route::get('Save-Item-List-Cart/{id}/{quanty}/{saleId}/{customerId}', [CartController::class, 'SaveListItemCart']);
+
+Route::get('/', [ProductController::class, 'index']);
 
 Route::prefix('homepage')->group(function () {
     Route::get('country/{id}', [ProductController::class, 'showByCountry']);
@@ -81,30 +78,23 @@ Route::prefix('homepage')->group(function () {
 });
 
 Route::prefix('admin')->group(function () {
-    Route::get('feedback/show', [FeedbackController::class, 'show']);
-    Route::get('feedback/create', [FeedbackController::class, 'create']);
-    Route::post('feedback/createProcess', [FeedbackController::class, 'createProcess']);
-    Route::get('feedback/update/{id}', [FeedbackController::class, 'update']);
-    Route::post('feedback/updateProcess/{id}', [FeedbackController::class, 'updateProcess']);
-    Route::get('feedback/showAll', [FeedbackController::class, 'showAll']);
-    Route::get('feedback/showReply', [FeedbackController::class, 'showReply']);
-    // Route::post('feedback/createDetail/{id, cusId}', [FeedbackController::class, 'createDetail']);
-
-});
-
-Route::prefix('admin')->group(function () {
-
     Route::get('cart/show', [CartController::class, 'show']);
     Route::get('cart/create', [CartController::class, 'create']);
     Route::post('cart/create', [CartController::class, 'createProcess'])->name('admin.cart.create');
+
     Route::get('cart/edit/{id}', [CartController::class, 'update'])->name('admin.cart.update');
+    Route::get('cart/view/{id}', [CartController::class, 'view'])->name('admin.cart.view');
     Route::post('cart/edit/{id}', [CartController::class, 'updateProcess']);
+    Route::post('cart/delete/{id}', [CartController::class, 'deleteProcess'])->name('admin.cart.delete');
 
     Route::get('invoice/show', [InvoiceController::class, 'show']);
     Route::get('invoice/create', [InvoiceController::class, 'create']);
     Route::post('invoice/create', [InvoiceController::class, 'createProcess'])->name('admin.invoice.create');
+
     Route::get('invoice/edit/{id}', [InvoiceController::class, 'update'])->name('admin.invoice.update');
     Route::post('invoice/edit/{id}', [InvoiceController::class, 'updateProcess']);
+    Route::post('invoice/delete/{id}', [InvoiceController::class, 'deleteProcess'])->name('admin.invoice.delete');
+
 });
 // Route::get('/admin/product', [ProductController::class, 'create']) -> name('create');
 // Route::get('/admin/catelogue', [CatelogueController::class, 'show']);
@@ -140,8 +130,8 @@ Route::prefix('admin')->group(function () {
     Route::get('shape/create', [ProductController::class, 'createShape']);
     Route::post('shape/create', [ProductController::class, 'createShapeProcess']);
 
-// customer -> listCust
-Route::get('admin/customer', [CustomerController::class, 'listCust']);
+    // customer -> listCust
+    Route::get('admin/customer', [CustomerController::class, 'listCust']);
     // customer -> listCust
     Route::get('customer/listCust', [CustomerController::class, 'listCust']);
 
@@ -154,12 +144,10 @@ Route::get('admin/customer', [CustomerController::class, 'listCust']);
     Route::post('customer/update/{id}', [CustomerController::class, 'updateProcess']);
 
 
-// customer -> delete
-Route::get('admin/customer/delete/{id}', [CustomerController::class, 'delete']);
+    // customer -> delete
+    Route::get('admin/customer/delete/{id}', [CustomerController::class, 'delete']);
 
-// customer -> main function
-Route::prefix('/')->group(function () {
-    Route::get('/', [ProductController::class, 'index']);
+    // customer -> main function
     Route::post('/login', [CustomerController::class, 'checkLogin']);
     Route::get('/signin', [CustomerController::class, 'login']);
     Route::get('/register', [CustomerController::class, 'create']);
@@ -167,11 +155,12 @@ Route::prefix('/')->group(function () {
     Route::get('/editProfile/{id}', [CustomerController::class, 'view']);
     Route::post('/customer/updateProcess/{id}', [CustomerController::class, 'updateProcess']);
     Route::get('/logout', [CustomerController::class, 'logout']);
+    // Route::prefix('/')->group(function () {
 
-    // Route::post('/', [AdminController::class, 'checkLogin']);
-    // Route::get('logout', [AdminController::class, 'logout']);
-    // Route::get('home', [AdminCustomerController::class, 'index'])
-});
+    //     // Route::post('/', [AdminController::class, 'checkLogin']);
+    //     // Route::get('logout', [AdminController::class, 'logout']);
+    //     // Route::get('home', [AdminCustomerController::class, 'index'])
+    // });
     // customer -> delete
     Route::get('customer/delete/{id}', [CustomerController::class, 'delete']);
 });
