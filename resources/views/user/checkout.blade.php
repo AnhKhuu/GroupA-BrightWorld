@@ -83,7 +83,7 @@
             @endif
 
             <div class="col-lg-8">
-                <form method="GET" action="{{ url('user/success') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('user.success') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="billing-info mb-lg-5 mb-3">
                         <div class="d-flex align-items-center justify-content-between mb-4">
@@ -96,7 +96,6 @@
                                     <p>First name <span class="required">*</span></p>
                                     <input type="text" class="form-control" id="first_name" name="first_name" required>
                                 </div>
-
 
                                 <div class="form-group mb-4">
                                     <p>Email <span class="required">*</span></p>
@@ -111,6 +110,10 @@
                                 <div class="form-group mb-4">
                                     <p>Address <span class="required">*</span></p>
                                     <input type="text" class="form-control" id="address" name="address" required>
+                                    @foreach (Session::get('Cart')->products as $item)
+                                        <input type="hidden" class="form-control" id="product_id" name="product_id"
+                                            value="{{ $item['productInfo']->id }}">
+                                    @endforeach
                                 </div>
 
 
@@ -290,7 +293,7 @@
                         </label>
                     </div>
                     <button type="submit"
-                        class="py-2 px-5 complete-order d-flex align-items-center justify-content-center">Commplete
+                        class="py-2 px-5 complete-order d-flex align-items-center justify-content-center">Complete
                         Order</button>
                 </form>
             </div>

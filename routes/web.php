@@ -46,7 +46,7 @@ Route::get('/homepage/{id}', [ProductController::class, 'productDetail']);
 Route::prefix('user')->group(function () {
     Route::match(['get', 'post'], 'checkout', [InvoiceController::class, 'checkout'])->name("user.checkout");
     Route::post('checkout/create', [InvoiceController::class, 'checkoutProcess'])->name("user.checkout.create");
-    Route::get('success', [InvoiceController::class, 'Success']);
+    Route::post('success', [InvoiceController::class, 'Success'])->name('user.success');
 
 
     // Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);

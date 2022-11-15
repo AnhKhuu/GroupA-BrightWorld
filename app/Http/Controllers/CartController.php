@@ -42,7 +42,6 @@ class CartController extends Controller
             $data
         );
         return redirect('admin/cart/show');
-
     }
 
     public function update($id)
@@ -52,6 +51,17 @@ class CartController extends Controller
             ->first();
         return view('admin.cart.update')
             ->with(['carts' => $carts]);
+    }
+
+    public function view($id)
+    {
+       
+        $cartDetailsJoin = DB::table('cart_details')
+            ->join('carts', 'cart_id', '=', 'cart_details.cart_id')
+            ->join('products', 'product_id', '=', 'cart_details.product_id')
+            ->first();
+        return view('admin.cart.view')
+            ->with(['cartDetailsJoin' => $cartDetailsJoin]);
     }
 
     public function updateProcess(CartRequest $request, $id)
@@ -64,7 +74,6 @@ class CartController extends Controller
             $data
         );
         return redirect('admin/cart/show');
-
     }
 
     public function deleteProcess($id)

@@ -50,8 +50,8 @@ Cart Management
         <div class="d-flex">
             <a class="btn btn-info mr-3" href="{{ route('admin.cart.update', $cart->id) }}"
                 >Edit</a>
-            {{-- <a class="btn btn-primary mr-3" href="{{ route('admin.cart.view', $cart->id) }}"
-                >View</a> --}}
+            <a class="btn btn-primary mr-3" href="{{ route('admin.cart.view', $cart->id) }}"
+                >View</a>
             <form
                 method="POST"
                 action="{{ route('admin.cart.delete', $cart->id) }}"
