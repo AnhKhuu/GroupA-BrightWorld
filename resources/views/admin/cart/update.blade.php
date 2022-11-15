@@ -7,7 +7,7 @@ Update Cart
     <div class="card-header">
       <h3 class="card-title">Forms</h3>
     </div>
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" onsubmit="return confirm('Are you sure want to edit?');">
         @csrf
       <div class="card-body">
        

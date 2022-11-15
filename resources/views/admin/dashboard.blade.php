@@ -101,7 +101,7 @@
           </li>
                <li class="nav-item">
                 <a href="../../admin/cart/show" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <i class="nav-icon fas fa-shopping-cart"></i>
                   <p>
                     Cart
                   </p>
@@ -109,7 +109,7 @@
               </li>
               <li class="nav-item">
                 <a href="../../admin/invoice/show" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <i class="nav-icon fas fa-money-bill"></i>
                   <p>
                     Invoice
                   </p>
