@@ -55,13 +55,13 @@
                                             <td style="text-align: center">
                                                 <b>{{ number_format($item['price'], 3, '.', ' ') }}₫</b></td>
                                             <td style="text-align: center">
-                                                <span class="material-icons-outlined"
+                                                <span style="cursor: pointer" class="material-icons-outlined"
                                                     onclick="SaveListItemCart({{ $item['productInfo']->id }}, {{ $item['productInfo']->sale_id }}, {{ $customer->id }});">
                                                     save
                                                 </span>
                                             </td>
                                             <td style="text-align: center">
-                                                <span class="material-icons-outlined"
+                                                <span style="cursor: pointer" class="material-icons-outlined"
                                                     onclick="DeleteListItemCart({{ $item['productInfo']->id }});">
                                                     close
                                                 </span>
@@ -128,6 +128,8 @@
             type: 'GET',
         }).done(function(response) {
             RenderListCart(response);
+            alertify.success('Đã xóa sản phẩm');
+
             setTimeout(function() {
                 location.reload();
             }, 300);
@@ -141,6 +143,7 @@
             type: 'GET',
         }).done(function(response) {
             RenderListCart(response);
+            alertify.success('Đã thêm mới sản phẩm');
             setTimeout(function() {
                 location.reload();
             }, 300);
