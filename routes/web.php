@@ -22,15 +22,15 @@ Route::get('test', function () {
 Route::get('/search-product', [ProductController::class, 'search']);
 // Route::get('/test', [ProductController::class, 'test']);
 
-//READ -> http://localhost/GroupA-BrightWorld/public/vwComment
-Route::get('/vwComment', 'App\Http\Controllers\feedBack@viewComment');
-//CREATE -> http://localhost/GroupA-BrightWorld/public/Comment
-Route::get('/Comment', 'App\Http\Controllers\feedBack@createComment');
-Route::post('/commentProcess', 'App\Http\Controllers\feedBack@commentProcess');
-//REPLY -> http://localhost/GroupA-BrightWorld/public/reply
-Route::get('/reply/{id}', 'App\Http\Controllers\feedBack@reply');
-Route::post('/replyProcess/{id}', 'App\Http\Controllers\feedBack@replyProcess');
-//DELETE -> http://localhost/GroupA-BrightWorld/public/delete
+// //READ -> http://localhost/GroupA-BrightWorld/public/vwComment
+// Route::get('/vwComment', 'App\Http\Controllers\feedBack@viewComment');
+// //CREATE -> http://localhost/GroupA-BrightWorld/public/Comment
+// Route::get('/Comment', 'App\Http\Controllers\feedBack@createComment');
+// Route::post('/commentProcess', 'App\Http\Controllers\feedBack@commentProcess');
+// //REPLY -> http://localhost/GroupA-BrightWorld/public/reply
+// Route::get('/reply/{id}', 'App\Http\Controllers\feedBack@reply');
+// Route::post('/replyProcess/{id}', 'App\Http\Controllers\feedBack@replyProcess');
+// //DELETE -> http://localhost/GroupA-BrightWorld/public/delete
 Route::get('/delete/{id}', 'App\Http\Controllers\feedBack@delete');
 Route::get('/admin/login', function () {
     return view('admin.auth.login');
@@ -51,6 +51,18 @@ Route::prefix('user')->group(function () {
 
     // Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
     // Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('feedback/show', [FeedbackController::class, 'show']);
+    Route::get('feedback/create', [FeedbackController::class, 'create']);
+    Route::post('feedback/createProcess', [FeedbackController::class, 'createProcess']);
+    Route::get('feedback/update/{id}', [FeedbackController::class, 'update']);
+    Route::post('feedback/updateProcess/{id}', [FeedbackController::class, 'updateProcess']);
+    Route::get('feedback/showAll', [FeedbackController::class, 'showAll']);
+    Route::get('feedback/showReply', [FeedbackController::class, 'showReply']);
+    // Route::post('feedback/createDetail/{id, cusId}', [FeedbackController::class, 'createDetail']);
+
 });
 
 // ADMIN/LOGIN
