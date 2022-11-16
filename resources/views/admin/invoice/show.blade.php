@@ -4,10 +4,10 @@ Invoice Management
 @endsection
 @section('content')
 <div class="d-flex justify-content-end m-2 p-2">
-    <a  href="../../admin/invoice/create"
+    {{-- <a  href="../../admin/invoice/create"
         >
         <button type="button" class="btn btn-block btn-outline-primary">New Invoice</button>
-        </a>
+        </a> --}}
 </div>
 <div class="card">
     <div class="card-body">
@@ -48,17 +48,16 @@ Invoice Management
         </td>
         <td
         >
-        <div>
-            <a href="{{ route('admin.invoice.update', $invoice->id) }}"
+        <div class="d-flex">
+            <a class="btn btn-info mr-3" href="{{ route('admin.invoice.update', $invoice->id) }}"
                 >Edit</a>
-            {{-- <form
+            <form
                 method="POST"
-                action="{{ route('admin.categories.destroy', $category->id) }}"
-                onsubmit="return confirm('Are you sure?');">
+                action="{{ route('admin.invoice.delete', $invoice->id) }}"
+                onsubmit="return confirm('Are you sure want to delete?');">
                 @csrf
-                @method('DELETE')
-                <button type="submit">Delete</button>
-            </form> --}}
+                <button class="btn btn-warning" type="submit">Delete</button>
+            </form>
         </div>
     </td>
             </tr>

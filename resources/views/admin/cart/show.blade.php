@@ -47,17 +47,18 @@ Cart Management
         </td>
         <td
         >
-        <div>
-            <a href="{{ route('admin.cart.update', $cart->id) }}"
+        <div class="d-flex">
+            <a class="btn btn-info mr-3" href="{{ route('admin.cart.update', $cart->id) }}"
                 >Edit</a>
-            {{-- <form
+            <a class="btn btn-primary mr-3" href="{{ route('admin.cart.view', $cart->id) }}"
+                >View</a>
+            <form
                 method="POST"
-                action="{{ route('admin.categories.destroy', $category->id) }}"
-                onsubmit="return confirm('Are you sure?');">
+                action="{{ route('admin.cart.delete', $cart->id) }}"
+                onsubmit="return confirm('Are you sure want to delete?');">
                 @csrf
-                @method('DELETE')
-                <button type="submit">Delete</button>
-            </form> --}}
+                <button class="btn btn-warning" type="submit">Delete</button>
+            </form>
         </div>
     </td>
             </tr>

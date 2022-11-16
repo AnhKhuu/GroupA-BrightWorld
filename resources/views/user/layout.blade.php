@@ -28,7 +28,7 @@
         <section class="header-container position-fixed">
             <section class="header w-100">
                 <nav class="d-flex justify-content-between align-items-center position-relative container-lg">
-                    <a href="/admin">
+                    <a href="/">
                         <img src="{{ asset('admin-assets/dist/img/main/Logo.png') }}" alt="Logo"
                             class="header-logo">
                     </a>
@@ -80,13 +80,13 @@
                                                                 @foreach ($sales as $sale)
                                                                     @if ($sale->id == $item['productInfo']->sale_id)
                                                                         <span
-                                                                            class="new-price">{{ (1 - $sale->percent) * number_format($item['productInfo']->price) }}đ</span>
+                                                                            class="new-price">{{ number_format((1 - $sale->percent) * $item['productInfo']->price, 3, '.', ' ') }}đ</span>
                                                                     @endif
                                                                 @endforeach
                                                             @endisset
 
                                                             <div class="old-price">
-                                                                {{ number_format($item['productInfo']->price) }}đ</div>
+                                                                {{ number_format($item['productInfo']->price, 3, '.', ' ') }}đ</div>
 
                                                         </div>
                                                     </div>
@@ -99,7 +99,7 @@
                                         @endforeach
                                         <div class="select-total px-2">
                                             <span>total:</span>
-                                            <h5>{{number_format(Session::get('Cart')->totalPrice)}}₫</h5>
+                                            <h5>{{number_format(Session::get('Cart')->totalPrice, 3, '.', ' ')}}₫</h5>
                                         </div>
                                         <div class="btn-bar-cart w-100 d-flex justify-content-between my-0">
                                             <a href="{{url('/List-Carts')}}" class='btn buy-now w-100'>View Card</a>
