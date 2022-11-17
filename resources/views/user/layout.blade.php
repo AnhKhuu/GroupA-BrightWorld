@@ -132,6 +132,11 @@
                                     person_outline
                                 </span>
                             </a>
+                            <a href="/admin" class="ms-2 ms-md-3 ms-xxl-5">
+                                <span class="material-icons-outlined">
+                                    edit
+                                </span>
+                            </a>
                         @endif
                         <span class="material-icons-outlined ms-2 trigger-mb-menu" data-bs-toggle="collapse"
                             data-bs-target="#collapseNav" aria-expanded="false" aria-controls="collapseNav">

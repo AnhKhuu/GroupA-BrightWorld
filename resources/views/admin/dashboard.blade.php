@@ -115,16 +115,16 @@
                   </p>
                 </a>
               </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="../../admin/catelogue" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Catelogue
               </p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
-            <a href="../../admin/customer" class="nav-link">
+            <a href="../../admin/home" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Customers

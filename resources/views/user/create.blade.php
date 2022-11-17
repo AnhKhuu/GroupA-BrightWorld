@@ -95,7 +95,7 @@
             </div>
             <div class="mb-3">
                 <label>Phone Number</label>
-                <input type="tel" name="txtPhoneNumber" pattern="[-+]?[0-9]" maxlength="12" class="input-field" required>
+                <input type="tel" name="txtPhoneNumber" maxlength="12" class="input-field" required>
             </div>
             <div class="mb-3">
                 <label>Address</label>
