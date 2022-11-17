@@ -53,6 +53,18 @@ class InvoiceController extends Controller
             ->with(['invoices' => $invoices]);
     }
 
+    public function view($id)
+    {
+       
+        $invoiceDetailsJoin = DB::table('invoce_details')
+            ->join('invoices', 'invoice_id', '=', 'invoce_details.invoice_id')
+            ->join('products', 'product_id', '=', 'invoce_details.product_id')->where('invoices.id', '=', $id)
+            ->get();
+            // dd($invoiceDetailsJoin);
+        return view('admin.invoice.view')
+            ->with(['invoiceDetailsJoin' => $invoiceDetailsJoin]);
+    }
+    
     public function updateProcess(InvoiceRequest $request, $id)
     {
         $data = array();
@@ -91,9 +103,9 @@ class InvoiceController extends Controller
 
     }
 
-    public function checkoutProcess(InvoiceRequest $request)
+    public function checkoutProcess()
     {
-        // $current_date_time = Carbon::now()->toDateTimeString();
+        $current_date_time = Carbon::now()->toDateTimeString();
         $dataInvoice = array();
         // $oldCart = Session('Cart') ? Session('Cart') : null;
         // $records = [];
@@ -103,25 +115,18 @@ class InvoiceController extends Controller
         $userId = session('userId');
         $record = Invoice::latest()->first();
         $expNum = explode('-', $record->invoice_number);
-
+        $expNum = (int)$expNum[0] += 1;
         //check first day in a year
-        if (date('l', strtotime(date('Y-01-01')))) {
-            $nextInvoiceNumber = date('Y') . '-0001';
-        } else {
-            //increase 1 with last invoice number
-            $nextInvoiceNumber = $expNum[0] . '-' . $expNum[1] + 1;
-        }
 
-        $dataInvoice['invoice_number'] = $nextInvoiceNumber;
-        $dataInvoice['customer_id'] =  $userId;
-        // $dataInvoice['created_at'] = $current_date_time;
-        // $dataInvoice['updated_at'] = $current_date_time;
+        $dataInvoice['invoice_number'] =  $expNum;
+        $dataInvoice['customer_id'] =  $userId[0];
+        $dataInvoice['created_at'] = $current_date_time;
+        $dataInvoice['updated_at'] = $current_date_time;
         DB::table('invoices')->insert(
             $dataInvoice
         );
 
-        $request->session()->forget('Cart');
-        return redirect('user/success');
+        return redirect('user/checkout');
     }
 
     public function Success(Request $request)

@@ -1,14 +1,12 @@
 @extends('admin.dashboard')
 @section('title')
-    Cart Management
+    Cart Detail Management
 @endsection
 @section('content')
-    <div class="d-flex justify-content-end m-2 p-2">
-        <a href="../../admin/cartDetail/create">
-            <button type="button" class="btn btn-block btn-outline-primary">New Cart</button>
-        </a>
-    </div>
-    <div class="card">
+<div class="d-flex justify-content-start m-2 p-2">
+    <a href="{{ URL::previous() }}">Go Back</a>
+</div>
+    <div class="card mt-5">
         <div class="card-body">
             <table id="example2" class="table table-bordered table-hover">
                 <thead>
@@ -18,23 +16,25 @@
                         <th>Name Product</th>
                         <th>Quantity</th>
                         <th>Price</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                @foreach ($cartDetailsJoin as $cartDetails)
+                    
+                @endforeach
                     <tr>
-                        <td><img src="/admin-assets/dist/img/product/{{$cartDetailsJoin->img_url}}" width="80px"></td>
+                        <td><img src="/admin-assets/dist/img/product/{{$cartDetails->img_url}}" width="80px"></td>
                         <td>
-                            {{ $cartDetailsJoin->customer_id }}
+                            {{ $cartDetails->customer_id }}
                         </td>
                         <td>
-                            {{ $cartDetailsJoin->name }}
+                            {{ $cartDetails->name }}
                         </td>
                         <td>
-                            {{ $cartDetailsJoin->quantity }}
+                            {{ $cartDetails->quantity }}
                         </td>
                         <td>
-                            {{ $cartDetailsJoin->price }}
+                            {{ $cartDetails->price }}
                         </td>
                         {{-- <td>
                             <div class="d-flex">
