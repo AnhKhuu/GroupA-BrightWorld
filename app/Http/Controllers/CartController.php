@@ -58,8 +58,8 @@ class CartController extends Controller
        
         $cartDetailsJoin = DB::table('cart_details')
             ->join('carts', 'cart_id', '=', 'cart_details.cart_id')
-            ->join('products', 'product_id', '=', 'cart_details.product_id')
-            ->first();
+            ->join('products', 'product_id', '=', 'cart_details.product_id')->where('carts.id', '=', $id)
+            ->get();
         return view('admin.cart.view')
             ->with(['cartDetailsJoin' => $cartDetailsJoin]);
     }
@@ -144,7 +144,9 @@ class CartController extends Controller
     {
         $current_date_time = Carbon::now()->toDateTimeString();
         $dataCart = array();
+        $dataUpdatePro = array();
         $sale = DB::table('sales')->where('id', '=', $saleId)->first();
+        $pro = DB::table('products')->where('id', '=', $id)->first();
 
         $oldCart = Session('Cart') ? Session('Cart') : null;
         $newCart = new CartOps($oldCart);
@@ -155,12 +157,17 @@ class CartController extends Controller
         $dataCart['created_at'] = $current_date_time;
         $dataCart['updated_at'] = $current_date_time;
 
+        $dataUpdatePro['in_stock'] = $pro->in_stock - $quanty;
+        $dataUpdatePro['sold'] = $pro->sold + $quanty;
         $req->Session()->put('Cart', $newCart);
 
         DB::table('carts')->insert(
             $dataCart
         );
 
+        DB::table('products')->where('id', intval($id))->update(
+            $dataUpdatePro
+        );
         return redirect('/List-Carts');
     }
 }

@@ -3,13 +3,8 @@
 Cart Management
 @endsection
 @section('content')
-<div class="d-flex justify-content-end m-2 p-2">
-    <a  href="../../admin/cart/create"
-        >
-        <button type="button" class="btn btn-block btn-outline-primary">New Cart</button>
-        </a>
-</div>
-<div class="card">
+
+<div class="card mt-5">
     <div class="card-body">
       <table id="example2" class="table table-bordered table-hover">
         <thead>
@@ -48,7 +43,7 @@ Cart Management
         <td
         >
         <div class="d-flex">
-            <a class="btn btn-info mr-3" href="{{ route('admin.cart.update', $cart->id) }}"
+            <a class="btn btn-success mr-3" href="{{ route('admin.cart.update', $cart->id) }}"
                 >Edit</a>
             <a class="btn btn-primary mr-3" href="{{ route('admin.cart.view', $cart->id) }}"
                 >View</a>

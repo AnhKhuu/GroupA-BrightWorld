@@ -3,13 +3,8 @@
 Invoice Management
 @endsection
 @section('content')
-<div class="d-flex justify-content-end m-2 p-2">
-    {{-- <a  href="../../admin/invoice/create"
-        >
-        <button type="button" class="btn btn-block btn-outline-primary">New Invoice</button>
-        </a> --}}
-</div>
-<div class="card">
+
+<div class="card mt-5">
     <div class="card-body">
       <table id="example2" class="table table-bordered table-hover">
         <thead>
@@ -49,8 +44,10 @@ Invoice Management
         <td
         >
         <div class="d-flex">
-            <a class="btn btn-info mr-3" href="{{ route('admin.invoice.update', $invoice->id) }}"
+            <a class="btn btn-success mr-3" href="{{ route('admin.invoice.update', $invoice->id) }}"
                 >Edit</a>
+                <a class="btn btn-primary mr-3" href="{{ route('admin.invoice.view', $invoice->id) }}"
+                    >View</a>
             <form
                 method="POST"
                 action="{{ route('admin.invoice.delete', $invoice->id) }}"

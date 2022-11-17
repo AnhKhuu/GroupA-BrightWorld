@@ -78,6 +78,12 @@
                             <p class="title">Total</p>
                             <p class="result"><b>{{ number_format(Session::get('Cart')->finalPrice, 3, '.', ' ') }}₫</b></p>
                         </div>
+                        <form method="POST" action="{{ route('user.checkout.create') }}">
+                            @csrf
+                            <button type="submit" class="py-2 px-5 complete-order d-flex">Confirm
+                                Price</button>
+                        </form>
+                       
                     </div>
                 </div>
             @endif

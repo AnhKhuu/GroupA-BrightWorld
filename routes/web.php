@@ -45,7 +45,7 @@ Route::get('/homepage/{id}', [ProductController::class, 'productDetail']);
 
 Route::prefix('user')->group(function () {
     Route::match(['get', 'post'], 'checkout', [InvoiceController::class, 'checkout'])->name("user.checkout");
-    Route::post('checkout/create', [InvoiceController::class, 'checkoutProcess'])->name("user.checkout.create");
+    Route::match(['get', 'post'], 'checkout/create', [InvoiceController::class, 'checkoutProcess'])->name("user.checkout.create");
     Route::post('success', [InvoiceController::class, 'Success'])->name('user.success');
 
 
@@ -104,6 +104,8 @@ Route::prefix('admin')->group(function () {
     Route::post('invoice/create', [InvoiceController::class, 'createProcess'])->name('admin.invoice.create');
 
     Route::get('invoice/edit/{id}', [InvoiceController::class, 'update'])->name('admin.invoice.update');
+    Route::get('invoice/view/{id}', [InvoiceController::class, 'view'])->name('admin.invoice.view');
+
     Route::post('invoice/edit/{id}', [InvoiceController::class, 'updateProcess']);
     Route::post('invoice/delete/{id}', [InvoiceController::class, 'deleteProcess'])->name('admin.invoice.delete');
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->integer('rating');
             $table->string('content');
+            $table->string('reply');
             $table->unsignedBigInteger('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->unsignedBigInteger('customer_id')->nullable();

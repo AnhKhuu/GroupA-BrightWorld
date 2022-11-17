@@ -18,8 +18,8 @@ class InvoiceSeeder extends Seeder
     public function run()
     {
         DB::table('invoices')->insert([
-            'invoice_number' => 15,
-            'customer_id' => 10,
+            'invoice_number' => "N11",
+            'customer_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
