@@ -1,6 +1,6 @@
 @extends('admin.dashboard')
 @section('title')
-Create Product
+Create Shape
 @endsection
 @section('content')
 <div>

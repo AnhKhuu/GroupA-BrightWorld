@@ -139,6 +139,54 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/admin/brand/create" class="nav-link">
+                <i class="nav-icon fas fa-lightbulb"></i>
+              <p>
+                Brands
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/country/create" class="nav-link">
+                <i class="nav-icon fas fa-lightbulb"></i>
+              <p>
+                Countries
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/sale/create" class="nav-link">
+                <i class="nav-icon fas fa-lightbulb"></i>
+              <p>
+                Sales
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/shape/create" class="nav-link">
+                <i class="nav-icon fas fa-lightbulb"></i>
+              <p>
+                Shapes
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/watt/create" class="nav-link">
+                <i class="nav-icon fas fa-lightbulb"></i>
+              <p>
+                Watts
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admin/type/create" class="nav-link">
+                <i class="nav-icon fas fa-lightbulb"></i>
+              <p>
+                Types
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

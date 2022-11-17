@@ -7,7 +7,7 @@
         @csrf
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <h1 style="text-align: center;">REGISTER INFORMATION</h1>
-        <table border="1" align="center">
+        <table border="1" align="center" style="margin: 0 auto;">
             <tr>
                 <td>FirstName:</td>
                 <td><input type="text" name="txtFirstName" minlength="2" maxlength="12" required></td>

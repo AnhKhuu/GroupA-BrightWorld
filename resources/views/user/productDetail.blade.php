@@ -23,28 +23,11 @@
                                 </div> -->
             <div class="product-information col-lg-5 ps-lg-5">
                 <p class="product-name pt-3 pb-2 my-0">{{ $pro->name }}</p>
-                <div class="d-flex product-sub-information align-items-center justify-content-between">
-                    <div class="vl first"></div>
-                    <div class="star-information d-flex align-items-center">
-                        <p class="my-2 me-1">rating star</p>
-                        <span class="star-rating" id="productRating">
-                            <span>
-                                <div></div>
-                            </span>
-                        </span>
-                    </div>
-                    <div class="vl"></div>
-                    <div>
-                        <span>rating number</span>
-                        <span>Ratings</span>
-                    </div>
-                    <div class="vl"></div>
-                    <div>
+                
+                <div>
                         <span>{{ $pro->sold }}</span>
                         <span>Sold</span>
                     </div>
-                    <div class="vl last"></div>
-                </div>
                 <div class="price">
                     @foreach ($sales as $sale)
                         @if ($sale->id == $pro->sale_id)

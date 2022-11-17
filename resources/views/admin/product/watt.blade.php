@@ -1,6 +1,6 @@
 @extends('admin.dashboard')
 @section('title')
-Create Product
+Create Watt
 @endsection
 @section('content')
 <div>

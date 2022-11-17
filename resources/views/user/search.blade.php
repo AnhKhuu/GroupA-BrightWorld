@@ -7,175 +7,12 @@ Homepage
 @endsection
 @section('content')
 <section class="product-category container my-3 my-lg-5">
-    <div class="row">
-        <div class="col-md-3 filter-desktop">
-            <h1 class="mb-3">Filter</h1>
-            <div class="mb-3 mb-lg-5 filter-brand">
-                <h2>Type</h2>
-                <div>
-                        <form action="/search-product" method="GET" enctype="multipart/form-data">
-                        @foreach($types as $type)
-                        <label class="container-filter d-flex align-items-center justify-content-between">
-                            <span class="brand-name">{{$type->description}}</span>
-                            <input type="radio" name="type" value="{{$type->id}}">
-                            <span class="checkmark"></span>
-                            <span class="quantity">6</span>
-                        </label>
-                        @endforeach
-                        <input type="text" placeholder="Search" name="name" value="{{$search}}" style="width: 0; height: 0; opacity: 0">
-                        <button type="submit" class="btn-apply">
-                            Apply
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="mb-3 mb-lg-5 filter-brand">
-                <h2>Brand</h2>
-                <div>
-                <form action="/search-product" method="GET" enctype="multipart/form-data">
-
-                @foreach($brands as $brand)
-                <label class="container-filter d-flex align-items-center justify-content-between">
-                            <span class="brand-name">{{$brand->full_name}}</span>
-                            <input type="radio" name="type" value="{{$brand->id}}">
-                            <span class="checkmark"></span>
-                            <span class="quantity">6</span>
-                        </label>
-                @endforeach
-                <input type="text" placeholder="Search" name="name" value="{{$search}}" style="width: 0; height: 0; opacity: 0">
-                        <button type="submit" class="btn-apply">
-                            Apply
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="mb-3 mb-lg-5 filter-brand">
-                <h2>Country</h2>
-                <div>
-                @foreach($countries as $country)
-                    <label class="container-filter d-flex align-items-center">
-                        <span class="brand-name">{{$country->full_name}}</span>
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                @endforeach
-                </div>
-            </div>
-            <!-- <div class="mb-3 mb-lg-5 filter-rating">
-                <h2>Ratings</h2>
-                <label class="container-filter d-flex align-items-center" for="five">
-                    <input type="checkbox" id="five" value="five">
-                    <span class="checkmark"></span>
-                    <span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                    </span>
-                </label>
-                <label class="container-filter d-flex align-items-center" for="four">
-                    <input type="checkbox" id="four" value="four">
-                    <span class="checkmark"></span>
-                    <span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star-outline">
-                            star_outline
-                        </span>
-                    </span>
-                </label>
-                <label class="container-filter d-flex align-items-center" for="three">
-                    <input type="checkbox" id="three" value="three">
-                    <span class="checkmark"></span>
-                    <span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star-outline">
-                            star_outline
-                        </span>
-                        <span class="material-icons star-outline">
-                            star_outline
-                        </span>
-                    </span>
-                </label>
-                <label class="container-filter d-flex align-items-center" for="two">
-                    <input type="checkbox" id="two" value="two">
-                    <span class="checkmark"></span>
-                    <span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star-outline">
-                            star_outline
-                        </span>
-                        <span class="material-icons star-outline">
-                            star_outline
-                        </span>
-                        <span class="material-icons star-outline">
-                            star_outline
-                        </span>
-                    </span>
-                </label>
-                <label class="container-filter d-flex align-items-center" for="one">
-                    <input type="checkbox" id="one" value="one">
-                    <span class="checkmark"></span>
-                    <span>
-                        <span class="material-icons star">
-                            star
-                        </span>
-                        <span class="material-icons star-outline">
-                            star_outline
-                        </span>
-                        <span class="material-icons star-outline">
-                            star_outline
-                        </span>
-                        <span class="material-icons star-outline">
-                            star_outline
-                        </span>
-                        <span class="material-icons star-outline">
-                            star_outline
-                        </span>
-                    </span>
-                </label>
-            </div> -->
-        </div>
-        <div class="col-md-9">
+<div class="row">
+        <div class="">
             <span>Number of results: {{count($pro)}}</span>
-            <div class="">
-                <div class="row">
+            <div class="row">
                     @foreach($pro as $product)
-                    <div class="item position-relative mb-4 col-4 mr-2" style="max-width: 320px">
+                    <div class="item position-relative col-3 mr-4 mb-4">
                         <a class="img-container d-block" href="/homepage/{{$product->id}}">
                             <img src="/admin-assets/dist/img/product/{{$product->img_url}}">
                         </a>
@@ -205,7 +42,6 @@ Homepage
                     </div>
                     @endforeach
                 </div>
-            </div>
         </div>
     </div>
 </section>

@@ -140,7 +140,7 @@
                     </div>
                     <div class="position-absolute collapse" id="collapseNav">
                         <div>
-                            <a href="#/!">
+                            <a href="/">
                                 HOME
                             </a>
                             <div class="d-flex justify-content-between">
@@ -199,7 +199,7 @@
             <nav class="sub-menu">
                 <div
                     class="d-flex justify-content-around align-items-center container-lg sub-menu-layout position-relative">
-                    <a href="#/!"class="active">HOME</a>
+                    <a href="/"class="active">HOME</a>
                     <span>
                         <div class="d-flex align-items-center">
                             <!-- <a href="#!Product-category" class="me-2">PRODUCT+</a> -->
