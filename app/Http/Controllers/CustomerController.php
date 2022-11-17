@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CustomerController extends Controller
 {
@@ -35,6 +36,7 @@ class CustomerController extends Controller
     public function createProcess(Request $request)
     {
         // $CustomerID = $request->input('txtCode');
+        $current_date_time = Carbon::now()->toDateTimeString();
         $FirstName = $request->input('txtFirstName');
         $LastName = $request->input('txtLastName');
         $PhoneNumber = $request->input('txtPhoneNumber');
@@ -43,8 +45,8 @@ class CustomerController extends Controller
         $Email = $request->input('txtEmail');
         $Username = $request->input('txtUserName');
         $Password = $request->input('txtPassword');
-        $CreatedAt = $request->input('txtCreateAt');
-        $UpdateAt = $request->input('txtUpdateAt');
+        // $CreatedAt = $request->input('txtCreateAt');
+        // $UpdateAt = $request->input('txtUpdateAt');
         if ($request->all()) {
             DB::table('customers')->insert([
                 // 'CustomerID' => $CustomerID,
@@ -56,8 +58,8 @@ class CustomerController extends Controller
                 'email' => $Email,
                 'user_name' => $Username,
                 'password' => $Password,
-                'created_at' => $CreatedAt,
-                'updated_at' => $UpdateAt
+                'created_at' => $current_date_time,
+                'updated_at' => $current_date_time,
             ]);
             return redirect('admin/signin');
         }

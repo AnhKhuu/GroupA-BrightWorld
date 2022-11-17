@@ -32,10 +32,10 @@ Homepage
               <p>{{$product->name}}</p>
           </a>
           <div class="price">
-              <span class="old-price">{{$product->price}}</span>
+              <span class="old-price">{{$product->price}}đ</span>
               @foreach($sales as $sale)
                 @if($sale->id == $product->sale_id)
-              <span class="new-price">{{(1-$sale->percent)*$product->price}}</span>
+              <span class="new-price">{{number_format((1-$sale->percent)*$product->price, 3, '.', ' ')}}đ</span>
                 @endif
               @endforeach
           </div>

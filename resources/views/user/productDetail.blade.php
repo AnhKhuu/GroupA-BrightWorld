@@ -31,10 +31,10 @@
                 <div class="price">
                     @foreach ($sales as $sale)
                         @if ($sale->id == $pro->sale_id)
-                            <span class="new-price">{{ (1 - $sale->percent) * $pro->price }}</span>
+                            <span class="new-price">{{ number_format((1 - $sale->percent) * $pro->price, 3, '.', ' ') }}đ</span>
                         @endif
                     @endforeach
-                    <div class="old-price">{{ $pro->price }}</div>
+                    <div class="old-price">{{ $pro->price }}đ</div>
                 </div>
                 <div class="detail mt-3">
                     <div class="d-flex justify-content-between" type="button" data-bs-toggle="collapse"
@@ -50,20 +50,20 @@
                         </ul>
                     </div>
                 </div>
-                <div class="quantity mb-3">
-                    <label for="quantity">
-                        <h2>Quantity</h2>
+                <div class="mb-3 mt-3">
+                    <div class="d-flex">
+                        <h4>Quantity </h4>
                         <div id="change-item-cart">
                             @if (Session::has('Cart') != null)
                                 @foreach (Session::get('Cart')->products as $item)
                                     @if ($pro->id == $item['productInfo']->id)
-                                        <span class="px-4">{{ $item['quanty'] }}</span>
+                                        <b style="font-size: 20px; color: #FF9F15" class="ml-2">x {{ $item['quanty'] }}</b>
                                     @endif
                                 @endforeach
                             @endif
 
                         </div>
-                    </label>
+                    </div>
                 </div>
                 <div class="btn-bar d-flex justify-content-between my-0">
                     <button class="btn add-to-cart d-flex flex-column align-items-center me-lg-4">

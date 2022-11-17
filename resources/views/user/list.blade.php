@@ -15,57 +15,60 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Image</th>
-                                    <th class="p-name" scope="col">Product Name</th>
-                                    <th scope="col">Price (Coupon)</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Save</th>
-                                    <th scope="col">Delete</th>
+                                    <th style="text-align: center" scope="col">Image</th>
+                                    <th style="text-align: center" class="p-name" scope="col">Product Name</th>
+                                    <th style="text-align: center" scope="col">Price (Coupon)</th>
+                                    <th style="text-align: center; width: 200px" scope="col">Quantity</th>
+                                    <th style="text-align: center" scope="col">Total</th>
+                                    <th style="text-align: center" scope="col">Save</th>
+                                    <th style="text-align: center" scope="col">Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (Session::get('Cart')->products as $item)
-                                    <tr>
-                                        <td><img style="width: 200px"
-                                                src="/admin-assets/dist/img/product/{{ $item['productInfo']->img_url }}"
-                                                alt=""></td>
-                                        <td>
-                                            <h5>{{ $item['productInfo']->name }}</h5>
-                                        </td>
-                                        <td>
-                                            @isset($sales)
-                                                @foreach ($sales as $sale)
-                                                    @if ($sale->id == $item['productInfo']->sale_id)
-                                                        <span
-                                                            class="new-price">{{ (1 - $sale->percent) * number_format($item['productInfo']->price) }}đ</span>
-                                                    @endif
-                                                @endforeach
-                                            @endisset
-                                        </td>
-                                        <td>
-                                            <div class="quantity">
-                                                <div class="pro-qty">
-                                                    <input id="quanty-item-{{ $item['productInfo']->id }}" type="text"
+                                @if (Session::has('Cart') != null)
+                                    @foreach (Session::get('Cart')->products as $item)
+                                        <tr>
+                                            <td style="text-align: center"><img style="width: 200px"
+                                                    src="/admin-assets/dist/img/product/{{ $item['productInfo']->img_url }}"
+                                                    alt=""></td>
+                                            <td style="text-align: center">
+                                                <h5>{{ $item['productInfo']->name }}</h5>
+                                            </td>
+                                            <td style="text-align: center">
+                                                @isset($sales)
+                                                    @foreach ($sales as $sale)
+                                                        @if ($sale->id == $item['productInfo']->sale_id)
+                                                            <b
+                                                                class="new-price">{{ number_format((1 - $sale->percent) * $item['productInfo']->price, 3, '.', ' ') }}đ</b>
+                                                        @endif
+                                                    @endforeach
+                                                @endisset
+                                            </td>
+                                            <td style="text-align: center">
+                                                <div class="pro-qty d-flex" style="text-align: center">
+                                                    <input class="form-control mr-3 ml-3 w-100"
+                                                        style="border-color: #FF9F15; border-radius: 10px; width: 50px; text-align: center"
+                                                        id="quanty-item-{{ $item['productInfo']->id }}" type="text"
                                                         value="{{ $item['quanty'] }}">
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>{{ number_format($item['price']) }}₫</td>
-                                        <td>
-                                            <span class="material-icons-outlined"
-                                                onclick="SaveListItemCart({{ $item['productInfo']->id }}, {{ $item['productInfo']->sale_id }});">
-                                                save
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span class="material-icons-outlined"
-                                                onclick="DeleteListItemCart({{ $item['productInfo']->id }});">
-                                                close
-                                            </span>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            </td>
+                                            <td style="text-align: center">
+                                                <b>{{ number_format($item['price'], 3, '.', ' ') }}₫</b></td>
+                                            <td style="text-align: center">
+                                                <span style="cursor: pointer" class="material-icons-outlined"
+                                                    onclick="SaveListItemCart({{ $item['productInfo']->id }}, {{ $item['productInfo']->sale_id }}, {{ $customer->id }});">
+                                                    save
+                                                </span>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <span style="cursor: pointer" class="material-icons-outlined"
+                                                    onclick="DeleteListItemCart({{ $item['productInfo']->id }});">
+                                                    close
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -78,11 +81,14 @@
                                             Quantity :<span>{{ Session::get('Cart')->totalQuanty }}</span>
                                         </li>
                                         <li class="cart-total">Total
-                                            Price : <span>{{ number_format(Session::get('Cart')->totalPrice) }}₫</span>
+                                            Price :
+                                            <span>{{ number_format(Session::get('Cart')->totalPrice, 3, '.', ' ') }}₫</span>
                                         </li>
                                     </ul>
-                                    <a href="{{ route('user.checkout', $customer->id) }}" class="proceed-btn">PROCEED TO CHECK
-                                        OUT</a>
+                                    <form method="POST" action="{{ route('user.checkout') }}">
+                                        @csrf
+                                        <button class="proceed-btn btn w-100" type="submit">PROCEED TO CHECK OUT</button>
+                                    </form>
                                 @endif
                             </div>
                         </div>
@@ -98,8 +104,8 @@
 <script>
     $(document).ready(function() {
         var proQty = $('.pro-qty');
-        proQty.prepend('<span class="dec qtybtn">-</span>');
-        proQty.append('<span class="inc qtybtn">+</span>');
+        proQty.prepend('<span class="dec qtybtn" style="font-size: 24px">-</span>');
+        proQty.append('<span class="inc qtybtn" style="font-size: 24px">+</span>');
         proQty.on('click', '.qtybtn', function() {
             var $button = $(this);
             var oldValue = $button.parent().find('input').val();
@@ -122,18 +128,22 @@
             type: 'GET',
         }).done(function(response) {
             RenderListCart(response);
+            alertify.success('Đã xóa sản phẩm');
+
             setTimeout(function() {
                 location.reload();
             }, 300);
         });
     }
 
-    function SaveListItemCart(id, saleId) {
+    function SaveListItemCart(id, saleId, customerId) {
         $.ajax({
-            url: 'Save-Item-List-Cart/' + id + '/' + $("#quanty-item-" + id).val() + '/' + saleId,
+            url: 'Save-Item-List-Cart/' + id + '/' + $("#quanty-item-" + id).val() + '/' + saleId + '/' +
+            customerId,
             type: 'GET',
         }).done(function(response) {
             RenderListCart(response);
+            alertify.success('Đã thêm mới sản phẩm');
             setTimeout(function() {
                 location.reload();
             }, 300);

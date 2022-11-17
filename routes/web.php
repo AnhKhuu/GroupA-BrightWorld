@@ -22,15 +22,15 @@ Route::get('test', function () {
 Route::get('/search-product', [ProductController::class, 'search']);
 // Route::get('/test', [ProductController::class, 'test']);
 
-//READ -> http://localhost/GroupA-BrightWorld/public/vwComment
-Route::get('/vwComment', 'App\Http\Controllers\feedBack@viewComment');
-//CREATE -> http://localhost/GroupA-BrightWorld/public/Comment
-Route::get('/Comment', 'App\Http\Controllers\feedBack@createComment');
-Route::post('/commentProcess', 'App\Http\Controllers\feedBack@commentProcess');
-//REPLY -> http://localhost/GroupA-BrightWorld/public/reply
-Route::get('/reply/{id}', 'App\Http\Controllers\feedBack@reply');
-Route::post('/replyProcess/{id}', 'App\Http\Controllers\feedBack@replyProcess');
-//DELETE -> http://localhost/GroupA-BrightWorld/public/delete
+// //READ -> http://localhost/GroupA-BrightWorld/public/vwComment
+// Route::get('/vwComment', 'App\Http\Controllers\feedBack@viewComment');
+// //CREATE -> http://localhost/GroupA-BrightWorld/public/Comment
+// Route::get('/Comment', 'App\Http\Controllers\feedBack@createComment');
+// Route::post('/commentProcess', 'App\Http\Controllers\feedBack@commentProcess');
+// //REPLY -> http://localhost/GroupA-BrightWorld/public/reply
+// Route::get('/reply/{id}', 'App\Http\Controllers\feedBack@reply');
+// Route::post('/replyProcess/{id}', 'App\Http\Controllers\feedBack@replyProcess');
+// //DELETE -> http://localhost/GroupA-BrightWorld/public/delete
 Route::get('/delete/{id}', 'App\Http\Controllers\feedBack@delete');
 Route::get('/admin/login', function () {
     return view('admin.auth.login');
@@ -45,12 +45,24 @@ Route::get('/homepage/{id}', [ProductController::class, 'productDetail']);
 
 Route::prefix('user')->group(function () {
     Route::match(['get', 'post'], 'checkout', [InvoiceController::class, 'checkout'])->name("user.checkout");
-    Route::post('checkout/create', [InvoiceController::class, 'checkoutProcess'])->name("user.checkout.create");
-    Route::get('success', [InvoiceController::class, 'Success']);
+    Route::match(['get', 'post'], 'checkout/create', [InvoiceController::class, 'checkoutProcess'])->name("user.checkout.create");
+    Route::post('success', [InvoiceController::class, 'Success'])->name('user.success');
 
 
     // Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
     // Route::get('checkout/{id}', [InvoiceController::class, 'checkoutProcess']);
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('feedback/show', [FeedbackController::class, 'show']);
+    Route::get('feedback/create', [FeedbackController::class, 'create']);
+    Route::post('feedback/createProcess', [FeedbackController::class, 'createProcess']);
+    Route::get('feedback/update/{id}', [FeedbackController::class, 'update']);
+    Route::post('feedback/updateProcess/{id}', [FeedbackController::class, 'updateProcess']);
+    Route::get('feedback/showAll', [FeedbackController::class, 'showAll']);
+    Route::get('feedback/showReply', [FeedbackController::class, 'showReply']);
+    // Route::post('feedback/createDetail/{id, cusId}', [FeedbackController::class, 'createDetail']);
+
 });
 
 // ADMIN/LOGIN
@@ -92,6 +104,8 @@ Route::prefix('admin')->group(function () {
     Route::post('invoice/create', [InvoiceController::class, 'createProcess'])->name('admin.invoice.create');
 
     Route::get('invoice/edit/{id}', [InvoiceController::class, 'update'])->name('admin.invoice.update');
+    Route::get('invoice/view/{id}', [InvoiceController::class, 'view'])->name('admin.invoice.view');
+
     Route::post('invoice/edit/{id}', [InvoiceController::class, 'updateProcess']);
     Route::post('invoice/delete/{id}', [InvoiceController::class, 'deleteProcess'])->name('admin.invoice.delete');
 

@@ -26,7 +26,7 @@ class CartOps{
         $newProduct['price'] = $newProduct['quanty'] * (1 - $sale->percent) * $product->price;
         $this->products[$id] =  $newProduct;
         $this->totalPrice += (1 - $sale->percent) * $product->price;
-        $this->finalPrice = ($this->totalPrice * 110 / 100) + 30000;
+        $this->finalPrice = ($this->totalPrice * 110 / 100) + 30;
         $this->totalQuanty++;
     }
 
